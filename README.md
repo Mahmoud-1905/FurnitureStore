@@ -11,7 +11,6 @@ It allows customers to browse, search, and purchase furniture easily, while enab
 Administrators can monitor sales, users, and overall system performance through a centralized dashboard.
 
 ## Team Members & Roles
-## Team Members & Roles
 
 | # | Name | Role | GitHub username | 
 |---|-------------|------|----------|
