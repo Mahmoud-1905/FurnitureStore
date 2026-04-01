@@ -26,5 +26,6 @@ Administrators can monitor sales, users, and overall system performance through 
 - [introduction](Docs/01-introduction.md)
 - [Stakeholder Analysis](Docs/02-Stakeholder-Analysis.md)
 - [Use Cases](Docs/03-Use-Cases-Model.md)
-- [Rrquirements](feature/docs-init/Docs/04-Requirements.md)
+- [Rrquirements](Docs/04-Requirements.md)
+- [User Stories](Docs/05-User-Stories.md)
 - [User Stories](feature/docs-init/Docs/05-User-Stories.md)
