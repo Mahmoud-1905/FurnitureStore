@@ -11,11 +11,14 @@ It allows customers to browse, search, and purchase furniture easily, while enab
 Administrators can monitor sales, users, and overall system performance through a centralized dashboard.
 
 ## Team Members & Roles
-- Hala Nabhan: Frontend
-- Hanan Abu Luly:  Documentation
-- Roaa Al-Jamal: testing
-- Ragahad Akeela: Database & Backend Support
-- Mahmoud Alhindi: Team Leader, Backend\frontend Developer
+
+| # | Name | Role | GitHub username | 
+|---|-------------|------|----------|
+| 1 | Hala Nabhan |Frontend| [Halanabhan](https://github.com/Halanabhan)
+| 2 | Hanan Abu Luly|Documentation| [hananabedalkareemabololy](https://github.com/hananabedalkareemabololy)
+| 3 | Roaa Al-Jamal| Testing | [Roaa-svs](https://github.com/Roaa-svs)
+| 4 | Ragahad Akeela| Database & Backend Support | [raghadkhaled12](https://github.com/raghadkhaled12)
+| 5 | Mahmoud Alhindi| Team Leader, Backend\frontend Developer| [Mahmoud-1905](https://github.com/Mahmoud-1905)
 
 ## User Types
 - **Customer:** Browse products, place orders, write reviews
@@ -28,4 +31,4 @@ Administrators can monitor sales, users, and overall system performance through 
 - [Use Cases](Docs/03-Use-Cases-Model.md)
 - [Rrquirements](Docs/04-Requirements.md)
 - [User Stories](Docs/05-User-Stories.md)
-- [User Stories](feature/docs-init/Docs/05-User-Stories.md)
+
