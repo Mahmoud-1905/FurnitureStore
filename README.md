@@ -23,8 +23,8 @@ Administrators can monitor sales, users, and overall system performance through 
 - **Admin:** Manage users, monitor orders, view reports
 
 ##  Documentation
-- [Introduction](feature/docs-init/Docs/01-introduction.md)
-- [Stakeholder Analysis](feature/docs-init/Docs/02-Stakeholder-Analysis.md)
-- [Use Cases](feature/docs-init/Docs/03-Use-Cases-Model.md)
+- [introduction](Docs/01-introduction.md)
+- [Stakeholder Analysis](Docs/02-Stakeholder-Analysis.md)
+- [Use Cases](Docs/03-Use-Cases-Model.md)
 - [Rrquirements](feature/docs-init/Docs/04-Requirements.md)
 - [User Stories](feature/docs-init/Docs/05-User-Stories.md)
