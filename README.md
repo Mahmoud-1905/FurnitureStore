@@ -20,7 +20,7 @@ Administrators can monitor sales, users, and overall system performance through 
 ## User Types
 - **Customer:** Browse products, place orders, write reviews
 - **Seller:** Add/edit/delete products, manage orders
-
+- **Admin:** Manage users, monitor orders, view reports
 
 ##  Documentation
 - [Introduction](feature/docs-init/Docs/01-introduction.md)
@@ -29,5 +29,4 @@ Administrators can monitor sales, users, and overall system performance through 
 - [Rrquirements](feature/docs-init/Docs/04-Requirements.md)
 - [User Stories](feature/docs-init/Docs/05-User-Stories.md)
 
-- **Admin:** Manage users, monitor orders, view reports
 
