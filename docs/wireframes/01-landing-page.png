@@ -1,18 +1,17 @@
-[ Navbar ]
-- Logo
-- Home | Products | Login
+# Landing Page Wireframe
 
---------------------------------
-
-[ Hero Section ]
-"Welcome to Furniture Store"
-[ Shop Now Button ]
-
---------------------------------
-
-[ Products Section ]
-[ Product ] [ Product ] [ Product ]
-
---------------------------------
-
-[ Footer ]
+```
+┌─────────────────────────────────────────────┐
+│ LOGO        Home | Products | Login         │
+├─────────────────────────────────────────────┤
+│                                             │
+│        Welcome to Furniture Store           │
+│             [ Shop Now ]                    │
+│                                             │
+├─────────────────────────────────────────────┤
+│   [ Product ]   [ Product ]   [ Product ]   │
+│                                             │
+├─────────────────────────────────────────────┤
+│                  Footer                     │
+└─────────────────────────────────────────────┘
+```
