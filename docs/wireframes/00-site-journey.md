@@ -1,11 +1,10 @@
 # Site Journey
 
-## Guest User (Not Logged In)
+## Guest User
 
 Home Page
   → View Products
       → Product Details
-          → [ ? Add to Cart (requires login) ]
   → Login Page
   → Register Page
 
@@ -18,6 +17,6 @@ Home Page
       → Product Details
           → Add to Cart
               → Cart Page
-                  → Checkout [ ? ]
-  → Profile Page [ ? ]
+                  → Checkout 
+  → Profile Page 
   → Logout
