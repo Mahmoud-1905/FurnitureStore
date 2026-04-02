@@ -25,13 +25,6 @@ Administrators can monitor sales, users, and overall system performance through 
 - SQL Server
 - Entity Framework Core
 - GitHub
-
-## Documentation
-- [Introduction](Docs/01-introduction.md)
-- [Stakeholder Analysis](Docs/02-stakeholder-analysis.md)
-- [Use Cases](Docs/03-use-cases.md)
-- [Requirements](Docs/04-Requirements.md)
-- [User Stories](Docs/05-user-stories.md)
 ---
 
 ## User Types
