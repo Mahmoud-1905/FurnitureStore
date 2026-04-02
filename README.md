@@ -20,6 +20,20 @@ Administrators can monitor sales, users, and overall system performance through 
 | 4 | Ragahad Akeela| Database & Backend Support | [raghadkhaled12](https://github.com/raghadkhaled12)
 | 5 | Mahmoud Alhindi| Team Leader, Backend\frontend Developer| [Mahmoud-1905](https://github.com/Mahmoud-1905)
 
+## Tech Stack
+- ASP.NET Core MVC
+- SQL Server
+- Entity Framework Core
+- GitHub
+
+## Documentation
+- [Introduction](Docs/01-introduction.md)
+- [Stakeholder Analysis](Docs/02-stakeholder-analysis.md)
+- [Use Cases](Docs/03-use-cases.md)
+- [Requirements](Docs/04-Requirements.md)
+- [User Stories](Docs/05-user-stories.md)
+---
+
 ## User Types
 - **Customer:** Browse products, place orders, write reviews
 - **Seller:** Add/edit/delete products, manage orders
