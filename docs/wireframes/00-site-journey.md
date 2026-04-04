@@ -17,6 +17,12 @@ Home Page
       → Product Details
           → Add to Cart
               → Cart Page
-                  → Checkout 
-  → Profile Page 
+                  → Checkout
+  → Profile Page
   → Logout
+
+---
+
+## Notes
+- [ ? ] Payment method not defined yet
+- [ ? ] Order confirmation page
