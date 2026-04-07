@@ -104,11 +104,11 @@ Seller Dashboard	SellerController
 
 ---
 ##  Documentation
-- [introduction](Docs/01-introduction.md)
-- [stakeholder analysis](Docs/02-stakeholder-analysis.md)
-- [use cases](Docs/03-use-cases.md)
-- [Rrquirements](Docs/04-Requirements.md)
-- [user stories](Docs/05-user-stories.md)
+- [introduction](feature/docs-init/Docs/01-introduction.md)
+- [stakeholder analysis](feature/docs-init/Docs/02-stakeholder-analysis.md)
+- [use cases](feature/docs-init/Docs/03-use-cases.md)
+- [Rrquirements](feature/docs-init/Docs/04-Requirements.md)
+- [user stories](feature/docs-init/Docs/05-user-stories.md)
 
 
 
