@@ -61,7 +61,8 @@ Version Control: Git & GitHub
 
 ---
 
-##  How to Run the Project Clone the repository: Bash git clone https://github.com/Mahmoud-1905/FurnitureStore.git Open the project in Visual Studio Configure the database: Update connection string in appsettings.json Run the project: Press F5 أو Start Debugging
+##  How to Run the Project Clone the repository: 
+Bash git clone https://github.com/Mahmoud-1905/FurnitureStore.git Open the project in Visual Studio Configure the database: Update connection string in appsettings.json Run the project: Press F5 أو Start Debugging
 
 
 ---
@@ -84,7 +85,6 @@ Testing & Bug Fixing	⬜ Pending
 ## Use Case Mapping
 
 Use Case	Controller / Module
-
 User Login/Register	AccountController
 Browse Products	ProductController
 Add to Cart	CartController
