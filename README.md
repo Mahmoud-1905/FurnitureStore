@@ -16,10 +16,6 @@ Smart Furniture Store is a modern e-commerce web application designed to provide
 **Sellers:** Manage and showcase their products efficiently, handle inventory, and process orders.
 
 **Administrators:** Monitor users, track sales, view reports, and manage overall system performance through a centralized dashboard.
-
-## Smart Furniture Store{Plan}
-- https://mm.tt/map/3968992033?t=IfhXy6qjAJ
-  this like have Functional/NonFunctional Requirements, Use Case Scenarios,....
   
 ---
 ## Team Members & Roles
