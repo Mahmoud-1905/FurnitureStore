@@ -16,6 +16,10 @@ namespace FurnitureStore.Controllers
                 new Product { Id = 2, Name = "5-piece serving table set - luxurious and professional design", Price = 200, ImageUrl = "~/images/7.jpg" },
                 new Product { Id = 3, Name = "A distinctive swing with an elegant circular design", Price = 150, ImageUrl = "~/images/4.jpg" },
                 new Product { Id = 4, Name = "Modern and elegant dining table with 8 chairs", Price = 300, ImageUrl = "~/images/5.jpg" }
+            
+            
+            
+            
             };
 
             return View(products);
