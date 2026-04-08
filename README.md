@@ -19,16 +19,8 @@ Administrators can monitor sales, users, and overall system performance through 
 | 3 | Roaa Al-Jamal| Testing | [Roaa-svs](https://github.com/Roaa-svs)
 | 4 | Ragahad Akeela| Database & Backend Support | [raghadkhaled12](https://github.com/raghadkhaled12)
 | 5 | Mahmoud Alhindi| Team Leader, Backend\frontend Developer| [Mahmoud-1905](https://github.com/Mahmoud-1905)
-
 ## User Types
 - **Customer:** Browse products, place orders, write reviews
 - **Seller:** Add/edit/delete products, manage orders
 - **Admin:** Manage users, monitor orders, view reports
-
-##  Documentation
-- [introduction](Docs/01-introduction.md)
-- [stakeholder analysis](Docs/02-stakeholder-analysis.md)
-- [use cases](Docs/03-use-cases.md)
-- [Rrquirements](Docs/04-Requirements.md)
-- [user stories](Docs/05-user-stories.md)
 
