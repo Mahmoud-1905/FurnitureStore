@@ -1,7 +1,9 @@
 body {
     position: relative;
 }
-
+main {
+    margin-bottom: 45px;
+}
 
 .hero-section {
     background-color: #1a1a1a;
@@ -13,7 +15,7 @@ body {
     padding-left: 50px;
     padding-right: 20px;
     
-    margin-bottom: 45px;
+
 }
 
 .text-serif {
@@ -60,5 +62,6 @@ body {
     }
 
 footer {
-    position: absolute; 
+
+    position: absolute;
 }
