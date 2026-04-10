@@ -6,7 +6,30 @@
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
 
-<div class="account-container">
+<style>
+    body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center; /* توسيط أفقي */
+    align-items: center;     /* توسيط عمودي */
+    background-color: #f5f5f5; /* اختياري */
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+}
+
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+</style>
+
+<div  class="account-container">
     <div class="account-box">
         <h2 class="text-center mb-4">Login</h2>
         <form asp-action="Login" method="post">
