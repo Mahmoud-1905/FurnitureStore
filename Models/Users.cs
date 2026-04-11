@@ -4,8 +4,6 @@ namespace FurnitureStore.Models
     
 
 {
-    
-
     namespace UserRoles.Models
     {
         public class Users : IdentityUser
