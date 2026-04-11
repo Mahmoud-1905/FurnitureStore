@@ -1,6 +1,6 @@
 # 1. Introduction
 
-## 1.1 Project Overvie
+## 1.1 Project Overview
 
 The Smart Furniture Store System is a web-based platform designed to provide a modern and intelligent shopping experience for furniture products. The system allows customers to browse, explore, and purchase a wide range of furniture items through an easy-to-use and interactive interface.
 
