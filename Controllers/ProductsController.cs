@@ -1,10 +1,14 @@
 ﻿using FurnitureStore.Models;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Diagnostics;
+using FurnitureStore.Data;
+
 
 namespace FurnitureStore.Controllers
 {
+
     public class ProductsController : Controller
     {
         public IActionResult Index()
@@ -76,5 +80,8 @@ namespace FurnitureStore.Controllers
                 new Product { Id = 50, Name = "مرآة مستطيلة مع رف مضيء", Price = 260, ImageUrl = "~/images/50.jpeg" }
             };
         }
+
+       
+
     }
 }
