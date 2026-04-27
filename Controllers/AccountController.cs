@@ -112,29 +112,29 @@ namespace FurnitureStore.Controllers
 
             var user = await userManager.FindByNameAsync(model.Email);
 
-            if (user == null)
+            if (user != null)
             {
-                ModelState.AddModelError("", "User not found!");
-                return View(model);
+                var token = await userManager.GeneratePasswordResetTokenAsync(user);
+                return RedirectToAction("ChangePassword", "Account", new { email = user.Email, token = token });
             }
-            else
-            {
-                return RedirectToAction("ChangePassword", "Account", new { username = user.UserName });
-            }
+
+            ModelState.AddModelError("", "If the email exists, a reset link was sent.");
+            return View(model);
         }
 
         [HttpGet]
-        public IActionResult ChangePassword(string username)
+        public IActionResult ChangePassword(string email, string token)
         {
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(token))
             {
                 return RedirectToAction("VerifyEmail", "Account");
             }
 
-            return View(new ChangePasswordViewModel { Email = username });
+            return View(new ChangePasswordViewModel { Email = email, Token = token });
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid)
@@ -147,25 +147,21 @@ namespace FurnitureStore.Controllers
 
             if (user == null)
             {
-                ModelState.AddModelError("", "User not found!");
-                return View(model);
-            }
-
-            var result = await userManager.RemovePasswordAsync(user);
-            if (result.Succeeded)
-            {
-                result = await userManager.AddPasswordAsync(user, model.NewPassword);
                 return RedirectToAction("Login", "Account");
             }
-            else
-            {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
 
-                return View(model);
+            var result = await userManager.ResetPasswordAsync(user, model.Token, model.NewPassword);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Login", "Account");
             }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
+
+            return View(model);
         }
 
         [HttpPost]

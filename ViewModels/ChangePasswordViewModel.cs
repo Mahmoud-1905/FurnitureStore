@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace FurnitureStore.ViewModels
 {
@@ -20,5 +20,6 @@ namespace FurnitureStore.ViewModels
         [Display(Name = "Confirm New Password")]
         public string ConfirmNewPassword { get; set; }
 
+        public string Token { get; set; }
     }
 }

@@ -1,8 +1,7 @@
-﻿using FurnitureStore.Models;
+using FurnitureStore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Diagnostics;
+using System.Threading.Tasks;
 using FurnitureStore.Data;
 
 
@@ -11,25 +10,36 @@ namespace FurnitureStore.Controllers
 
     public class ProductsController : Controller
     {
-        public IActionResult Index()
+        private readonly AppDbContext _context;
+
+        public ProductsController(AppDbContext context)
         {
-            var products = GetProducts();
+            _context = context;
+        }
+
+        public async Task<IActionResult> Index(string searchTerm)
+        {
+            var productsQuery = _context.Products.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                productsQuery = productsQuery.Where(p => p.Name.Contains(searchTerm) || p.Category.Contains(searchTerm));
+            }
+
+            var products = await productsQuery.ToListAsync();
+            ViewBag.SearchTerm = searchTerm;
             return View(products);
         }
 
-        private List<Product> GetProducts()
+        public async Task<IActionResult> Details(int id)
         {
-            using var context = new AppDbContext(new DbContextOptions<AppDbContext>());
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+            if (product == null)
             {
-                context.Products.ToList();
+                return NotFound();
             }
-            return new List<Product>
-            {
-                
-            };
+            return View(product);
         }
-
-       
 
     }
 }

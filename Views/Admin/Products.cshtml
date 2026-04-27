@@ -1,4 +1,4 @@
-﻿@model List<FurnitureStore.Models.Product>
+@model List<FurnitureStore.Models.Product>
 <main>
 <h2>إدارة المنتجات</h2>
 
@@ -17,7 +17,10 @@
             <td>@item.Name</td>
             <td>@item.Price</td>
             <td>
-                <a href="/Admin/Delete/@item.Id">❌ حذف</a>
+                <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" style="background:none; border:none; color:red; cursor:pointer;">❌ حذف</button>
+                </form>
             </td>
         </tr>
     }

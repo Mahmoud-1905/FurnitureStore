@@ -1,22 +1,28 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using FurnitureStore.Models;
-using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using FurnitureStore.Data;
 
 namespace FurnitureStore.Controllers
 {
     public class AdminController : Controller
     {
-        private static List<Product> products = new List<Product>();
+        private readonly AppDbContext _context;
+
+        public AdminController(AppDbContext context)
+        {
+            _context = context;
+        }
 
         public IActionResult Dashboard()
         {
             return View();
         }
 
-        public IActionResult Products()
+        public async Task<IActionResult> Products()
         {
-            return View(products);
+            return View(await _context.Products.ToListAsync());
         }
 
         public IActionResult Create()
@@ -25,23 +31,31 @@ namespace FurnitureStore.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Product product)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Product product)
         {
-            product.Id = products.Count + 1;
-            products.Add(product);
-            return RedirectToAction("Products");
+            if (ModelState.IsValid)
+            {
+                _context.Products.Add(product);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Products));
+            }
+            return View(product);
         }
 
-        public IActionResult Delete(int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
         {
-            var item = products.FirstOrDefault(x => x.Id == id);
+            var item = await _context.Products.FindAsync(id);
             if (item != null)
-                products.Remove(item);
+            {
+                _context.Products.Remove(item);
+                await _context.SaveChangesAsync();
+            }
 
-            return RedirectToAction("Products");
+            return RedirectToAction(nameof(Products));
         }
     }
 
 }
-
-

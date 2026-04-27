@@ -1,4 +1,4 @@
-﻿@model List<CartItem>
+@model List<CartItem>
 
 @{
     ViewData["Title"] = "سلة المشتريات";
@@ -46,9 +46,12 @@
                         <td>@(item.Price* item.Quantity) شيكل</td>
 
                         <td>
-                            <a asp-action="Remove" asp-route-id="@item.Id" class="btn btn-danger">
-                                حذف
-                            </a>
+                            <form asp-action="Remove" asp-route-id="@item.Id" method="post" style="display:inline;">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger">
+                                    حذف
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 }
