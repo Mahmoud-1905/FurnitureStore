@@ -1,0 +1,28 @@
+@model List<FurnitureStore.Models.Product>
+<main>
+<h2>إدارة المنتجات</h2>
+
+<a href="/Admin/Create">➕ إضافة منتج</a>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>الاسم</th>
+        <th>السعر</th>
+        <th>حذف</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Price</td>
+            <td>
+                <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" style="background:none; border:none; color:red; cursor:pointer;">❌ حذف</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+</main>

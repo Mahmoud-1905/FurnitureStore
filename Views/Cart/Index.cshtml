@@ -1,0 +1,77 @@
+@model List<CartItem>
+
+@{
+    ViewData["Title"] = "سلة المشتريات";
+}
+
+<body>
+   
+<h2 class="text-center mt-4">🛒 سلة المشتريات</h2>
+
+<div class="Cart-container mt-4">
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center">
+            السلة فارغة 😅
+        </div>
+    }
+    else
+    {
+        <table class="table table-bordered text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>الصورة</th>
+                    <th>المنتج</th>
+                    <th>السعر</th>
+                    <th>الكمية</th>
+                    <th>المجموع</th>
+                    <th>حذف</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="@item.ImageUrl" width="80" />
+                        </td>
+
+                        <td>@item.ProductName</td>
+
+                        <td>@item.Price شيكل</td>
+
+                        <td>@item.Quantity</td>
+
+                        <td>@(item.Price* item.Quantity) شيكل</td>
+
+                        <td>
+                            <form asp-action="Remove" asp-route-id="@item.Id" method="post" style="display:inline;">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger">
+                                    حذف
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="text-end mt-3">
+            <h4>
+                المجموع الكلي:
+                <span class="text-success">
+                    @Model.Sum(x => x.Price * x.Quantity) شيكل
+                </span>
+            </h4>
+        </div>
+
+        <div class="text-center mt-4">
+            <button class="btn btn-success btn-lg">
+                إتمام الشراء
+            </button>
+        </div>
+    }
+</div>
+</body>

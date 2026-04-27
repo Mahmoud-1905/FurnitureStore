@@ -1,0 +1,92 @@
+﻿@model FurnitureStore.Models.Product
+
+<style>
+    .details-container {
+        display: flex;
+        gap: 40px;
+        padding: 50px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .details-img {
+        width: 400px;
+        border-radius: 20px;
+        object-fit: cover;
+    }
+
+    .details-content {
+        max-width: 500px;
+    }
+
+    .details-title {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .details-price {
+        color: #16a34a;
+        font-size: 24px;
+        font-weight: bold;
+        margin: 10px 0;
+    }
+
+    .details-desc {
+        color: #555;
+        margin-bottom: 20px;
+        line-height: 1.6;
+    }
+
+    .qty-input {
+        width: 60px;
+        padding: 8px;
+        margin-bottom: 20px;
+    }
+
+    .btn-cart {
+        padding: 12px 30px;
+        background: #1f2937;
+        color: white;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+        .btn-cart:hover {
+            background: #111827;
+        }
+</style>
+
+<div class="details-container">
+
+    <img src="@Url.Content(Model.ImageUrl)" class="details-img" />
+
+    <div class="details-content">
+
+        <div class="details-title">@Model.Name</div>
+
+        <div class="details-price">₪ @Model.Price</div>
+
+        <div class="details-desc">
+            @Model.Description
+        </div>
+
+        <div>
+            الكمية:
+            <input type="number" value="1" min="1" class="qty-input" />
+        </div>
+
+        <a asp-controller="Cart"
+               asp-action="AddToCart"
+               asp-route-name="@Model.Name"
+               asp-route-price="@Model.Price"
+               asp-route-image="@Model.ImageUrl"
+               class="btn-cart">
+            🛒 إضافة للسلة
+        </a>
+
+    </div>
+
+</div>
