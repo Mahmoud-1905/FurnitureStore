@@ -8,6 +8,13 @@
    
 <h2 class="text-center mt-4">🛒 سلة المشتريات</h2>
 
+<div class="text-end mb-2" style="padding: 0 20px;">
+    <a asp-controller="Products" asp-action="Index"
+       class="btn btn-outline-secondary">
+        ← العودة إلى المنتجات
+    </a>
+</div>
+
 <div class="Cart-container mt-4">
     @if (!Model.Any())
     {
@@ -34,7 +41,8 @@
                 {
                     <tr>
                         <td>
-                            <img src="@item.ImageUrl" width="80" />
+                            <img src="@Url.Content(item.ImageUrl)" width="80"
+                                 style="border-radius:8px;object-fit:cover;height:60px;" />
                         </td>
 
                         <td>@item.ProductName</td>

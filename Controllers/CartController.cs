@@ -27,14 +27,16 @@ namespace FurnitureStore.Controllers
             return View(GetCart());
         }
 
-        public IActionResult AddToCart(string name, decimal price, string image)
+        public IActionResult AddToCart(string name, decimal price, string image, int quantity = 1)
         {
+            if (quantity < 1) quantity = 1;
+
             var cart = GetCart();
             var item = cart.FirstOrDefault(x => x.ProductName == name);
 
             if (item != null)
             {
-                item.Quantity++;
+                item.Quantity += quantity;
             }
             else
             {
@@ -45,7 +47,7 @@ namespace FurnitureStore.Controllers
                     ProductName = name,
                     Price = price,
                     ImageUrl = image,
-                    Quantity = 1
+                    Quantity = quantity
                 });
             }
 

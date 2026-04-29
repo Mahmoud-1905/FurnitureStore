@@ -1,4 +1,4 @@
-﻿@model FurnitureStore.Models.Product
+@model FurnitureStore.Models.Product
 
 <style>
     .details-container {
@@ -73,18 +73,24 @@
             @Model.Description
         </div>
 
-        <div>
-            الكمية:
-            <input type="number" value="1" min="1" class="qty-input" />
-        </div>
+        <form method="get" asp-controller="Cart" asp-action="AddToCart">
+            <input type="hidden" name="name"  value="@Model.Name" />
+            <input type="hidden" name="price" value="@Model.Price" />
+            <input type="hidden" name="image" value="@Model.ImageUrl" />
 
-        <a asp-controller="Cart"
-               asp-action="AddToCart"
-               asp-route-name="@Model.Name"
-               asp-route-price="@Model.Price"
-               asp-route-image="@Model.ImageUrl"
-               class="btn-cart">
-            🛒 إضافة للسلة
+            <div style="margin-bottom:16px;">
+                <label style="font-weight:600;">الكمية:</label>
+                <input type="number" name="quantity" value="1" min="1" class="qty-input" />
+            </div>
+
+            <button type="submit" class="btn-cart">
+                🛒 إضافة للسلة
+            </button>
+        </form>
+
+        <a asp-controller="Products" asp-action="Index"
+           style="display:inline-block;margin-top:14px;color:#2563eb;font-weight:600;text-decoration:none;">
+            ← العودة إلى المنتجات
         </a>
 
     </div>

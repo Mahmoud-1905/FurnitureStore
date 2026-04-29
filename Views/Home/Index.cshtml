@@ -1,29 +1,68 @@
-﻿<main>
-<section class="hero-section">
-    <div class="container-fluid px-5">
+@{
+    ViewData["Title"] = "أهلاً بكم في متجر رقي";
+}
+
+<div class="hero-section">
+    <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-6 hero-content">
-                <h1 class="display-3 fw-bold">Find beauty in <br> <span class="text-serif">simplicity</span></h1>
-                <p class="lead my-4">
-                    A modern furniture catalog that combines simplicity and beauty to suit your refined taste in your smart home.
+            <!-- Text Content (Right side in RTL) -->
+            <div class="col-lg-6 hero-content text-right">
+                <h1 class="hero-title fw-bold">أهلاً بكم في <br> <span class="text-primary-teal">متجر رقي</span></h1>
+                <p class="hero-description">
+                    نقدم لكم أرقى تشكيلة من الأثاث العصري الذي يجمع بين الفخامة والراحة. تصاميمنا تضفي لمسة من الأناقة والتميز على منزلك الذكي.
                 </p>
-                <a asp-controller="Products" asp-action="Index" class="btn btn-outline-light btn-lg px-5 py-3">Explore Now</a>
-                <div class="social-links mt-5">
-                    <a href="#"><i class="bi bi-instagram"></i></a>
-                    <a href="#"><i class="bi bi-facebook"></i></a>
-                    <a href="#"><i class="bi bi-twitter"></i></a>
+                <div class="hero-buttons">
+                    <a asp-controller="Products" asp-action="Index" class="btn btn-teal px-5">
+                        المنتجات
+                    </a>
                 </div>
             </div>
 
-            <div class="col-lg-6 hero-images-container">
-                <div class="main-image-box">
-                    <img src="~/images/7.jpg" alt="Modern Sofa" class="img-fluid main-img">
-                        <div class="floating-image">
-                            <img src="~/images/5.jpg" alt="Designer Chair" class="img-fluid shadow-lg">
-                            </div>
-                        </div>
-                    </div>
+            <!-- Image Content (Left side in RTL) -->
+            <div class="col-lg-6 chair-container">
+                <img src="~/images/hero_chair_transparent.png" alt="Ruqi Premium Chair" class="animated-chair img-fluid">
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 stat-item">
+                    <span class="stat-value">2.5k+</span>
+                    <span class="stat-label">كرسي تم بيعه</span>
+                </div>
+                <div class="col-md-3 stat-item">
+                    <span class="stat-value">98%</span>
+                    <span class="stat-label">نسبة الرضا</span>
+                </div>
+                <div class="col-md-3 stat-item">
+                    <span class="stat-value">1.2k</span>
+                    <span class="stat-label">تقييم 5 نجوم</span>
+                </div>
+                <div class="col-md-3 stat-item">
+                    <span class="stat-value">10</span>
+                    <span class="stat-label">ضمان سنوات</span>
                 </div>
             </div>
-        </section>
-        </main>
+        </div>
+    </div>
+</div>
+
+<style>
+    .text-primary-teal {
+        color: var(--primary-teal);
+    }
+    
+    /* Ensure the main container doesn't restrict the hero section */
+    main.pb-3 {
+        padding-bottom: 0 !important;
+    }
+    
+    .container {
+        max-width: 1200px;
+    }
+
+    /* Override the order for RTL if needed, but Bootstrap 5 row is already RTL aware */
+</style>
