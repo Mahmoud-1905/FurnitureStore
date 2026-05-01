@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -116,7 +116,34 @@
     @await RenderSectionAsync("Scripts", required: false)
 
 
-
+    <style>
+            .modern-footer {
+                direction: rtl;
+                text-align: right;
+            }
+    
+                .modern-footer h5,
+                .modern-footer h6,
+                .modern-footer p,
+                .modern-footer a,
+                .modern-footer ul,
+                .modern-footer li {
+                    text-align: right;
+                }
+    
+                .modern-footer .input-group {
+                    direction: rtl;
+                    flex-direction: row-reverse;
+                }
+    
+                .modern-footer .social-icons {
+                    text-align: right;
+                }
+    
+                .modern-footer .text-center {
+                    text-align: center !important;
+                }
+    </style>
    
 </body>
 </html>
