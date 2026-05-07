@@ -1,85 +1,203 @@
 @model List<CartItem>
 
 @{
-    ViewData["Title"] = "سلة المشتريات";
+    ViewData["Title"] = "سلة المشتريات - متجر رقي";
 }
 
-<body>
-   
-<h2 class="text-center mt-4">🛒 سلة المشتريات</h2>
+<div class="py-12 px-8 md:px-16 container-center">
+    <!-- Page Header -->
+    <div class="mb-16 text-right flex justify-between items-end">
+        <a asp-controller="Products" asp-action="Index" class="text-xs font-sans text-primary uppercase tracking-widest border-b border-primary pb-1 hover:opacity-70 transition-opacity">
+            ← العودة للمجموعة
+        </a>
+        <div>
+            <span class="text-xs font-sans text-primary uppercase tracking-[0.2em] block mb-stack-sm">حقيبتك</span>
+            <h1 class="text-5xl font-serif text-on-surface">سلة المشتريات</h1>
+        </div>
+    </div>
 
-<div class="text-end mb-2" style="padding: 0 20px;">
-    <a asp-controller="Products" asp-action="Index"
-       class="btn btn-outline-secondary">
-        ← العودة إلى المنتجات
-    </a>
+    <div class="w-full">
+        @if (!Model.Any())
+        {
+            <div class="py-32 text-center bg-surface-container-low/30">
+                <p class="text-xl font-serif text-secondary mb-8">سلتك لا تزال بانتظار اختياراتك الفاخرة.</p>
+                <a asp-controller="Products" asp-action="Index" class="bg-on-surface text-surface px-10 py-4 font-sans text-sm uppercase tracking-widest hover:bg-primary transition-colors">
+                    ابدأ التسوق
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                <!-- Items List -->
+                <div class="lg:col-span-8">
+                    <div class="border-t border-outline-variant/30">
+                        @foreach (var item in Model)
+                        {
+                            <div class="flex flex-col md:flex-row-reverse gap-8 py-8 border-b border-outline-variant/30 group">
+                                <!-- Product Image -->
+                                <div class="w-full md:w-32 aspect-square overflow-hidden bg-surface-container">
+                                    <img src="@Url.Content(item.ImageUrl)" 
+                                         class="w-full h-full object-cover transition-all duration-700" 
+                                         alt="@item.ProductName" />
+                                </div>
+
+                                <!-- Product Info -->
+                                <div class="flex-1 text-right flex flex-col justify-center">
+                                    <h3 class="text-xl font-serif text-on-surface mb-2">@item.ProductName</h3>
+                                    <p class="text-sm font-sans text-secondary">الكمية: @item.Quantity</p>
+                                </div>
+
+                                <!-- Price and Remove -->
+                                <div class="flex flex-col justify-center items-start md:items-end gap-4">
+                                    <span class="text-lg font-sans text-on-surface font-semibold">₪@(item.Price * item.Quantity)</span>
+                                    <form asp-action="Remove" asp-route-id="@item.Id" method="post">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="text-[10px] font-sans text-error uppercase tracking-widest hover:border-b hover:border-error transition-all">
+                                            إزالة القطعة
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Summary Sidebar -->
+                <div class="lg:col-span-4">
+                    <div class="bg-surface-container-low p-12 text-right">
+                        <h2 class="text-2xl font-serif text-on-surface mb-8 border-b border-outline-variant/30 pb-4">ملخص الطلب</h2>
+                        
+                        <div class="flex justify-between flex-row-reverse mb-6">
+                            <span class="font-sans text-secondary">المجموع الفرعي</span>
+                            <span class="font-sans text-on-surface">₪@Model.Sum(x => x.Price * x.Quantity)</span>
+                        </div>
+                        
+                        <div class="flex justify-between flex-row-reverse mb-8">
+                            <span class="font-sans text-secondary">التوصيل المعماري</span>
+                            <span class="font-sans text-primary">مجاني</span>
+                        </div>
+
+                        <div class="border-t border-on-surface pt-6 mb-12 flex justify-between flex-row-reverse">
+                            <span class="text-xl font-serif text-on-surface">الإجمالي</span>
+                            <span class="text-2xl font-sans text-on-surface font-bold">₪@Model.Sum(x => x.Price * x.Quantity)</span>
+                        </div>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <button onclick="openCheckoutModal()" class="w-full bg-on-surface text-surface py-5 font-sans text-sm uppercase tracking-[0.2em] hover:bg-primary transition-colors duration-500">
+                                إتمام عملية الشراء
+                            </button>
+                        }
+                        else
+                        {
+                            <a asp-controller="Account" asp-action="Login" class="block text-center w-full bg-primary text-surface py-5 font-sans text-sm uppercase tracking-[0.2em] hover:bg-on-surface transition-colors duration-500">
+                                تسجيل الدخول لإتمام الشراء
+                            </a>
+                        }
+                        
+                        <p class="text-[10px] font-sans text-secondary mt-6 text-center leading-relaxed">
+                            بإتمامك للشراء، أنت توافق على شروط الخدمة المعمارية الخاصة بمتجر رقي.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
 
-<div class="Cart-container mt-4">
-    @if (!Model.Any())
-    {
-        <div class="alert alert-info text-center">
-            السلة فارغة 😅
+<!-- Checkout Modal -->
+<div id="checkoutModal" class="fixed inset-0 z-50 invisible opacity-0 transition-all duration-500 flex items-center justify-center p-4">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-on-surface/80 backdrop-blur-sm" onclick="closeCheckoutModal()"></div>
+    
+    <!-- Modal Content -->
+    <div class="relative bg-surface w-full max-w-xl p-12 shadow-2xl transform translate-y-8 transition-transform duration-500" id="modalContent">
+        <button onclick="closeCheckoutModal()" class="absolute top-8 left-8 text-secondary hover:text-on-surface transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+
+        <div class="text-right">
+            <h2 class="text-3xl font-serif text-on-surface mb-2">تفاصيل التسجيل المعماري</h2>
+            <p class="text-sm font-sans text-secondary mb-12 uppercase tracking-widest">يرجى تأكيد بياناتك لإتمام حجز القطع الفاخرة</p>
+
+            <div class="space-y-8">
+                <div>
+                    <label class="block text-[10px] font-sans text-secondary uppercase tracking-widest mb-2">الاسم الكامل</label>
+                    <input type="text" id="custName" class="w-full bg-transparent border-b border-outline-variant py-3 font-sans text-on-surface focus:border-primary outline-none transition-colors" placeholder="محمود ...">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-sans text-secondary uppercase tracking-widest mb-2">الموقع / المدينة</label>
+                    <input type="text" id="custLocation" class="w-full bg-transparent border-b border-outline-variant py-3 font-sans text-on-surface focus:border-primary outline-none transition-colors" placeholder="رام الله، فلسطين">
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <label class="block text-[10px] font-sans text-secondary uppercase tracking-widest mb-2">رقم الهاتف</label>
+                        <input type="tel" id="custPhone" class="w-full bg-transparent border-b border-outline-variant py-3 font-sans text-on-surface focus:border-primary outline-none transition-colors" placeholder="+970 ...">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-sans text-secondary uppercase tracking-widest mb-2">البريد الإلكتروني</label>
+                        <input type="email" id="custEmail" class="w-full bg-transparent border-b border-outline-variant py-3 font-sans text-on-surface focus:border-primary outline-none transition-colors" placeholder="name@domain.com">
+                    </div>
+                </div>
+
+                <div class="pt-8">
+                    <button onclick="processPurchase()" class="w-full bg-on-surface text-surface py-5 font-sans text-sm uppercase tracking-[0.2em] hover:bg-primary transition-colors duration-500">
+                        تأكيد وإتمام الشراء
+                    </button>
+                </div>
+            </div>
         </div>
-    }
-    else
-    {
-        <table class="table table-bordered text-center">
-            <thead class="table-dark">
-                <tr>
-                    <th>الصورة</th>
-                    <th>المنتج</th>
-                    <th>السعر</th>
-                    <th>الكمية</th>
-                    <th>المجموع</th>
-                    <th>حذف</th>
-                </tr>
-            </thead>
+    </div>
 
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            <img src="@Url.Content(item.ImageUrl)" width="80"
-                                 style="border-radius:8px;object-fit:cover;height:60px;" />
-                        </td>
-
-                        <td>@item.ProductName</td>
-
-                        <td>@item.Price شيكل</td>
-
-                        <td>@item.Quantity</td>
-
-                        <td>@(item.Price* item.Quantity) شيكل</td>
-
-                        <td>
-                            <form asp-action="Remove" asp-route-id="@item.Id" method="post" style="display:inline;">
-                                @Html.AntiForgeryToken()
-                                <button type="submit" class="btn btn-danger">
-                                    حذف
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-
-        <div class="text-end mt-3">
-            <h4>
-                المجموع الكلي:
-                <span class="text-success">
-                    @Model.Sum(x => x.Price * x.Quantity) شيكل
-                </span>
-            </h4>
+    <!-- Success Content -->
+    <div class="relative bg-surface w-full max-w-md p-16 shadow-2xl text-center hidden transform scale-95 transition-all duration-500" id="successContent">
+        <div class="mb-8 flex justify-center">
+            <div class="w-20 h-20 border border-primary rounded-full flex items-center justify-center">
+                <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 13l4 4L19 7"></path></svg>
+            </div>
         </div>
-
-        <div class="text-center mt-4">
-            <button class="btn btn-success btn-lg">
-                إتمام الشراء
+        <h2 class="text-3xl font-serif text-on-surface mb-4">تمت العملية بنجاح</h2>
+        <p class="text-sm font-sans text-secondary mb-12 leading-relaxed">شكراً لاختياركم "رقي". لقد تم استلام طلبكم وسيتم التواصل معكم قريباً لتأكيد تفاصيل التسليم المعماري.</p>
+        
+        <form asp-action="Clear" method="post">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="w-full bg-on-surface text-surface py-4 font-sans text-xs uppercase tracking-widest hover:bg-primary transition-colors">
+                العودة للمتجر
             </button>
-        </div>
-    }
+        </form>
+    </div>
 </div>
-</body>
+
+<script>
+    function openCheckoutModal() {
+        const modal = document.getElementById('checkoutModal');
+        const content = document.getElementById('modalContent');
+        modal.classList.remove('invisible', 'opacity-0');
+        content.classList.remove('translate-y-8');
+    }
+
+    function closeCheckoutModal() {
+        const modal = document.getElementById('checkoutModal');
+        const content = document.getElementById('modalContent');
+        modal.classList.add('invisible', 'opacity-0');
+        content.classList.add('translate-y-8');
+    }
+
+    function processPurchase() {
+        const name = document.getElementById('custName').value;
+        const email = document.getElementById('custEmail').value;
+
+        if (!name || !email) {
+            alert('يرجى تعبئة الحقول المطلوبة');
+            return;
+        }
+
+        document.getElementById('modalContent').classList.add('hidden');
+        const success = document.getElementById('successContent');
+        success.classList.remove('hidden');
+        setTimeout(() => {
+            success.classList.remove('scale-95');
+        }, 50);
+    }
+</script>

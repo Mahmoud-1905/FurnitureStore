@@ -1,69 +1,54 @@
-﻿@using FurnitureStore.ViewModels
-
+@using FurnitureStore.ViewModels
 @model RegisterViewModel;
 
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "إنشاء حساب";
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
-<style>
-    body {
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        justify-content: center; 
-        align-items: center; 
-        background-color: #f9f5f5; 
-    }
 
-    .container {
-        width: 100%;
-        max-width: 400px;
-    }
+<div class="text-right">
+    <h2 class="text-2xl font-serif text-on-surface mb-8">انضم إلى عالم رقي</h2>
+    
+    <form asp-action="Register" method="post" class="space-y-8">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-xs text-error font-sans mb-4"></div>
+        
+        <div class="relative group">
+            <label asp-for="Name" class="form-label">الاسم الكامل</label>
+            <input asp-for="Name" class="form-input" placeholder="أدخل اسمك هنا" />
+            <span asp-validation-for="Name" class="text-[10px] text-error font-sans mt-1 block"></span>
+        </div>
 
-    form {
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-</style>
+        <div class="relative group">
+            <label asp-for="Email" class="form-label">البريد الإلكتروني</label>
+            <input asp-for="Email" class="form-input" placeholder="name@domain.com" />
+            <span asp-validation-for="Email" class="text-[10px] text-error font-sans mt-1 block"></span>
+        </div>
 
-<div class="account-container">
-    <div class="account-box">
-        <h2 class="text-center mb-4">Register</h2>
-        <form asp-action="Register" method="post">
-            @Html.AntiForgeryToken()
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="mb-3">
-                <label asp-for="Name" class="form-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="relative group">
+                <label asp-for="Password" class="form-label">كلمة المرور</label>
+                <input asp-for="Password" type="password" class="form-input" />
+                <span asp-validation-for="Password" class="text-[10px] text-error font-sans mt-1 block"></span>
             </div>
-            <div class="mb-3">
-                <label asp-for="Email" class="form-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+            <div class="relative group">
+                <label asp-for="ConfirmPassword" class="form-label">تأكيد كلمة المرور</label>
+                <input asp-for="ConfirmPassword" type="password" class="form-input" />
+                <span asp-validation-for="ConfirmPassword" class="text-[10px] text-error font-sans mt-1 block"></span>
             </div>
-            <div class="mb-3">
-                <label asp-for="Password" class="form-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="ConfirmPassword" class="form-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <input type="submit" value="Register" class="btn btn-success w-100 p-2" />
-            <p class="text-center mt-2">
-                Already have an account? <a asp-controller="Account" asp-action="Login" class="text-decoration-none">Login</a>
+        </div>
+
+        <button type="submit" class="w-full bg-on-surface text-surface py-4 font-sans text-xs uppercase tracking-[0.2em] hover:bg-primary transition-colors duration-500">
+            إنشاء حساب معماري
+        </button>
+
+        <div class="pt-8 border-t border-outline-variant/30 text-center">
+            <p class="text-xs font-sans text-secondary">
+                لديك حساب بالفعل؟ 
+                <a asp-controller="Account" asp-action="Login" class="text-primary uppercase tracking-widest border-b border-primary/20 hover:border-primary transition-all pb-1 mr-2">تسجيل الدخول</a>
             </p>
-            <div class="text-center">
-                <a asp-controller="Home" asp-action="Index" class="text-decoration-none mt-3">Back</a>
-            </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 
 @section Scripts {

@@ -1,268 +1,107 @@
 @model List<FurnitureStore.Models.Product>
 
-<style>
-    body {
-        background: #f5f6fa;
-        font-family: 'Segoe UI', sans-serif;
-        direction: rtl;
-    }
+@{
+    ViewData["Title"] = "منتجاتنا - فخامة معمارية";
+}
 
-    .title {
-        text-align: center;
-        font-size: 36px;
-        margin: 30px 0;
-        font-weight: bold;
-        color: #1f2937;
-    }
+<div class="py-12 px-8 md:px-16 container-center">
+    <!-- Page Header -->
+    <div class="mb-16 text-right">
+        <span class="text-xs font-sans text-primary uppercase tracking-[0.2em] block mb-stack-sm">استكشف</span>
+        <h1 class="text-5xl font-serif text-on-surface">منتجاتنا المختارة</h1>
+        <div class="w-24 h-[1px] bg-outline-variant mt-6"></div>
+    </div>
 
-    .products-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-        gap: 30px;
-        padding: 40px;
-    }
+    <!-- Search Section -->
+    <div class="mb-16">
+        <form asp-action="Index" method="get" class="flex flex-col md:flex-row gap-6 items-end md:items-center justify-start border-b border-outline-variant pb-8">
+            <div class="flex-1 w-full relative">
+                <input type="text" name="searchTerm" 
+                       class="w-full bg-transparent border-none focus:ring-0 font-sans text-lg placeholder:text-secondary/50 text-right pr-0" 
+                       placeholder="ابحث عن قطعة أثاث محددة..." 
+                       value="@ViewBag.SearchTerm" />
+            </div>
+            
+            <div class="flex items-center gap-6">
+                @if (!string.IsNullOrEmpty(ViewBag.SearchTerm as string))
+                {
+                    <a asp-action="Index" class="text-xs font-sans text-error uppercase tracking-widest hover:opacity-70 transition-opacity">
+                        ✕ مسح البحث
+                    </a>
+                }
+                <button type="submit" class="bg-on-surface text-surface px-8 py-3 font-sans text-sm uppercase tracking-widest hover:bg-primary transition-colors">
+                    بحث معماري
+                </button>
+            </div>
+        </form>
+    </div>
 
-    .product-card {
-        background: #fff;
-        border-radius: 20px;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        transition: 0.3s;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-        position: relative;
-    }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
-    .product-img {
-        width: 100%;
-        height: 220px;
-        object-fit: cover;
-    }
-
-    .badge {
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        background: #22c55e;
-        color: #fff;
-        padding: 6px 12px;
-        border-radius: 10px;
-        font-size: 12px;
-        font-weight: bold;
-    }
-
-    .product-content {
-        padding: 18px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        flex: 1;
-    }
-
-    .product-name {
-        font-size: 18px;
-        font-weight: bold;
-        color: #111827;
-    }
-
-    .product-desc {
-        font-size: 14px;
-        color: #6b7280;
-        height: 40px;
-        overflow: hidden;
-    }
-
-    .product-category {
-        font-size: 13px;
-        color: #2563eb;
-        font-weight: 600;
-    }
-
-    .product-rating {
-        color: #fbbf24;
-        font-size: 14px;
-    }
-
-    .product-price {
-        color: #16a34a;
-        font-size: 20px;
-        font-weight: bold;
-    }
-
-    .actions {
-        display: flex;
-        gap: 10px;
-        margin-top: auto;
-    }
-
-    .btn-cart, .btn-details {
-        flex: 1;
-        padding: 10px;
-        border-radius: 10px;
-        border: none;
-        cursor: pointer;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-    }
-
-    .btn-cart {
-        background: #1f2937;
-        color: #fff;
-    }
-
-        .btn-cart:hover {
-            background: #111827;
-        }
-
-    .btn-details {
-        background: #e5e7eb;
-        color: #111;
-    }
-
-        .btn-details:hover {
-            background: #d1d5db;
-        }
-
-    .search-section {
-        max-width: 800px;
-        margin: 0 auto 50px;
-        padding: 0 20px;
-    }
-
-    .search-form {
-        display: flex;
-        gap: 15px;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(10px);
-        padding: 10px;
-        border-radius: 20px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        align-items: center;
-    }
-
-    .search-input {
-        flex: 1;
-        border: 2px solid transparent;
-        padding: 14px 25px;
-        font-size: 17px;
-        outline: none;
-        border-radius: 15px;
-        background: #f8fafc;
-        transition: 0.3s;
-    }
-
-    .search-input:focus {
-        border-color: #3b82f6;
-        background: #fff;
-        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-    }
-
-    .btn-search {
-        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-        color: #fff;
-        border: none;
-        padding: 14px 35px;
-        border-radius: 15px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: 0.3s;
-        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-    }
-
-    .btn-search:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
-    }
-
-    .clear-search {
-        color: #ef4444;
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 600;
-        margin-right: 10px;
-        padding: 8px 12px;
-        border-radius: 8px;
-        transition: 0.2s;
-    }
-
-    .clear-search:hover {
-        background: rgba(239, 68, 68, 0.1);
-    }
-</style>
-
-<h1 class="title">🛋️ متجر الأثاث الفاخر</h1>
-
-<div class="search-section">
-    <form asp-action="Index" method="get" class="search-form">
-        <input type="text" name="searchTerm" class="search-input" placeholder="ابحث عن منتج أو فئة (كنب، طاولات...)" value="@ViewBag.SearchTerm" />
-        
-        @if (!string.IsNullOrEmpty(ViewBag.SearchTerm as string))
+    <!-- Products Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-gutter gap-y-24">
+        @foreach (var item in Model)
         {
-            <a asp-action="Index" class="clear-search">✕ مسح</a>
-        }
+            <div class="group flex flex-col h-full bg-surface-container-low/30">
+                <!-- Image Container -->
+                <div class="relative aspect-[4/5] overflow-hidden bg-surface-container mb-6">
+                    <img src="@Url.Content(item.ImageUrl)" 
+                         class="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105" 
+                         alt="@item.Name" />
+                    
+                    <div class="absolute top-0 right-0 p-4">
+                        <span class="bg-on-surface text-surface text-[10px] uppercase tracking-[0.2em] px-3 py-1">
+                            @item.Category
+                        </span>
+                    </div>
 
-        <button type="submit" class="btn-search">🔍 بحث</button>
-    </form>
-</div>
-
-<div class="products-container">
-    @foreach (var item in Model)
-    {
-        <div class="product-card">
-
-            <div class="badge">جديد</div>
-
-            <img src="@Url.Content(item.ImageUrl)" class="product-img" />
-
-            <div class="product-content">
-
-                <div class="product-name">@item.Name</div>
-
-                <div class="product-desc">
-                    @item.Description
-                </div>
-
-                <div class="product-category">
-                    @item.Category
-                </div>
-
-                <div class="product-rating">
-                    ⭐⭐⭐⭐☆
-                </div>
-
-                <div class="product-price">
-                    ₪ @item.Price
-                </div>
-
-                <div class="actions">
-
-                    <a asp-controller="Cart"
+                    <!-- Quick Add Hover -->
+                    <div class="absolute inset-0 bg-on-surface/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                        <a asp-controller="Cart"
                            asp-action="AddToCart"
                            asp-route-name="@item.Name"
                            asp-route-price="@item.Price"
                            asp-route-image="@item.ImageUrl"
-                           class="btn-cart">
-                        🛒 إضافة
-                    </a>
-
-                    <a asp-controller="Products"
-                           asp-action="Details"
-                           asp-route-id="@item.Id"
-                           class="btn-details">
-                        👁️ تفاصيل
-                    </a>
-
+                           class="bg-surface text-on-surface px-8 py-3 font-sans text-xs uppercase tracking-widest hover:bg-primary hover:text-surface transition-colors">
+                            @(User.Identity.IsAuthenticated ? "إضافة للسلة" : "سجل دخول للإضافة")
+                        </a>
+                    </div>
                 </div>
 
-            </div>
+                <!-- Content -->
+                <div class="flex flex-col flex-1 px-2 text-right">
+                    <div class="flex justify-between items-start mb-2 flex-row-reverse">
+                        <h3 class="text-xl font-serif text-on-surface group-hover:text-primary transition-colors">@item.Name</h3>
+                        <span class="text-lg font-sans text-on-surface font-semibold">₪@item.Price</span>
+                    </div>
+                    
+                    <p class="text-sm font-sans text-secondary mb-6 line-clamp-2 leading-relaxed">
+                        @item.Description
+                    </p>
 
+                    <div class="mt-auto pt-4 border-t border-outline-variant/30 flex justify-between items-center flex-row-reverse">
+                        <a asp-controller="Products"
+                           asp-action="Details"
+                           asp-route-id="@item.Id" 
+                           class="text-[10px] font-sans text-primary uppercase tracking-[0.2em] border-b border-primary/0 hover:border-primary transition-all">
+                            التفاصيل الكاملة
+                        </a>
+                        <div class="flex gap-1">
+                            <span class="material-symbols-outlined text-[14px] text-primary-container">star</span>
+                            <span class="material-symbols-outlined text-[14px] text-primary-container">star</span>
+                            <span class="material-symbols-outlined text-[14px] text-primary-container">star</span>
+                            <span class="material-symbols-outlined text-[14px] text-primary-container">star</span>
+                            <span class="material-symbols-outlined text-[14px] text-primary-container">star_half</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="py-32 text-center">
+            <p class="text-xl font-serif text-secondary">لم يتم العثور على قطع تطابق بحثك.</p>
+            <a asp-action="Index" class="text-sm font-sans text-primary uppercase tracking-widest mt-6 inline-block border-b border-primary">العودة للمجموعة الكاملة</a>
         </div>
     }
 </div>

@@ -31,6 +31,18 @@ namespace FurnitureStore.Controllers
             return View();
         }
 
+        [Route("Collections")]
+        public IActionResult Collections()
+        {
+            return View();
+        }
+
+        [Route("About")]
+        public IActionResult About()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

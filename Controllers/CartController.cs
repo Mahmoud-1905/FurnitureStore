@@ -27,6 +27,7 @@ namespace FurnitureStore.Controllers
             return View(GetCart());
         }
 
+        [Microsoft.AspNetCore.Authorization.Authorize]
         public IActionResult AddToCart(string name, decimal price, string image, int quantity = 1)
         {
             if (quantity < 1) quantity = 1;
@@ -67,6 +68,13 @@ namespace FurnitureStore.Controllers
                 SaveCart(cart);
             }
 
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Clear()
+        {
+            HttpContext.Session.Remove(CartSessionKey);
             return RedirectToAction("Index");
         }
     }

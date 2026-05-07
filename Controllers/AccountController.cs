@@ -1,4 +1,4 @@
-﻿
+
 using FurnitureStore.Models.UserRoles.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -33,6 +33,8 @@ namespace FurnitureStore.Controllers
             {
                 return View(model);
             }
+
+            HttpContext.Session.Clear();
 
             var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
 
@@ -84,7 +86,7 @@ namespace FurnitureStore.Controllers
                 await userManager.AddToRoleAsync(user, "User");
 
                 await signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Home");
             }
 
             foreach (var error in result.Errors)
@@ -169,6 +171,7 @@ namespace FurnitureStore.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
+            HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }
     }

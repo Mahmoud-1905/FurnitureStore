@@ -3,9 +3,11 @@ using FurnitureStore.Models;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using FurnitureStore.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FurnitureStore.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly AppDbContext _context;

@@ -1,0 +1,214 @@
+@{
+    ViewData["Title"] = "المجموعات - فخامة الاختيار ودقة التصميم";
+}
+
+<main class="bg-surface min-h-screen">
+    <!-- Hero Section -->
+    <section class="relative h-[60vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute inset-0 bg-black/40"></div>
+            <img class="w-full h-full object-cover"
+                 src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop"
+                 alt="Collections Hero" />
+        </div>
+        <div class="container-center px-8 md:px-16 text-center">
+            <h1 class="text-5xl md:text-7xl font-serif mb-6 leading-tight animate-fade-up">مجموعاتنا المنسقة</h1>
+            <p class="text-lg md:text-xl font-sans max-w-2xl mx-auto opacity-90 leading-relaxed">
+                اكتشف عوالم من التصميم حيث تلتقي الدقة المعمارية بالفخامة الهادئة. كل مجموعة هي قصة تُروى من خلال الخشب،
+                القماش، والضوء.
+            </p>
+        </div>
+    </section>
+
+    <!-- Collections Grid -->
+    <section class="py-24 px-8 md:px-16 container-center">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+            <!-- Collection 1 -->
+            <div class="group cursor-pointer">
+                <div class="overflow-hidden aspect-[16/9] mb-8 relative">
+                    <img class="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105"
+                         src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1200&auto=format&fit=crop"
+                         alt="Living Room Collection" />
+                    <div
+                        class="absolute top-6 right-6 bg-surface px-4 py-2 text-[10px] font-sans uppercase tracking-widest text-on-surface">
+                        جديد</div>
+                    </div>
+                    <div class="text-right">
+                        <h3 class="text-3xl font-serif text-on-surface mb-4">سلسلة المونوليث</h3>
+                        <p class="text-secondary font-sans leading-relaxed mb-6">
+                            تصاميم مستوحاة من العمارة الوحشية، تتميز بخطوط جريئة وكتل صلبة توفر توازناً مثالياً بين القوة
+                            والراحة. مثالية للمساحات العصرية الواسعة.
+                        </p>
+                        <a href="/Products?collection=monolith"
+                           class="inline-flex items-center gap-2 text-primary font-sans text-sm uppercase tracking-widest border-b border-primary/30 pb-1 hover:border-primary transition-all">
+                            <span>عرض القطع</span>
+                            <span class="material-symbols-outlined text-sm transform rotate-180">arrow_right_alt</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Collection 2 -->
+                <div class="group cursor-pointer">
+                    <div class="overflow-hidden aspect-[16/9] mb-8 relative">
+                        <img class="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105"
+                         src="https://bobtimberlakeah.com/bedroom-furniture/images/Bob-Timberlake-American-Home-Chetola-Bedroom-Furniture-Collection.jpg"
+                             alt="Bedroom Collection" />
+                    </div>
+                    <div class="text-right">
+                        <h3 class="text-3xl font-serif text-on-surface mb-4">مجموعة الملاذ</h3>
+                        <p class="text-secondary font-sans leading-relaxed mb-6">
+                            تتمحور حول مفهوم الصفاء والنقاء. ألوان ترابية هادئة وأقمشة طبيعية فاخرة مصممة لتحويل غرف النوم
+                            إلى واحات حقيقية للاسترخاء والسكينة.
+                        </p>
+                        <a href="/Products?collection=haven"
+                           class="inline-flex items-center gap-2 text-primary font-sans text-sm uppercase tracking-widest border-b border-primary/30 pb-1 hover:border-primary transition-all">
+                            <span>عرض القطع</span>
+                            <span class="material-symbols-outlined text-sm transform rotate-180">arrow_right_alt</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Collection 3 -->
+                <div class="group cursor-pointer">
+                    <div class="overflow-hidden aspect-[16/9] mb-8 relative">
+                        <img class="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105"
+                         src="https://media.houseandgarden.co.uk/photos/686bcd4ca40de086ecd8bbb4/1:1/w_2500,h_2500,c_limit/Studio-Wanda-2-Sea-View_Dining_Chris-Snook.jpg"
+                             alt="Dining Collection" />
+                    </div>
+                    <div class="text-right">
+                        <h3 class="text-3xl font-serif text-on-surface mb-4">أساسيات التميز</h3>
+                        <p class="text-secondary font-sans leading-relaxed mb-6">
+                            مجموعة تركز على الوظيفة دون التنازل عن الجمال. قطع غرف الطعام التي تجمع بين الخشب الطبيعي
+                            والمعادن المصقولة، لخلق مساحات اجتماعية لا تُنسى.
+                        </p>
+                        <a href="/Products?collection=essentials"
+                           class="inline-flex items-center gap-2 text-primary font-sans text-sm uppercase tracking-widest border-b border-primary/30 pb-1 hover:border-primary transition-all">
+                            <span>عرض القطع</span>
+                            <span class="material-symbols-outlined text-sm transform rotate-180">arrow_right_alt</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Collection 4 -->
+                <div class="group cursor-pointer">
+                    <div class="overflow-hidden aspect-[16/9] mb-8 relative">
+                        <img class="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105"
+                             src="https://images.unsplash.com/photo-1616137422495-1e9e46e2aa77?q=80&w=1200&auto=format&fit=crop"
+                             alt="Office Collection" />
+                    </div>
+                    <div class="text-right">
+                        <h3 class="text-3xl font-serif text-on-surface mb-4">إرث الحداثة</h3>
+                        <p class="text-secondary font-sans leading-relaxed mb-6">
+                            إعادة إحياء للتصاميم الكلاسيكية بلمسة عصرية. قطع أثاث المكتب التي توحي بالوقار وتدعم الإنتاجية،
+                            مع الحفاظ على روح الفخامة الهادئة.
+                        </p>
+                        <a href="/Products?collection=legacy"
+                           class="inline-flex items-center gap-2 text-primary font-sans text-sm uppercase tracking-widest border-b border-primary/30 pb-1 hover:border-primary transition-all">
+                            <span>عرض القطع</span>
+                            <span class="material-symbols-outlined text-sm transform rotate-180">arrow_right_alt</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Room Categories -->
+        <section class="bg-surface-container py-24 px-8 md:px-16">
+            <div class="container-center text-center mb-16">
+                <h2 class="text-4xl font-serif text-on-surface mb-4">تسوق حسب الغرفة</h2>
+                <div class="w-16 h-1 bg-primary mx-auto"></div>
+            </div>
+            <div class="container-center grid grid-cols-2 md:grid-cols-4 gap-8">
+                <a href="/Products?category=living" class="relative group overflow-hidden block aspect-square">
+                    <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                         src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=600&auto=format&fit=crop"
+                         alt="Living Room" />
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+                        <span class="text-white font-serif text-2xl tracking-widest">غرفة المعيشة</span>
+                    </div>
+                </a>
+                <a href="/Products?category=bedroom" class="relative group overflow-hidden block aspect-square">
+                    <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                     src="https://cdn.arhaus.com/product/images/45HATHJFQNBD_GW251211.jpg?preset=plp"
+                         alt="Bedroom" />
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+                        <span class="text-white font-serif text-2xl tracking-widest">غرفة النوم</span>
+                    </div>
+                </a>
+                <a href="/Products?category=dining" class="relative group overflow-hidden block aspect-square">
+                    <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                     src="https://globalfurnitureusa.com/wp-content/uploads/2026/03/D8030DT-D8030DC-RSC-1-700x480.jpg"
+                         alt="Dining" />
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+                        <span class="text-white font-serif text-2xl tracking-widest">غرفة الطعام</span>
+                    </div>
+                </a>
+                <a href="/Products?category=office" class="relative group overflow-hidden block aspect-square">
+                    <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                         src="https://images.unsplash.com/photo-1616137422495-1e9e46e2aa77?q=80&w=600&auto=format&fit=crop"
+                         alt="Office" />
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+                        <span class="text-white font-serif text-2xl tracking-widest">المكتب</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Quality Promise -->
+        <section class="py-24 px-8 md:px-16 container-center">
+            <div
+                class="bg-on-surface text-surface p-12 md:p-24 grid grid-cols-1 md:grid-cols-2 items-center gap-16 text-right">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-serif mb-8 leading-tight">وعد رقي: الجودة التي تتوارثها الأجيال
+                    </h2>
+                    <p class="text-lg font-sans opacity-80 leading-relaxed mb-8">
+                        في رقي، لا نصمم أثاثاً فحسب، بل نصنع استثمارات تدوم. كل قطعة تخضع لاختبارات صارمة للجودة، بدءاً من
+                        اختيار المواد الخام وحتى اللمسات النهائية اليدوية.
+                    </p>
+                    <div class="flex flex-col gap-6">
+                        <div class="flex items-start gap-4 flex-row-reverse">
+                            <span class="material-symbols-outlined text-primary-container">workspace_premium</span>
+                            <div>
+                                <h4 class="font-serif text-xl mb-1">مواد استثنائية</h4>
+                                <p class="text-sm font-sans opacity-70">نستخدم أفضل أنواع الخشب الطبيعي والجلود الإيطالية
+                                    والأقمشة المختارة بعناية.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 flex-row-reverse">
+                                <span class="material-symbols-outlined text-primary-container">handyman</span>
+                                <div>
+                                    <h4 class="font-serif text-xl mb-1">صناعة يدوية</h4>
+                                    <p class="text-sm font-sans opacity-70">نجمع بين تقنيات النجارة التقليدية وأحدث أدوات الدقة
+                                        المعمارية.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="h-full min-h-[400px]">
+                            <img class="w-full h-full object-cover"
+                                 src="https://images.unsplash.com/photo-1581453904507-626ddb717f14?q=80&w=800&auto=format&fit=crop"
+                                 alt="Quality Craftsmanship" />
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            @section Styles {
+                <style>
+                    @@keyframes fadeInUp {
+                        from {
+                            opacity: 0;
+                            transform: translateY(30px);
+                        }
+
+                        to {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+
+                    .animate-fade-up {
+                        animation: fadeInUp 1.2s ease-out forwards;
+                    }
+                </style>
+            }
