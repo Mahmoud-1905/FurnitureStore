@@ -14,7 +14,7 @@
                      alt="@Model.Name" />
                 <div class="absolute top-0 right-0 p-8">
                     <span class="text-[10px] font-sans text-on-surface bg-surface px-4 py-2 uppercase tracking-[0.2em]">
-                        الرقم المرجعي: #@Model.Id
+                        الرقم المرجعي: #@Model.ProductId
                     </span>
                 </div>
             </div>
@@ -23,7 +23,7 @@
         <!-- Product Details -->
         <div class="lg:col-span-5 text-right">
             <div class="mb-12">
-                <span class="text-xs font-sans text-primary uppercase tracking-[0.2em] block mb-stack-sm">@Model.Category</span>
+                <span class="text-xs font-sans text-primary uppercase tracking-[0.2em] block mb-stack-sm">@Model.Category?.Name</span>
                 <h1 class="text-5xl font-serif text-on-surface mb-6 leading-tight">@Model.Name</h1>
                 <div class="text-3xl font-sans text-on-surface font-light mb-8">₪@Model.Price</div>
                 <div class="w-16 h-[1px] bg-outline-variant"></div>

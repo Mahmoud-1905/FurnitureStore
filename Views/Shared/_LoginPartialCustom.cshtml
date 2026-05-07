@@ -1,6 +1,6 @@
-@using FurnitureStore.Models.UserRoles.Models
+@using FurnitureStore.Models
 @using Microsoft.AspNetCore.Identity;
-@inject SignInManager<Users> signInManager;
+@inject SignInManager<ApplicationUser> signInManager;
 
 <div class="flex items-center gap-6">
     @if (signInManager.IsSignedIn(User))

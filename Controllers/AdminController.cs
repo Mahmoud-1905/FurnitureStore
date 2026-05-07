@@ -24,11 +24,12 @@ namespace FurnitureStore.Controllers
 
         public async Task<IActionResult> Products()
         {
-            return View(await _context.Products.ToListAsync());
+            return View(await _context.Products.Include(p => p.Category).ToListAsync());
         }
 
         public IActionResult Create()
         {
+            ViewBag.Categories = _context.Categories.Where(c => c.IsActive).OrderBy(c => c.SortOrder).ToList();
             return View();
         }
 
@@ -42,6 +43,7 @@ namespace FurnitureStore.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Products));
             }
+            ViewBag.Categories = _context.Categories.Where(c => c.IsActive).OrderBy(c => c.SortOrder).ToList();
             return View(product);
         }
 

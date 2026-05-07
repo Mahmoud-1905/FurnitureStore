@@ -1,4 +1,4 @@
-using FurnitureStore.Models;
+using FurnitureStore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +11,13 @@ namespace FurnitureStore.Controllers
     {
         private const string CartSessionKey = "CartSession";
 
-        private List<CartItem> GetCart()
+        private List<CartSessionItem> GetCart()
         {
             var sessionCart = HttpContext.Session.GetString(CartSessionKey);
-            return sessionCart == null ? new List<CartItem>() : JsonSerializer.Deserialize<List<CartItem>>(sessionCart);
+            return sessionCart == null ? new List<CartSessionItem>() : JsonSerializer.Deserialize<List<CartSessionItem>>(sessionCart)!;
         }
 
-        private void SaveCart(List<CartItem> cart)
+        private void SaveCart(List<CartSessionItem> cart)
         {
             HttpContext.Session.SetString(CartSessionKey, JsonSerializer.Serialize(cart));
         }
@@ -42,7 +42,7 @@ namespace FurnitureStore.Controllers
             else
             {
                 int newId = cart.Any() ? cart.Max(c => c.Id) + 1 : 1;
-                cart.Add(new CartItem
+                cart.Add(new CartSessionItem
                 {
                     Id = newId,
                     ProductName = name,

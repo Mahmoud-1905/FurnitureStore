@@ -17,7 +17,7 @@
             <td>@item.Name</td>
             <td>@item.Price</td>
             <td>
-                <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
+                <form asp-action="Delete" asp-route-id="@item.ProductId" method="post" style="display:inline;">
                     @Html.AntiForgeryToken()
                     <button type="submit" style="background:none; border:none; color:red; cursor:pointer;">❌ حذف</button>
                 </form>

@@ -1,5 +1,5 @@
 
-using FurnitureStore.Models.UserRoles.Models;
+using FurnitureStore.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using FurnitureStore.ViewModels;
@@ -8,11 +8,11 @@ namespace FurnitureStore.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly SignInManager<Users> signInManager;
-        private readonly UserManager<Users> userManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
-        public AccountController(SignInManager<Users> signInManager, UserManager<Users> userManager, RoleManager<IdentityRole> roleManager)
+        public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
@@ -62,7 +62,7 @@ namespace FurnitureStore.Controllers
                 return View(model);
             }
 
-            var user = new Users
+            var user = new ApplicationUser
             {
                 FullName = model.Name,
                 UserName = model.Email,
@@ -75,15 +75,15 @@ namespace FurnitureStore.Controllers
 
             if (result.Succeeded)
             {
-                var roleExist = await roleManager.RoleExistsAsync("User");
+                var roleExist = await roleManager.RoleExistsAsync("Customer");
 
                 if (!roleExist)
                 {
-                    var role = new IdentityRole("User");
+                    var role = new IdentityRole("Customer");
                     await roleManager.CreateAsync(role);
                 }
 
-                await userManager.AddToRoleAsync(user, "User");
+                await userManager.AddToRoleAsync(user, "Customer");
 
                 await signInManager.SignInAsync(user, isPersistent: false);
                 return RedirectToAction("Index", "Home");

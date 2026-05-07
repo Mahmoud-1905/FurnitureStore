@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
 namespace FurnitureStore.Data
@@ -10,7 +10,7 @@ namespace FurnitureStore.Data
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
 
             optionsBuilder.UseSqlServer(
-                "Server=DESKTOP-1FAKNBI\\SQLEXPRESS;Database=NEWUserRoles;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true"
+                "Server=.\\SQLEXPRESS;Database=NEWUserRoles;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true"
             );
 
             return new AppDbContext(optionsBuilder.Options);
