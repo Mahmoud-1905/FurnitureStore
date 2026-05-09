@@ -10,7 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-options.UseSqlServer(Environment.GetEnvironmentVariable("DEFAULT_CONNECTION") ?? builder.Configuration.GetConnectionString("Default")));
+{
+    var connStr = builder.Environment.IsDevelopment()
+        ? builder.Configuration.GetConnectionString("DefaultConnection")
+        : Environment.GetEnvironmentVariable("DATABASE_URL");
+
+    options.UseSqlite(connStr);
+});
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
@@ -34,6 +40,13 @@ builder.Services.AddSession(options =>
 });
 
 var app = builder.Build();
+
+// Ensure App_Data directory exists for SQLite
+var appDataPath = Path.Combine(Directory.GetCurrentDirectory(), "App_Data");
+if (!Directory.Exists(appDataPath))
+{
+    Directory.CreateDirectory(appDataPath);
+}
 
 await SeedService.SeedDatabase(app.Services);
 

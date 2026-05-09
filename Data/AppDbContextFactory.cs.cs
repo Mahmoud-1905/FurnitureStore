@@ -9,8 +9,8 @@ namespace FurnitureStore.Data
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
 
-            optionsBuilder.UseSqlServer(
-                "Server=.\\SQLEXPRESS;Database=NEWUserRoles;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true"
+            optionsBuilder.UseSqlite(
+                "Data Source=App_Data/furniture_store.db"
             );
 
             return new AppDbContext(optionsBuilder.Options);

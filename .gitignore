@@ -416,3 +416,10 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Ignore SQLite temp/lock files
+*.db-shm
+*.db-wal
+
+# Force-include the main database file
+!App_Data/furniture_store.db
