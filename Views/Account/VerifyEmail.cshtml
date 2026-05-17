@@ -1,48 +1,27 @@
-﻿@using FurnitureStore.ViewModels
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@using FurnitureStore.ViewModels
 @model VerifyEmailViewModel;
 
 @{
-    ViewData["Title"] = "Verify Email";
+    ViewData["Title"] = Localizer["Title"];
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
 
-<style>
-    body {
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #f9f5f5;
-    }
-
-    .container {
-        width: 100%;
-        max-width: 400px;
-    }
-
-    form {
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-</style>
-
 <div class="account-container">
     <div class="account-box">
-        <h2 class="text-center mb-4">Verify Email</h2>
+        <h2 class="text-center mb-4">@Localizer["Header"]</h2>
         <form asp-action="VerifyEmail" method="post">
             @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="mb-3">
-                <label asp-for="Email" class="form-label"></label>
+                <label asp-for="Email" class="form-label">@Localizer["Email"]</label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <input type="submit" value="Verify" class="btn btn-success w-100 p-2" />
+            <input type="submit" value="@Localizer["Verify"]" class="btn btn-success w-100 p-2" />
             <div class="text-center mt-2">
-                <a asp-controller="Account" asp-action="Login" class="text-decoration-none mt-3">Back</a>
+                <a asp-controller="Account" asp-action="Login" class="text-decoration-none mt-3">@Localizer["Back"]</a>
             </div>
         </form>
     </div>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="Title" xml:space="preserve"><value>المجموعات - فخامة الاختيار ودقة التصميم</value></data>
+  <data name="HeroTitle" xml:space="preserve"><value>مجموعاتنا المنسقة</value></data>
+  <data name="HeroDesc" xml:space="preserve"><value>اكتشف عوالم من التصميم حيث تلتقي الدقة المعمارية بالفخامة الهادئة. كل مجموعة هي قصة تُروى من خلال الخشب، القماش، والضوء.</value></data>
+  <data name="New" xml:space="preserve"><value>جديد</value></data>
+  <data name="ViewPieces" xml:space="preserve"><value>عرض القطع</value></data>
+  <data name="ShopByRoom" xml:space="preserve"><value>تسوق حسب الغرفة</value></data>
+  <data name="LivingRoom" xml:space="preserve"><value>غرفة المعيشة</value></data>
+  <data name="Bedroom" xml:space="preserve"><value>غرفة النوم</value></data>
+  <data name="DiningRoom" xml:space="preserve"><value>غرفة الطعام</value></data>
+  <data name="Office" xml:space="preserve"><value>المكتب</value></data>
+  <data name="QualityPromiseTitle" xml:space="preserve"><value>وعد رقي: الجودة التي تتوارثها الأجيال</value></data>
+  <data name="QualityPromiseDesc" xml:space="preserve"><value>في رقي، لا نصمم أثاثاً فحسب، بل نصنع استثمارات تدوم. كل قطعة تخضع لاختبارات صارمة للجودة، بدءاً من اختيار المواد الخام وحتى اللمسات النهائية اليدوية.</value></data>
+  <data name="ExceptionalMaterials" xml:space="preserve"><value>مواد استثنائية</value></data>
+  <data name="ExceptionalMaterialsDesc" xml:space="preserve"><value>نستخدم أفضل أنواع الخشب الطبيعي والجلود الإيطالية والأقمشة المختارة بعناية.</value></data>
+  <data name="Handmade" xml:space="preserve"><value>صناعة يدوية</value></data>
+  <data name="HandmadeDesc" xml:space="preserve"><value>نجمع بين تقنيات النجارة التقليدية وأحدث أدوات الدقة المعمارية.</value></data>
+  <data name="MonolithTitle" xml:space="preserve"><value>سلسلة المونوليث</value></data>
+  <data name="MonolithDesc" xml:space="preserve"><value>تصاميم مستوحاة من العمارة الوحشية، تتميز بخطوط جريئة وكتل صلبة توفر توازناً مثالياً بين القوة والراحة. مثالية للمساحات العصرية الواسعة.</value></data>
+  <data name="HavenTitle" xml:space="preserve"><value>مجموعة الملاذ</value></data>
+  <data name="HavenDesc" xml:space="preserve"><value>تتمحور حول مفهوم الصفاء والنقاء. ألوان ترابية هادئة وأقمشة طبيعية فاخرة مصممة لتحويل غرف النوم إلى واحات حقيقية للاسترخاء والسكينة.</value></data>
+  <data name="EssentialsTitle" xml:space="preserve"><value>أساسيات التميز</value></data>
+  <data name="EssentialsDesc" xml:space="preserve"><value>مجموعة تركز على الوظيفة دون التنازل عن الجمال. قطع غرف الطعام التي تجمع بين الخشب الطبيعي والمعادن المصقولة، لخلق مساحات اجتماعية لا تُنسى.</value></data>
+  <data name="LegacyTitle" xml:space="preserve"><value>إرث الحداثة</value></data>
+  <data name="LegacyDesc" xml:space="preserve"><value>إعادة إحياء للتصاميم الكلاسيكية بلمسة عصرية. قطع أثاث المكتب التي توحي بالوقار وتدعم الإنتاجية، مع الحفاظ على روح الفخامة الهادئة.</value></data>
+</root>

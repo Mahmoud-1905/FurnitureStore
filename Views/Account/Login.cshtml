@@ -1,29 +1,31 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @using FurnitureStore.ViewModels;
 @model FurnitureStore.ViewModels.LoginViewModel;
 
 @{
-    ViewData["Title"] = "تسجيل الدخول";
+    ViewData["Title"] = Localizer["Title"];
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
 
 <div class="text-right">
-    <h2 class="text-2xl font-serif text-on-surface mb-8">مرحباً بك مجدداً</h2>
+    <h2 class="text-2xl font-serif text-on-surface mb-8">@Localizer["WelcomeBack"]</h2>
     
     <form asp-action="Login" method="post" class="space-y-8">
         @Html.AntiForgeryToken()
         <div asp-validation-summary="ModelOnly" class="text-xs text-error font-sans mb-4"></div>
         
         <div class="relative group">
-            <label asp-for="Email" class="form-label">البريد الإلكتروني</label>
+            <label asp-for="Email" class="form-label">@Localizer["Email"]</label>
             <input asp-for="Email" class="form-input" placeholder="name@domain.com" />
             <span asp-validation-for="Email" class="text-[10px] text-error font-sans mt-1 block"></span>
         </div>
 
         <div class="relative group">
             <div class="flex justify-between items-center mb-2 flex-row-reverse">
-                <label asp-for="Password" class="form-label m-0">كلمة المرور</label>
+                <label asp-for="Password" class="form-label m-0">@Localizer["Password"]</label>
                 <a asp-controller="Account" asp-action="VerifyEmail" class="text-[10px] text-primary uppercase tracking-widest hover:opacity-70 transition-opacity">
-                    نسيت كلمة المرور؟
+                    @Localizer["ForgotPassword"]
                 </a>
             </div>
             <input asp-for="Password" type="password" class="form-input" />
@@ -32,17 +34,17 @@
 
         <div class="flex items-center gap-3 flex-row-reverse">
             <input asp-for="RememberMe" class="w-4 h-4 text-primary border-outline-variant focus:ring-primary rounded-none" />
-            <label class="text-[10px] text-secondary uppercase tracking-widest font-sans">تذكرني على هذا الجهاز</label>
+            <label class="text-[10px] text-secondary uppercase tracking-widest font-sans">@Localizer["RememberMe"]</label>
         </div>
 
         <button type="submit" class="w-full bg-on-surface text-surface py-4 font-sans text-xs uppercase tracking-[0.2em] hover:bg-primary transition-colors duration-500">
-            دخول معماري
+            @Localizer["LoginButton"]
         </button>
 
         <div class="pt-8 border-t border-outline-variant/30 text-center">
             <p class="text-xs font-sans text-secondary">
-                ليس لديك حساب؟ 
-                <a asp-controller="Account" asp-action="Register" class="text-primary uppercase tracking-widest border-b border-primary/20 hover:border-primary transition-all pb-1 mr-2">إنشاء حساب جديد</a>
+                @Localizer["NoAccount"]
+                <a asp-controller="Account" asp-action="Register" class="text-primary uppercase tracking-widest border-b border-primary/20 hover:border-primary transition-all pb-1 mr-2">@Localizer["CreateAccount"]</a>
             </p>
         </div>
     </form>

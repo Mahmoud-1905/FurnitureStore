@@ -28,6 +28,10 @@ namespace FurnitureStore.Models
         [MaxLength(500)]
         public string? Description { get; set; }
 
+        public string? OldValues { get; set; } // JSON snapshot before change
+
+        public string? NewValues { get; set; } // JSON snapshot after change
+
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         // Navigation property

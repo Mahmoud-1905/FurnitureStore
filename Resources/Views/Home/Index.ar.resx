@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="HeroTitle" xml:space="preserve"><value>حياة عصرية،&lt;br /&gt;تصاميم خالدة</value></data>
+  <data name="HeroSubtitle" xml:space="preserve"><value>نرتدي بجمالية منزلك من خلال قطع مختارة بعناية تجمع بين الدقة المعمارية والفخامة الهادئة.</value></data>
+  <data name="ExploreCollection" xml:space="preserve"><value>استكشف المجموعة</value></data>
+  <data name="ViewGallery" xml:space="preserve"><value>عرض المعرض</value></data>
+  <data name="Metric1Value" xml:space="preserve"><value>500+</value></data>
+  <data name="Metric1Label" xml:space="preserve"><value>قطعة فريدة</value></data>
+  <data name="Metric2Value" xml:space="preserve"><value>15k+</value></data>
+  <data name="Metric2Label" xml:space="preserve"><value>منزل سعيد</value></data>
+  <data name="PhilosophySubtitle" xml:space="preserve"><value>فلسفتنا</value></data>
+  <data name="PhilosophyTitle" xml:space="preserve"><value>الدقة المعمارية في كل تفصيل.</value></data>
+  <data name="PhilosophyText" xml:space="preserve"><value>نؤمن بأن الأثاث هو عمارة التصميم الداخلي. كل قطعة في مجموعة رقي صُنعت بعناية فائقة باستخدام مواد مستدامة عالية الجودة، لضمان التوازن بين الصدق الإنشائي والراحة الفاخرة.</value></data>
+  <data name="PicksSubtitle" xml:space="preserve"><value>اختياراتنا</value></data>
+  <data name="PicksTitle" xml:space="preserve"><value>مجموعات مختارة</value></data>
+  <data name="DiscoverAll" xml:space="preserve"><value>اكتشف الكل</value></data>
+  <data name="Collection1Title" xml:space="preserve"><value>سلسلة المونوليث</value></data>
+  <data name="Collection1Desc" xml:space="preserve"><value>هندسة جريئة تلتقي براحة لا تضاهى.</value></data>
+  <data name="Collection2Title" xml:space="preserve"><value>مجموعة الملاذ</value></data>
+  <data name="Collection3Title" xml:space="preserve"><value>أساسيات التميز</value></data>
+  <data name="NewsletterTitle" xml:space="preserve"><value>ابقَ على اطلاع</value></data>
+  <data name="NewsletterDesc" xml:space="preserve"><value>انضم إلى قائمتنا البريدية الحصرية للحصول على وصول مبكر للمجموعات الجديدة ودعوات لفعاليات صالات العرض الخاصة.</value></data>
+  <data name="EmailPlaceholder" xml:space="preserve"><value>بريدك الإلكتروني</value></data>
+  <data name="ConsultationSubtitle" xml:space="preserve"><value>استشارة</value></data>
+  <data name="ConsultationTitle" xml:space="preserve"><value>خدمة معمارية خاصة</value></data>
+  <data name="ConsultationDesc" xml:space="preserve"><value>تعاون مع كبار المصممين لدينا لتأثيث مساحتك بدقة متناهية. نقدم رعاية شاملة للمشاريع السكنية الراقية.</value></data>
+  <data name="BookConsultation" xml:space="preserve"><value>احجز استشارة</value></data>
+</root>

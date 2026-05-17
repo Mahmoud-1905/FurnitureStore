@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="EmailRequired" xml:space="preserve"><value>البريد الإلكتروني مطلوب.</value></data>
+  <data name="InvalidEmail" xml:space="preserve"><value>البريد الإلكتروني غير صالح.</value></data>
+  <data name="PasswordRequired" xml:space="preserve"><value>كلمة المرور مطلوبة.</value></data>
+  <data name="RememberMeLabel" xml:space="preserve"><value>تذكرني؟</value></data>
+</root>

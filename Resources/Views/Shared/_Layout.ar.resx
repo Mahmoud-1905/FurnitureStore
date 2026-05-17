@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="StoreName" xml:space="preserve">
+    <value>متجر رقي</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>الرئيسية</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>المنتجات</value>
+  </data>
+  <data name="Collections" xml:space="preserve">
+    <value>المجموعات</value>
+  </data>
+  <data name="AboutUs" xml:space="preserve">
+    <value>من نحن</value>
+  </data>
+  <data name="AdminDashboard" xml:space="preserve">
+    <value>لوحة التحكم</value>
+  </data>
+  <data name="RuqiFurniture" xml:space="preserve">
+    <value>أثاث رقي.</value>
+  </data>
+  <data name="Privacy" xml:space="preserve">
+    <value>الخصوصية</value>
+  </data>
+  <data name="Terms" xml:space="preserve">
+    <value>الشروط</value>
+  </data>
+  <data name="Press" xml:space="preserve">
+    <value>الصحافة</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>اتصل بنا</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>متجر رقي. دقة معمارية.</value>
+  </data>
+</root>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="TitleSuffix" xml:space="preserve"><value>دقة معمارية</value></data>
+  <data name="ReferenceNumber" xml:space="preserve"><value>الرقم المرجعي: #</value></data>
+  <data name="Quantity" xml:space="preserve"><value>الكمية</value></data>
+  <data name="AddToCartButton" xml:space="preserve"><value>اقتناء هذه القطعة</value></data>
+  <data name="LoginToBuy" xml:space="preserve"><value>تسجيل الدخول للاقتناء</value></data>
+  <data name="BackToCollection" xml:space="preserve"><value>← العودة للمجموعة الكاملة</value></data>
+  <data name="SustainableMaterials" xml:space="preserve"><value>مواد مستدامة</value></data>
+  <data name="SustainableMaterialsDesc" xml:space="preserve"><value>صُنع بعناية من أجود أنواع الأخشاب الطبيعية.</value></data>
+  <data name="ArchitecturalShipping" xml:space="preserve"><value>شحن معماري</value></data>
+  <data name="ArchitecturalShippingDesc" xml:space="preserve"><value>تغليف خاص يضمن وصول القطعة بدقتها الأصلية.</value></data>
+</root>

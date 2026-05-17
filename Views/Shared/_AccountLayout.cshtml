@@ -1,9 +1,15 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    var culture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+    var isRtl = culture.StartsWith("ar");
+}
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="@culture" dir="@(isRtl ? "rtl" : "ltr")">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - رقي للأثاث</title>
+    <title>@ViewData["Title"] - @Localizer["BrandTitle"]</title>
     
     <!-- Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -75,7 +81,7 @@
         <div class="text-center mb-12">
             <a href="/" class="inline-block">
                 <span class="text-3xl font-serif tracking-[0.3em] text-on-surface uppercase">RUQI</span>
-                <span class="block text-[8px] tracking-[0.5em] text-primary mt-2">INTERIOR ARCHITECTURE</span>
+                <span class="block text-[8px] tracking-[0.5em] text-primary mt-2">@Localizer["InteriorArchitecture"]</span>
             </a>
         </div>
 

@@ -1,19 +1,21 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @using FurnitureStore.ViewModels
 @model List<CartSessionItem>
 
 @{
-    ViewData["Title"] = "سلة المشتريات - متجر رقي";
+    ViewData["Title"] = Localizer["Title"];
 }
 
 <div class="py-12 px-8 md:px-16 container-center">
     <!-- Page Header -->
     <div class="mb-16 text-right flex justify-between items-end">
         <a asp-controller="Products" asp-action="Index" class="text-xs font-sans text-primary uppercase tracking-widest border-b border-primary pb-1 hover:opacity-70 transition-opacity">
-            ← العودة للمجموعة
+            @Localizer["BackToCollection"]
         </a>
         <div>
-            <span class="text-xs font-sans text-primary uppercase tracking-[0.2em] block mb-stack-sm">حقيبتك</span>
-            <h1 class="text-5xl font-serif text-on-surface">سلة المشتريات</h1>
+            <span class="text-xs font-sans text-primary uppercase tracking-[0.2em] block mb-stack-sm">@Localizer["YourBag"]</span>
+            <h1 class="text-5xl font-serif text-on-surface">@Localizer["ShoppingCart"]</h1>
         </div>
     </div>
 
@@ -21,9 +23,9 @@
         @if (!Model.Any())
         {
             <div class="py-32 text-center bg-surface-container-low/30">
-                <p class="text-xl font-serif text-secondary mb-8">سلتك لا تزال بانتظار اختياراتك الفاخرة.</p>
+                <p class="text-xl font-serif text-secondary mb-8">@Localizer["EmptyCartMsg"]</p>
                 <a asp-controller="Products" asp-action="Index" class="bg-on-surface text-surface px-10 py-4 font-sans text-sm uppercase tracking-widest hover:bg-primary transition-colors">
-                    ابدأ التسوق
+                    @Localizer["StartShopping"]
                 </a>
             </div>
         }
@@ -46,7 +48,7 @@
                                 <!-- Product Info -->
                                 <div class="flex-1 text-right flex flex-col justify-center">
                                     <h3 class="text-xl font-serif text-on-surface mb-2">@item.ProductName</h3>
-                                    <p class="text-sm font-sans text-secondary">الكمية: @item.Quantity</p>
+                                    <p class="text-sm font-sans text-secondary">@Localizer["Quantity"]@item.Quantity</p>
                                 </div>
 
                                 <!-- Price and Remove -->
@@ -55,7 +57,7 @@
                                     <form asp-action="Remove" asp-route-id="@item.Id" method="post">
                                         @Html.AntiForgeryToken()
                                         <button type="submit" class="text-[10px] font-sans text-error uppercase tracking-widest hover:border-b hover:border-error transition-all">
-                                            إزالة القطعة
+                                            @Localizer["RemoveItem"]
                                         </button>
                                     </form>
                                 </div>
@@ -67,38 +69,38 @@
                 <!-- Summary Sidebar -->
                 <div class="lg:col-span-4">
                     <div class="bg-surface-container-low p-12 text-right">
-                        <h2 class="text-2xl font-serif text-on-surface mb-8 border-b border-outline-variant/30 pb-4">ملخص الطلب</h2>
+                        <h2 class="text-2xl font-serif text-on-surface mb-8 border-b border-outline-variant/30 pb-4">@Localizer["OrderSummary"]</h2>
                         
                         <div class="flex justify-between flex-row-reverse mb-6">
-                            <span class="font-sans text-secondary">المجموع الفرعي</span>
+                            <span class="font-sans text-secondary">@Localizer["Subtotal"]</span>
                             <span class="font-sans text-on-surface">₪@Model.Sum(x => x.Price * x.Quantity)</span>
                         </div>
                         
                         <div class="flex justify-between flex-row-reverse mb-8">
-                            <span class="font-sans text-secondary">التوصيل المعماري</span>
-                            <span class="font-sans text-primary">مجاني</span>
+                            <span class="font-sans text-secondary">@Localizer["ArchitecturalShipping"]</span>
+                            <span class="font-sans text-primary">@Localizer["Free"]</span>
                         </div>
 
                         <div class="border-t border-on-surface pt-6 mb-12 flex justify-between flex-row-reverse">
-                            <span class="text-xl font-serif text-on-surface">الإجمالي</span>
+                            <span class="text-xl font-serif text-on-surface">@Localizer["Total"]</span>
                             <span class="text-2xl font-sans text-on-surface font-bold">₪@Model.Sum(x => x.Price * x.Quantity)</span>
                         </div>
 
                         @if (User.Identity.IsAuthenticated)
                         {
                             <button onclick="openCheckoutModal()" class="w-full bg-on-surface text-surface py-5 font-sans text-sm uppercase tracking-[0.2em] hover:bg-primary transition-colors duration-500">
-                                إتمام عملية الشراء
+                                @Localizer["CompletePurchase"]
                             </button>
                         }
                         else
                         {
                             <a asp-controller="Account" asp-action="Login" class="block text-center w-full bg-primary text-surface py-5 font-sans text-sm uppercase tracking-[0.2em] hover:bg-on-surface transition-colors duration-500">
-                                تسجيل الدخول لإتمام الشراء
+                                @Localizer["LoginToBuy"]
                             </a>
                         }
                         
                         <p class="text-[10px] font-sans text-secondary mt-6 text-center leading-relaxed">
-                            بإتمامك للشراء، أنت توافق على شروط الخدمة المعمارية الخاصة بمتجر رقي.
+                            @Localizer["AgreementMsg"]
                         </p>
                     </div>
                 </div>
@@ -119,32 +121,32 @@
         </button>
 
         <div class="text-right">
-            <h2 class="text-3xl font-serif text-on-surface mb-2">تفاصيل التسجيل المعماري</h2>
-            <p class="text-sm font-sans text-secondary mb-12 uppercase tracking-widest">يرجى تأكيد بياناتك لإتمام حجز القطع الفاخرة</p>
+            <h2 class="text-3xl font-serif text-on-surface mb-2">@Localizer["ModalTitle"]</h2>
+            <p class="text-sm font-sans text-secondary mb-12 uppercase tracking-widest">@Localizer["ModalSubtitle"]</p>
 
             <div class="space-y-8">
                 <div>
-                    <label class="block text-[10px] font-sans text-secondary uppercase tracking-widest mb-2">الاسم الكامل</label>
+                    <label class="block text-[10px] font-sans text-secondary uppercase tracking-widest mb-2">@Localizer["FullName"]</label>
                     <input type="text" id="custName" class="w-full bg-transparent border-b border-outline-variant py-3 font-sans text-on-surface focus:border-primary outline-none transition-colors" placeholder="محمود ...">
                 </div>
                 <div>
-                    <label class="block text-[10px] font-sans text-secondary uppercase tracking-widest mb-2">الموقع / المدينة</label>
+                    <label class="block text-[10px] font-sans text-secondary uppercase tracking-widest mb-2">@Localizer["LocationCity"]</label>
                     <input type="text" id="custLocation" class="w-full bg-transparent border-b border-outline-variant py-3 font-sans text-on-surface focus:border-primary outline-none transition-colors" placeholder="رام الله، فلسطين">
                 </div>
                 <div class="grid grid-cols-2 gap-8">
                     <div>
-                        <label class="block text-[10px] font-sans text-secondary uppercase tracking-widest mb-2">رقم الهاتف</label>
+                        <label class="block text-[10px] font-sans text-secondary uppercase tracking-widest mb-2">@Localizer["Phone"]</label>
                         <input type="tel" id="custPhone" class="w-full bg-transparent border-b border-outline-variant py-3 font-sans text-on-surface focus:border-primary outline-none transition-colors" placeholder="+970 ...">
                     </div>
                     <div>
-                        <label class="block text-[10px] font-sans text-secondary uppercase tracking-widest mb-2">البريد الإلكتروني</label>
+                        <label class="block text-[10px] font-sans text-secondary uppercase tracking-widest mb-2">@Localizer["Email"]</label>
                         <input type="email" id="custEmail" class="w-full bg-transparent border-b border-outline-variant py-3 font-sans text-on-surface focus:border-primary outline-none transition-colors" placeholder="name@domain.com">
                     </div>
                 </div>
 
                 <div class="pt-8">
                     <button onclick="processPurchase()" class="w-full bg-on-surface text-surface py-5 font-sans text-sm uppercase tracking-[0.2em] hover:bg-primary transition-colors duration-500">
-                        تأكيد وإتمام الشراء
+                        @Localizer["ConfirmButton"]
                     </button>
                 </div>
             </div>
@@ -158,13 +160,13 @@
                 <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 13l4 4L19 7"></path></svg>
             </div>
         </div>
-        <h2 class="text-3xl font-serif text-on-surface mb-4">تمت العملية بنجاح</h2>
-        <p class="text-sm font-sans text-secondary mb-12 leading-relaxed">شكراً لاختياركم "رقي". لقد تم استلام طلبكم وسيتم التواصل معكم قريباً لتأكيد تفاصيل التسليم المعماري.</p>
+        <h2 class="text-3xl font-serif text-on-surface mb-4">@Localizer["SuccessTitle"]</h2>
+        <p class="text-sm font-sans text-secondary mb-12 leading-relaxed">@Localizer["SuccessMsg"]</p>
         
         <form asp-action="Clear" method="post">
             @Html.AntiForgeryToken()
             <button type="submit" class="w-full bg-on-surface text-surface py-4 font-sans text-xs uppercase tracking-widest hover:bg-primary transition-colors">
-                العودة للمتجر
+                @Localizer["BackToStore"]
             </button>
         </form>
     </div>
@@ -190,7 +192,7 @@
         const email = document.getElementById('custEmail').value;
 
         if (!name || !email) {
-            alert('يرجى تعبئة الحقول المطلوبة');
+            alert('@Localizer["FillFieldsMsg"]');
             return;
         }
 

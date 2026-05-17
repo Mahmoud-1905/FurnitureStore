@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="Title" xml:space="preserve"><value>تسجيل الدخول</value></data>
+  <data name="WelcomeBack" xml:space="preserve"><value>مرحباً بك مجدداً</value></data>
+  <data name="Email" xml:space="preserve"><value>البريد الإلكتروني</value></data>
+  <data name="Password" xml:space="preserve"><value>كلمة المرور</value></data>
+  <data name="ForgotPassword" xml:space="preserve"><value>نسيت كلمة المرور؟</value></data>
+  <data name="RememberMe" xml:space="preserve"><value>تذكرني على هذا الجهاز</value></data>
+  <data name="LoginButton" xml:space="preserve"><value>دخول معماري</value></data>
+  <data name="NoAccount" xml:space="preserve"><value>ليس لديك حساب؟ </value></data>
+  <data name="CreateAccount" xml:space="preserve"><value>إنشاء حساب جديد</value></data>
+</root>

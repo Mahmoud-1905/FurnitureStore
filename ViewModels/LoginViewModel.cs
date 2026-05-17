@@ -1,19 +1,19 @@
-﻿
+
 using System.ComponentModel.DataAnnotations;
 
 namespace FurnitureStore.ViewModels
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "Email is required.")]
-        [EmailAddress]
+        [Required(ErrorMessage = "EmailRequired")]
+        [EmailAddress(ErrorMessage = "InvalidEmail")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Password is required.")]
+        [Required(ErrorMessage = "PasswordRequired")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "RememberMeLabel")]
         public bool RememberMe { get; set; }
 
     }

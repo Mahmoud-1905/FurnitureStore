@@ -11,12 +11,14 @@ namespace FurnitureStore.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly Microsoft.Extensions.Localization.IStringLocalizer<AccountController> localizer;
 
-        public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, Microsoft.Extensions.Localization.IStringLocalizer<AccountController> localizer)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
             this.roleManager = roleManager;
+            this.localizer = localizer;
         }
 
         [HttpGet]
@@ -43,7 +45,7 @@ namespace FurnitureStore.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            ModelState.AddModelError(string.Empty, "Invalid Login Attempt.");
+            ModelState.AddModelError(string.Empty, localizer["InvalidLogin"]);
             return View(model);
         }
 
@@ -120,7 +122,7 @@ namespace FurnitureStore.Controllers
                 return RedirectToAction("ChangePassword", "Account", new { email = user.Email, token = token });
             }
 
-            ModelState.AddModelError("", "If the email exists, a reset link was sent.");
+            ModelState.AddModelError("", localizer["ResetLinkSent"]);
             return View(model);
         }
 
@@ -141,7 +143,7 @@ namespace FurnitureStore.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("", "Something went wrong");
+                ModelState.AddModelError("", localizer["SomethingWentWrong"]);
                 return View(model);
             }
 

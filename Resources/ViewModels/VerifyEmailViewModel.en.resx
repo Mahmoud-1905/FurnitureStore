@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="EmailRequired" xml:space="preserve"><value>Email is required.</value></data>
+  <data name="InvalidEmail" xml:space="preserve"><value>Invalid email address.</value></data>
+</root>

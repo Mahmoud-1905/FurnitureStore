@@ -17,6 +17,64 @@ namespace FurnitureStore.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.7");
 
+            modelBuilder.Entity("FurnitureStore.Models.Address", b =>
+                {
+                    b.Property<int>("AddressId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("AddressName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT")
+                        .HasDefaultValue("Egypt");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDefault")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("StreetAddress")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("AddressId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Addresses");
+                });
+
             modelBuilder.Entity("FurnitureStore.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -165,6 +223,12 @@ namespace FurnitureStore.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("NewValues")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OldValues")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("TargetEntityId")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -277,15 +341,75 @@ namespace FurnitureStore.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("FurnitureStore.Models.Coupon", b =>
+                {
+                    b.Property<int>("CouponId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("DiscountValue")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsPercentage")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal?>("MaxDiscountAmount")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<decimal?>("MinimumOrderAmount")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("TimesUsed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("UsageLimit")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("CouponId");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.ToTable("Coupons");
+                });
+
             modelBuilder.Entity("FurnitureStore.Models.Order", b =>
                 {
                     b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("AddressId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("CouponId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("DeliveryAddress")
                         .IsRequired()
                         .HasMaxLength(600)
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("DiscountAmount")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Notes")
@@ -334,6 +458,10 @@ namespace FurnitureStore.Migrations
 
                     b.HasKey("OrderId");
 
+                    b.HasIndex("AddressId");
+
+                    b.HasIndex("CouponId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Orders", t =>
@@ -373,6 +501,49 @@ namespace FurnitureStore.Migrations
                         {
                             t.HasCheckConstraint("CK_OrderItems_Quantity", "[Quantity] > 0");
                         });
+                });
+
+            modelBuilder.Entity("FurnitureStore.Models.Payment", b =>
+                {
+                    b.Property<int>("PaymentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProviderResponse")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(20)
+                        .HasColumnType("TEXT")
+                        .HasDefaultValue("Pending");
+
+                    b.Property<string>("TransactionId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("PaymentId");
+
+                    b.HasIndex("OrderId")
+                        .IsUnique();
+
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("FurnitureStore.Models.Product", b =>
@@ -459,6 +630,32 @@ namespace FurnitureStore.Migrations
                         });
                 });
 
+            modelBuilder.Entity("FurnitureStore.Models.ProductAttribute", b =>
+                {
+                    b.Property<int>("AttributeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("AttributeId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductAttributes");
+                });
+
             modelBuilder.Entity("FurnitureStore.Models.ProductImage", b =>
                 {
                     b.Property<int>("ImageId")
@@ -488,6 +685,21 @@ namespace FurnitureStore.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductImages");
+                });
+
+            modelBuilder.Entity("FurnitureStore.Models.ProductTag", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ProductId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("ProductTags");
                 });
 
             modelBuilder.Entity("FurnitureStore.Models.Review", b =>
@@ -541,6 +753,25 @@ namespace FurnitureStore.Migrations
                         {
                             t.HasCheckConstraint("CK_Reviews_Rating", "[Rating] >= 1 AND [Rating] <= 5");
                         });
+                });
+
+            modelBuilder.Entity("FurnitureStore.Models.Tag", b =>
+                {
+                    b.Property<int>("TagId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("TagId");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -671,6 +902,17 @@ namespace FurnitureStore.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("FurnitureStore.Models.Address", b =>
+                {
+                    b.HasOne("FurnitureStore.Models.ApplicationUser", "User")
+                        .WithMany("Addresses")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("FurnitureStore.Models.Appointment", b =>
                 {
                     b.HasOne("FurnitureStore.Models.ApplicationUser", "User")
@@ -725,11 +967,25 @@ namespace FurnitureStore.Migrations
 
             modelBuilder.Entity("FurnitureStore.Models.Order", b =>
                 {
+                    b.HasOne("FurnitureStore.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("FurnitureStore.Models.Coupon", "Coupon")
+                        .WithMany("Orders")
+                        .HasForeignKey("CouponId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.HasOne("FurnitureStore.Models.ApplicationUser", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Address");
+
+                    b.Navigation("Coupon");
 
                     b.Navigation("User");
                 });
@@ -753,6 +1009,17 @@ namespace FurnitureStore.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("FurnitureStore.Models.Payment", b =>
+                {
+                    b.HasOne("FurnitureStore.Models.Order", "Order")
+                        .WithOne("Payment")
+                        .HasForeignKey("FurnitureStore.Models.Payment", "OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("FurnitureStore.Models.Product", b =>
                 {
                     b.HasOne("FurnitureStore.Models.Category", "Category")
@@ -764,6 +1031,17 @@ namespace FurnitureStore.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("FurnitureStore.Models.ProductAttribute", b =>
+                {
+                    b.HasOne("FurnitureStore.Models.Product", "Product")
+                        .WithMany("Attributes")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("FurnitureStore.Models.ProductImage", b =>
                 {
                     b.HasOne("FurnitureStore.Models.Product", "Product")
@@ -773,6 +1051,25 @@ namespace FurnitureStore.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("FurnitureStore.Models.ProductTag", b =>
+                {
+                    b.HasOne("FurnitureStore.Models.Product", "Product")
+                        .WithMany("ProductTags")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FurnitureStore.Models.Tag", "Tag")
+                        .WithMany("ProductTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("FurnitureStore.Models.Review", b =>
@@ -847,6 +1144,8 @@ namespace FurnitureStore.Migrations
 
             modelBuilder.Entity("FurnitureStore.Models.ApplicationUser", b =>
                 {
+                    b.Navigation("Addresses");
+
                     b.Navigation("Appointments");
 
                     b.Navigation("AuditLogs");
@@ -868,20 +1167,36 @@ namespace FurnitureStore.Migrations
                     b.Navigation("Products");
                 });
 
+            modelBuilder.Entity("FurnitureStore.Models.Coupon", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
             modelBuilder.Entity("FurnitureStore.Models.Order", b =>
                 {
                     b.Navigation("OrderItems");
+
+                    b.Navigation("Payment");
                 });
 
             modelBuilder.Entity("FurnitureStore.Models.Product", b =>
                 {
+                    b.Navigation("Attributes");
+
                     b.Navigation("CartItems");
 
                     b.Navigation("OrderItems");
 
                     b.Navigation("ProductImages");
 
+                    b.Navigation("ProductTags");
+
                     b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("FurnitureStore.Models.Tag", b =>
+                {
+                    b.Navigation("ProductTags");
                 });
 #pragma warning restore 612, 618
         }

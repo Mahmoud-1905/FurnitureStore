@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="Title" xml:space="preserve"><value>About Us - Our Story in Design and Authenticity</value></data>
+  <data name="HeroTitle" xml:space="preserve"><value>About Ruqi</value></data>
+  <data name="HeroDesc" xml:space="preserve"><value>We don't just make furniture; we design spaces that inspire life and embody architectural sophistication.</value></data>
+  <data name="OurBeginning" xml:space="preserve"><value>Our Beginning</value></data>
+  <data name="StoryTitle" xml:space="preserve"><value>Passion for Precision, Commitment to Luxury.</value></data>
+  <data name="StoryPara1" xml:space="preserve"><value>Ruqi Store was founded with a single vision: to provide furniture pieces that transcend functional items to become architectural masterpieces. We started as a small workshop specializing in hand woodworking, and today we are a leading destination for everyone seeking excellence in interior design.</value></data>
+  <data name="StoryPara2" xml:space="preserve"><value>We believe that a home is a reflection of the soul, so we ensure that every piece we create carries the spirit of both authenticity and modernity.</value></data>
+  <data name="ArchDesignTitle" xml:space="preserve"><value>Architectural Design</value></data>
+  <data name="ArchDesignDesc" xml:space="preserve"><value>We draw inspiration for our designs from timeless engineering and architectural principles, creating pieces characterized by balance and structural beauty.</value></data>
+  <data name="SustainabilityTitle" xml:space="preserve"><value>Sustainability</value></data>
+  <data name="SustainabilityDesc" xml:space="preserve"><value>We are committed to using sustainable resources and eco-friendly production processes to ensure a more beautiful future for us and our generations.</value></data>
+  <data name="QualityTitle" xml:space="preserve"><value>Absolute Quality</value></data>
+  <data name="QualityDesc" xml:space="preserve"><value>We never compromise on quality. Every millimeter of our pieces is carefully inspected to ensure only the best reaches our customers.</value></data>
+  <data name="Quote" xml:space="preserve"><value>We believe that beauty lies in the details that not everyone sees, but everyone who inhabits the place feels.</value></data>
+  <data name="DesignTeam" xml:space="preserve"><value>Ruqi Design Team</value></data>
+</root>

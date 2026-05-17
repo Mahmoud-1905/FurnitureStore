@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="InvalidLogin" xml:space="preserve"><value>محاولة تسجيل دخول غير صالحة.</value></data>
+  <data name="ResetLinkSent" xml:space="preserve"><value>إذا كان البريد الإلكتروني موجوداً، فقد تم إرسال رابط إعادة التعيين.</value></data>
+  <data name="SomethingWentWrong" xml:space="preserve"><value>حدث خطأ ما.</value></data>
+</root>

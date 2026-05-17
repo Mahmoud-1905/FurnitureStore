@@ -1,26 +1,26 @@
-﻿
+
 using System.ComponentModel.DataAnnotations;
 
 namespace FurnitureStore.ViewModels
 {
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "Name is required.")]
+        [Required(ErrorMessage = "NameRequired")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Email is required.")]
-        [EmailAddress]
+        [Required(ErrorMessage = "EmailRequired")]
+        [EmailAddress(ErrorMessage = "InvalidEmail")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Password is required.")]
-        [StringLength(40, MinimumLength = 8, ErrorMessage = "The {0} must be at {2} and at max {1} characters long.")]
+        [Required(ErrorMessage = "PasswordRequired")]
+        [StringLength(40, MinimumLength = 8, ErrorMessage = "PasswordLengthError")]
         [DataType(DataType.Password)]
-        [Compare("ConfirmPassword", ErrorMessage = "Password does not match.")]
+        [Compare("ConfirmPassword", ErrorMessage = "PasswordMismatch")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Confirm Password is required.")]
+        [Required(ErrorMessage = "ConfirmPasswordRequired")]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm Password")]
+        [Display(Name = "ConfirmPasswordLabel")]
         public string ConfirmPassword { get; set; }
 
     }

@@ -38,8 +38,18 @@ namespace FurnitureStore.Models
 
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
+        // Coupon integration
+        public int? CouponId { get; set; }
+        public decimal DiscountAmount { get; set; } = 0;
+
+        // Address integration (reference to saved address)
+        public int? AddressId { get; set; }
+
         // Navigation properties
         public ApplicationUser User { get; set; } = null!;
         public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+        public Coupon? Coupon { get; set; }
+        public Payment? Payment { get; set; }
+        public Address? Address { get; set; }
     }
 }

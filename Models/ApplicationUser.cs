@@ -22,5 +22,6 @@ namespace FurnitureStore.Models
         public ICollection<Review> Reviews { get; set; } = new List<Review>();
         public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
         public ICollection<AuditLog> AuditLogs { get; set; } = new List<AuditLog>();
+        public ICollection<Address> Addresses { get; set; } = new List<Address>();
     }
 }

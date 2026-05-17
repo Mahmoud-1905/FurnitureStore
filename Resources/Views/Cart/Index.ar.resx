@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="Title" xml:space="preserve"><value>سلة المشتريات - متجر رقي</value></data>
+  <data name="BackToCollection" xml:space="preserve"><value>← العودة للمجموعة</value></data>
+  <data name="YourBag" xml:space="preserve"><value>حقيبتك</value></data>
+  <data name="ShoppingCart" xml:space="preserve"><value>سلة المشتريات</value></data>
+  <data name="EmptyCartMsg" xml:space="preserve"><value>سلتك لا تزال بانتظار اختياراتك الفاخرة.</value></data>
+  <data name="StartShopping" xml:space="preserve"><value>ابدأ التسوق</value></data>
+  <data name="Quantity" xml:space="preserve"><value>الكمية: </value></data>
+  <data name="RemoveItem" xml:space="preserve"><value>إزالة القطعة</value></data>
+  <data name="OrderSummary" xml:space="preserve"><value>ملخص الطلب</value></data>
+  <data name="Subtotal" xml:space="preserve"><value>المجموع الفرعي</value></data>
+  <data name="ArchitecturalShipping" xml:space="preserve"><value>التوصيل المعماري</value></data>
+  <data name="Free" xml:space="preserve"><value>مجاني</value></data>
+  <data name="Total" xml:space="preserve"><value>الإجمالي</value></data>
+  <data name="CompletePurchase" xml:space="preserve"><value>إتمام عملية الشراء</value></data>
+  <data name="LoginToBuy" xml:space="preserve"><value>تسجيل الدخول لإتمام الشراء</value></data>
+  <data name="AgreementMsg" xml:space="preserve"><value>بإتمامك للشراء، أنت توافق على شروط الخدمة المعمارية الخاصة بمتجر رقي.</value></data>
+  <data name="ModalTitle" xml:space="preserve"><value>تفاصيل التسجيل المعماري</value></data>
+  <data name="ModalSubtitle" xml:space="preserve"><value>يرجى تأكيد بياناتك لإتمام حجز القطع الفاخرة</value></data>
+  <data name="FullName" xml:space="preserve"><value>الاسم الكامل</value></data>
+  <data name="LocationCity" xml:space="preserve"><value>الموقع / المدينة</value></data>
+  <data name="Phone" xml:space="preserve"><value>رقم الهاتف</value></data>
+  <data name="Email" xml:space="preserve"><value>البريد الإلكتروني</value></data>
+  <data name="ConfirmButton" xml:space="preserve"><value>تأكيد وإتمام الشراء</value></data>
+  <data name="SuccessTitle" xml:space="preserve"><value>تمت العملية بنجاح</value></data>
+  <data name="SuccessMsg" xml:space="preserve"><value>شكراً لاختياركم "رقي". لقد تم استلام طلبكم وسيتم التواصل معكم قريباً لتأكيد تفاصيل التسليم المعماري.</value></data>
+  <data name="BackToStore" xml:space="preserve"><value>العودة للمتجر</value></data>
+  <data name="FillFieldsMsg" xml:space="preserve"><value>يرجى تعبئة الحقول المطلوبة</value></data>
+</root>

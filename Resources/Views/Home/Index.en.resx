@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="HeroTitle" xml:space="preserve"><value>Modern Living,&lt;br /&gt;Timeless Designs</value></data>
+  <data name="HeroSubtitle" xml:space="preserve"><value>We dress your home's aesthetic with carefully curated pieces that combine architectural precision and quiet luxury.</value></data>
+  <data name="ExploreCollection" xml:space="preserve"><value>Explore Collection</value></data>
+  <data name="ViewGallery" xml:space="preserve"><value>View Gallery</value></data>
+  <data name="Metric1Value" xml:space="preserve"><value>500+</value></data>
+  <data name="Metric1Label" xml:space="preserve"><value>Unique Pieces</value></data>
+  <data name="Metric2Value" xml:space="preserve"><value>15k+</value></data>
+  <data name="Metric2Label" xml:space="preserve"><value>Happy Homes</value></data>
+  <data name="PhilosophySubtitle" xml:space="preserve"><value>Our Philosophy</value></data>
+  <data name="PhilosophyTitle" xml:space="preserve"><value>Architectural precision in every detail.</value></data>
+  <data name="PhilosophyText" xml:space="preserve"><value>We believe furniture is the architecture of interior design. Every piece in the Ruqi collection is meticulously crafted using high-quality sustainable materials, ensuring a balance between structural honesty and luxurious comfort.</value></data>
+  <data name="PicksSubtitle" xml:space="preserve"><value>Our Picks</value></data>
+  <data name="PicksTitle" xml:space="preserve"><value>Curated Collections</value></data>
+  <data name="DiscoverAll" xml:space="preserve"><value>Discover All</value></data>
+  <data name="Collection1Title" xml:space="preserve"><value>The Monolith Series</value></data>
+  <data name="Collection1Desc" xml:space="preserve"><value>Bold geometry meets unparalleled comfort.</value></data>
+  <data name="Collection2Title" xml:space="preserve"><value>The Haven Collection</value></data>
+  <data name="Collection3Title" xml:space="preserve"><value>Essentials of Excellence</value></data>
+  <data name="NewsletterTitle" xml:space="preserve"><value>Stay Informed</value></data>
+  <data name="NewsletterDesc" xml:space="preserve"><value>Join our exclusive mailing list for early access to new collections and invitations to private showroom events.</value></data>
+  <data name="EmailPlaceholder" xml:space="preserve"><value>Your Email</value></data>
+  <data name="ConsultationSubtitle" xml:space="preserve"><value>Consultation</value></data>
+  <data name="ConsultationTitle" xml:space="preserve"><value>Private Architectural Service</value></data>
+  <data name="ConsultationDesc" xml:space="preserve"><value>Collaborate with our top designers to furnish your space with utmost precision. We offer comprehensive care for high-end residential projects.</value></data>
+  <data name="BookConsultation" xml:space="preserve"><value>Book Consultation</value></data>
+</root>

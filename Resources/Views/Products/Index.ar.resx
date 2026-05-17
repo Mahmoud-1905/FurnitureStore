@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="Title" xml:space="preserve"><value>منتجاتنا - فخامة معمارية</value></data>
+  <data name="Explore" xml:space="preserve"><value>استكشف</value></data>
+  <data name="OurPicks" xml:space="preserve"><value>منتجاتنا المختارة</value></data>
+  <data name="SearchPlaceholder" xml:space="preserve"><value>ابحث عن قطعة أثاث محددة...</value></data>
+  <data name="ClearSearch" xml:space="preserve"><value>✕ مسح البحث</value></data>
+  <data name="SearchButton" xml:space="preserve"><value>بحث معماري</value></data>
+  <data name="AddToCart" xml:space="preserve"><value>إضافة للسلة</value></data>
+  <data name="LoginToAdd" xml:space="preserve"><value>سجل دخول للإضافة</value></data>
+  <data name="FullDetails" xml:space="preserve"><value>التفاصيل الكاملة</value></data>
+  <data name="NoProductsFound" xml:space="preserve"><value>لم يتم العثور على قطع تطابق بحثك.</value></data>
+  <data name="BackToCollection" xml:space="preserve"><value>العودة للمجموعة الكاملة</value></data>
+</root>

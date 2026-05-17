@@ -1,7 +1,9 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @model FurnitureStore.Models.Product
 
 @{
-    ViewData["Title"] = $"{Model.Name} - دقة معمارية";
+    ViewData["Title"] = $"{Model.Name} - {Localizer["TitleSuffix"]}";
 }
 
 <div class="py-24 px-8 md:px-16 container-center">
@@ -14,7 +16,7 @@
                      alt="@Model.Name" />
                 <div class="absolute top-0 right-0 p-8">
                     <span class="text-[10px] font-sans text-on-surface bg-surface px-4 py-2 uppercase tracking-[0.2em]">
-                        الرقم المرجعي: #@Model.ProductId
+                        @Localizer["ReferenceNumber"]@Model.ProductId
                     </span>
                 </div>
             </div>
@@ -41,7 +43,7 @@
 
                 <div class="flex items-center justify-end gap-6">
                     <div class="relative">
-                        <label class="text-[10px] font-sans text-secondary uppercase tracking-[0.2em] block mb-2">الكمية</label>
+                        <label class="text-[10px] font-sans text-secondary uppercase tracking-[0.2em] block mb-2">@Localizer["Quantity"]</label>
                         <input type="number" name="quantity" value="1" min="1" 
                                class="bg-transparent border-b border-on-surface focus:ring-0 focus:border-primary w-24 text-center font-sans text-lg py-2" />
                     </div>
@@ -51,18 +53,18 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <button type="submit" class="w-full bg-on-surface text-surface py-5 font-sans text-sm uppercase tracking-[0.2em] hover:bg-primary transition-colors duration-500">
-                            اقتناء هذه القطعة
+                            @Localizer["AddToCartButton"]
                         </button>
                     }
                     else
                     {
                         <a asp-controller="Account" asp-action="Login" class="block text-center w-full bg-primary text-surface py-5 font-sans text-sm uppercase tracking-[0.2em] hover:bg-on-surface transition-colors duration-500">
-                            تسجيل الدخول للاقتناء
+                            @Localizer["LoginToBuy"]
                         </a>
                     }
                     <a asp-controller="Products" asp-action="Index" 
                        class="text-center text-xs font-sans text-primary uppercase tracking-widest border-b border-primary/0 hover:border-primary py-2 transition-all">
-                        ← العودة للمجموعة الكاملة
+                        @Localizer["BackToCollection"]
                     </a>
                 </div>
             </form>
@@ -70,12 +72,12 @@
             <!-- Quality Assurance -->
             <div class="mt-16 grid grid-cols-2 gap-8 border-t border-outline-variant/30 pt-8">
                 <div>
-                    <h4 class="text-[10px] font-sans text-on-surface uppercase tracking-[0.1em] mb-2">مواد مستدامة</h4>
-                    <p class="text-xs font-sans text-secondary">صُنع بعناية من أجود أنواع الأخشاب الطبيعية.</p>
+                    <h4 class="text-[10px] font-sans text-on-surface uppercase tracking-[0.1em] mb-2">@Localizer["SustainableMaterials"]</h4>
+                    <p class="text-xs font-sans text-secondary">@Localizer["SustainableMaterialsDesc"]</p>
                 </div>
                 <div>
-                    <h4 class="text-[10px] font-sans text-on-surface uppercase tracking-[0.1em] mb-2">شحن معماري</h4>
-                    <p class="text-xs font-sans text-secondary">تغليف خاص يضمن وصول القطعة بدقتها الأصلية.</p>
+                    <h4 class="text-[10px] font-sans text-on-surface uppercase tracking-[0.1em] mb-2">@Localizer["ArchitecturalShipping"]</h4>
+                    <p class="text-xs font-sans text-secondary">@Localizer["ArchitecturalShippingDesc"]</p>
                 </div>
             </div>
         </div>

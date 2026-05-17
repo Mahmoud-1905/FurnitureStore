@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace FurnitureStore.ViewModels
 {
     public class VerifyEmailViewModel
     {
-        [Required(ErrorMessage = "Email is required.")]
-        [EmailAddress]
+        [Required(ErrorMessage = "EmailRequired")]
+        [EmailAddress(ErrorMessage = "InvalidEmail")]
         public string Email { get; set; }
 
     }

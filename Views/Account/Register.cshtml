@@ -1,51 +1,53 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @using FurnitureStore.ViewModels
 @model RegisterViewModel;
 
 @{
-    ViewData["Title"] = "إنشاء حساب";
+    ViewData["Title"] = Localizer["Title"];
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
 
 <div class="text-right">
-    <h2 class="text-2xl font-serif text-on-surface mb-8">انضم إلى عالم رقي</h2>
+    <h2 class="text-2xl font-serif text-on-surface mb-8">@Localizer["JoinRuqi"]</h2>
     
     <form asp-action="Register" method="post" class="space-y-8">
         @Html.AntiForgeryToken()
         <div asp-validation-summary="ModelOnly" class="text-xs text-error font-sans mb-4"></div>
         
         <div class="relative group">
-            <label asp-for="Name" class="form-label">الاسم الكامل</label>
-            <input asp-for="Name" class="form-input" placeholder="أدخل اسمك هنا" />
+            <label asp-for="Name" class="form-label">@Localizer["FullName"]</label>
+            <input asp-for="Name" class="form-input" placeholder="@Localizer["FullNamePlaceholder"]" />
             <span asp-validation-for="Name" class="text-[10px] text-error font-sans mt-1 block"></span>
         </div>
 
         <div class="relative group">
-            <label asp-for="Email" class="form-label">البريد الإلكتروني</label>
+            <label asp-for="Email" class="form-label">@Localizer["Email"]</label>
             <input asp-for="Email" class="form-input" placeholder="name@domain.com" />
             <span asp-validation-for="Email" class="text-[10px] text-error font-sans mt-1 block"></span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="relative group">
-                <label asp-for="Password" class="form-label">كلمة المرور</label>
+                <label asp-for="Password" class="form-label">@Localizer["Password"]</label>
                 <input asp-for="Password" type="password" class="form-input" />
                 <span asp-validation-for="Password" class="text-[10px] text-error font-sans mt-1 block"></span>
             </div>
             <div class="relative group">
-                <label asp-for="ConfirmPassword" class="form-label">تأكيد كلمة المرور</label>
+                <label asp-for="ConfirmPassword" class="form-label">@Localizer["ConfirmPassword"]</label>
                 <input asp-for="ConfirmPassword" type="password" class="form-input" />
                 <span asp-validation-for="ConfirmPassword" class="text-[10px] text-error font-sans mt-1 block"></span>
             </div>
         </div>
 
         <button type="submit" class="w-full bg-on-surface text-surface py-4 font-sans text-xs uppercase tracking-[0.2em] hover:bg-primary transition-colors duration-500">
-            إنشاء حساب معماري
+            @Localizer["RegisterButton"]
         </button>
 
         <div class="pt-8 border-t border-outline-variant/30 text-center">
             <p class="text-xs font-sans text-secondary">
-                لديك حساب بالفعل؟ 
-                <a asp-controller="Account" asp-action="Login" class="text-primary uppercase tracking-widest border-b border-primary/20 hover:border-primary transition-all pb-1 mr-2">تسجيل الدخول</a>
+                @Localizer["AlreadyHaveAccount"]
+                <a asp-controller="Account" asp-action="Login" class="text-primary uppercase tracking-widest border-b border-primary/20 hover:border-primary transition-all pb-1 mr-2">@Localizer["Login"]</a>
             </p>
         </div>
     </form>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="Title" xml:space="preserve"><value>من نحن - قصتنا في التصميم والأصالة</value></data>
+  <data name="HeroTitle" xml:space="preserve"><value>عن رقي</value></data>
+  <data name="HeroDesc" xml:space="preserve"><value>نحن لا نصنع الأثاث؛ نحن نصمم المساحات التي تلهم الحياة وتجسد الرقي المعماري.</value></data>
+  <data name="OurBeginning" xml:space="preserve"><value>بدايتنا</value></data>
+  <data name="StoryTitle" xml:space="preserve"><value>شغف بالدقة، التزام بالفخامة.</value></data>
+  <data name="StoryPara1" xml:space="preserve"><value>تأسس متجر رقي برؤية واحدة: تقديم قطع أثاث تتجاوز كونها مجرد عناصر وظيفية لتصبح تحفاً معمارية. بدأنا كورشة صغيرة متخصصة في النجارة اليدوية، واليوم نحن وجهة رائدة لكل من يبحث عن التميز في التصميم الداخلي.</value></data>
+  <data name="StoryPara2" xml:space="preserve"><value>نؤمن بأن المنزل هو انعكاس للروح، ولذلك نحرص على أن تحمل كل قطعة نصنعها روح الأصالة والحداثة في آن واحد.</value></data>
+  <data name="ArchDesignTitle" xml:space="preserve"><value>التصميم المعماري</value></data>
+  <data name="ArchDesignDesc" xml:space="preserve"><value>نستلهم تصاميمنا من المبادئ الهندسية والمعمارية الخالدة، لنخلق قطعاً تتميز بالاتزان والجمال التركيبي.</value></data>
+  <data name="SustainabilityTitle" xml:space="preserve"><value>الاستدامة</value></data>
+  <data name="SustainabilityDesc" xml:space="preserve"><value>نلتزم باستخدام موارد مستدامة وعمليات إنتاج صديقة للبيئة، لضمان مستقبل أجمل لنا ولأجيالنا.</value></data>
+  <data name="QualityTitle" xml:space="preserve"><value>الجودة المطلقة</value></data>
+  <data name="QualityDesc" xml:space="preserve"><value>لا نساوم على الجودة. كل ملم من قطعنا يتم فحصه بعناية لضمان وصول الأفضل فقط لعملائنا.</value></data>
+  <data name="Quote" xml:space="preserve"><value>نحن نؤمن بأن الجمال يكمن في التفاصيل التي لا يراها الجميع، ولكن يشعر بها كل من يسكن المكان.</value></data>
+  <data name="DesignTeam" xml:space="preserve"><value>فريق رقي للتصميم</value></data>
+</root>

@@ -1,5 +1,7 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "من نحن - قصتنا في التصميم والأصالة";
+    ViewData["Title"] = Localizer["Title"];
 }
 
 <main class="bg-surface min-h-screen">
@@ -12,9 +14,9 @@
                  alt="About Hero" />
         </div>
         <div class="container-center px-8 md:px-16 text-center">
-            <h1 class="text-5xl md:text-7xl font-serif mb-6 leading-tight animate-fade-up">عن رقي</h1>
+            <h1 class="text-5xl md:text-7xl font-serif mb-6 leading-tight animate-fade-up">@Localizer["HeroTitle"]</h1>
             <p class="text-lg md:text-xl font-sans max-w-2xl mx-auto opacity-90 leading-relaxed">
-                نحن لا نصنع الأثاث؛ نحن نصمم المساحات التي تلهم الحياة وتجسد الرقي المعماري.
+                @Localizer["HeroDesc"]
             </p>
         </div>
     </section>
@@ -28,17 +30,13 @@
                      alt="Craftsmanship" />
             </div>
             <div class="order-1 md:order-2 text-right">
-                <span class="text-xs font-sans text-primary uppercase tracking-[0.2em] block mb-4">بدايتنا</span>
-                <h2 class="text-4xl md:text-5xl font-serif text-on-surface mb-8 leading-tight">شغف بالدقة، التزام
-                    بالفخامة.</h2>
+                <span class="text-xs font-sans text-primary uppercase tracking-[0.2em] block mb-4">@Localizer["OurBeginning"]</span>
+                <h2 class="text-4xl md:text-5xl font-serif text-on-surface mb-8 leading-tight">@Localizer["StoryTitle"]</h2>
                     <p class="text-lg font-sans text-secondary leading-relaxed mb-8">
-                        تأسس متجر رقي برؤية واحدة: تقديم قطع أثاث تتجاوز كونها مجرد عناصر وظيفية لتصبح تحفاً معمارية. بدأنا
-                        كورشة صغيرة متخصصة في النجارة اليدوية، واليوم نحن وجهة رائدة لكل من يبحث عن التميز في التصميم
-                        الداخلي.
+                        @Localizer["StoryPara1"]
                     </p>
                     <p class="text-lg font-sans text-secondary leading-relaxed">
-                        نؤمن بأن المنزل هو انعكاس للروح، ولذلك نحرص على أن تحمل كل قطعة نصنعها روح الأصالة والحداثة في آن
-                        واحد.
+                        @Localizer["StoryPara2"]
                     </p>
                 </div>
             </div>
@@ -49,23 +47,23 @@
             <div class="container-center grid grid-cols-1 md:grid-cols-3 gap-16 text-right">
                 <div>
                     <span class="material-symbols-outlined text-primary text-4xl mb-6">architecture</span>
-                    <h3 class="text-2xl font-serif text-on-surface mb-4">التصميم المعماري</h3>
+                    <h3 class="text-2xl font-serif text-on-surface mb-4">@Localizer["ArchDesignTitle"]</h3>
                     <p class="text-secondary font-sans leading-relaxed">
-                        نستلهم تصاميمنا من المبادئ الهندسية والمعمارية الخالدة، لنخلق قطعاً تتميز بالاتزان والجمال التركيبي.
+                        @Localizer["ArchDesignDesc"]
                     </p>
                 </div>
                 <div>
                     <span class="material-symbols-outlined text-primary text-4xl mb-6">eco</span>
-                    <h3 class="text-2xl font-serif text-on-surface mb-4">الاستدامة</h3>
+                    <h3 class="text-2xl font-serif text-on-surface mb-4">@Localizer["SustainabilityTitle"]</h3>
                     <p class="text-secondary font-sans leading-relaxed">
-                        نلتزم باستخدام موارد مستدامة وعمليات إنتاج صديقة للبيئة، لضمان مستقبل أجمل لنا ولأجيالنا.
+                        @Localizer["SustainabilityDesc"]
                     </p>
                 </div>
                 <div>
                     <span class="material-symbols-outlined text-primary text-4xl mb-6">workspace_premium</span>
-                    <h3 class="text-2xl font-serif text-on-surface mb-4">الجودة المطلقة</h3>
+                    <h3 class="text-2xl font-serif text-on-surface mb-4">@Localizer["QualityTitle"]</h3>
                     <p class="text-secondary font-sans leading-relaxed">
-                        لا نساوم على الجودة. كل ملم من قطعنا يتم فحصه بعناية لضمان وصول الأفضل فقط لعملائنا.
+                        @Localizer["QualityDesc"]
                     </p>
                 </div>
             </div>
@@ -76,9 +74,9 @@
             <div class="max-w-4xl mx-auto">
                 <span class="text-6xl font-serif text-primary/20 block mb-8">"</span>
                 <p class="text-3xl md:text-4xl font-serif text-on-surface leading-tight italic mb-8">
-                    نحن نؤمن بأن الجمال يكمن في التفاصيل التي لا يراها الجميع، ولكن يشعر بها كل من يسكن المكان.
+                    @Localizer["Quote"]
                 </p>
-                <span class="text-xs font-sans text-primary uppercase tracking-[0.2em]">فريق رقي للتصميم</span>
+                <span class="text-xs font-sans text-primary uppercase tracking-[0.2em]">@Localizer["DesignTeam"]</span>
             </div>
         </section>
     </main>

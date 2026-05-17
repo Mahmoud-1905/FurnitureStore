@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="TitleSuffix" xml:space="preserve"><value>Architectural Precision</value></data>
+  <data name="ReferenceNumber" xml:space="preserve"><value>Reference Number: #</value></data>
+  <data name="Quantity" xml:space="preserve"><value>Quantity</value></data>
+  <data name="AddToCartButton" xml:space="preserve"><value>Acquire this piece</value></data>
+  <data name="LoginToBuy" xml:space="preserve"><value>Log in to acquire</value></data>
+  <data name="BackToCollection" xml:space="preserve"><value>← Back to Full Collection</value></data>
+  <data name="SustainableMaterials" xml:space="preserve"><value>Sustainable Materials</value></data>
+  <data name="SustainableMaterialsDesc" xml:space="preserve"><value>Carefully crafted from the finest natural woods.</value></data>
+  <data name="ArchitecturalShipping" xml:space="preserve"><value>Architectural Shipping</value></data>
+  <data name="ArchitecturalShippingDesc" xml:space="preserve"><value>Special packaging ensures the piece arrives in its original precision.</value></data>
+</root>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="EmailRequired" xml:space="preserve"><value>Email is required.</value></data>
+  <data name="InvalidEmail" xml:space="preserve"><value>Invalid email address.</value></data>
+  <data name="PasswordRequired" xml:space="preserve"><value>Password is required.</value></data>
+  <data name="RememberMeLabel" xml:space="preserve"><value>Remember me?</value></data>
+</root>

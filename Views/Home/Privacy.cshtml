@@ -1,10 +1,15 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = Localizer["Title"];
 }
 
-<main>
-<h1>@ViewData["Title"]</h1>
-<p>Use this page to detail your site's privacy policy.</p>
-<p>Use this page to detail your site's privacy policy.Use this page to detail your site's privacy policy.Use this page to detail your site's privacy policy.Use this page to detail your site's privacy policy.Use this page to detail your site's privacy policy.Use this page to detail your site's privacy policy.Use this page to detail your site's privacy policy.Use this page to detail your site's privacy policy.Use this page to detail your site's privacy policy.Use this page to detail your site's privacy policy.</p>
+<main class="py-24 px-8 md:px-16 container-center min-h-[60vh] text-right">
+    <h1 class="text-4xl font-serif text-on-surface mb-8">@ViewData["Title"]</h1>
+    <div class="prose prose-stone max-w-none">
+        <p class="text-lg text-secondary font-sans leading-relaxed">
+            @Localizer["Content"]
+        </p>
+    </div>
 </main>
 

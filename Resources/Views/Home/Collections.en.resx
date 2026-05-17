@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="Title" xml:space="preserve"><value>Collections - Luxury Choice and Design Precision</value></data>
+  <data name="HeroTitle" xml:space="preserve"><value>Our Curated Collections</value></data>
+  <data name="HeroDesc" xml:space="preserve"><value>Discover worlds of design where architectural precision meets quiet luxury. Each collection is a story told through wood, fabric, and light.</value></data>
+  <data name="New" xml:space="preserve"><value>New</value></data>
+  <data name="ViewPieces" xml:space="preserve"><value>View Pieces</value></data>
+  <data name="ShopByRoom" xml:space="preserve"><value>Shop by Room</value></data>
+  <data name="LivingRoom" xml:space="preserve"><value>Living Room</value></data>
+  <data name="Bedroom" xml:space="preserve"><value>Bedroom</value></data>
+  <data name="DiningRoom" xml:space="preserve"><value>Dining Room</value></data>
+  <data name="Office" xml:space="preserve"><value>Office</value></data>
+  <data name="QualityPromiseTitle" xml:space="preserve"><value>Ruqi Promise: Quality Inherited by Generations</value></data>
+  <data name="QualityPromiseDesc" xml:space="preserve"><value>At Ruqi, we don't just design furniture; we create lasting investments. Every piece undergoes rigorous quality testing, from raw material selection to manual finishing touches.</value></data>
+  <data name="ExceptionalMaterials" xml:space="preserve"><value>Exceptional Materials</value></data>
+  <data name="ExceptionalMaterialsDesc" xml:space="preserve"><value>We use the best types of natural wood, Italian leathers, and carefully selected fabrics.</value></data>
+  <data name="Handmade" xml:space="preserve"><value>Handmade</value></data>
+  <data name="HandmadeDesc" xml:space="preserve"><value>We combine traditional woodworking techniques with the latest architectural precision tools.</value></data>
+  <data name="MonolithTitle" xml:space="preserve"><value>Monolith Series</value></data>
+  <data name="MonolithDesc" xml:space="preserve"><value>Designs inspired by Brutalist architecture, featuring bold lines and solid masses providing a perfect balance between strength and comfort. Ideal for large modern spaces.</value></data>
+  <data name="HavenTitle" xml:space="preserve"><value>Haven Collection</value></data>
+  <data name="HavenDesc" xml:space="preserve"><value>Centered around the concept of serenity and purity. Calm earthy colors and luxurious natural fabrics designed to transform bedrooms into true oases of relaxation and tranquility.</value></data>
+  <data name="EssentialsTitle" xml:space="preserve"><value>Essentials of Excellence</value></data>
+  <data name="EssentialsDesc" xml:space="preserve"><value>A collection focused on function without compromising on beauty. Dining room pieces combining natural wood and polished metals to create unforgettable social spaces.</value></data>
+  <data name="LegacyTitle" xml:space="preserve"><value>Modern Legacy</value></data>
+  <data name="LegacyDesc" xml:space="preserve"><value>Reviving classic designs with a modern touch. Office furniture pieces that suggest dignity and support productivity while maintaining the spirit of quiet luxury.</value></data>
+</root>

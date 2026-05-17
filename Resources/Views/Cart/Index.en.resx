@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="Title" xml:space="preserve"><value>Shopping Cart - Ruqi Store</value></data>
+  <data name="BackToCollection" xml:space="preserve"><value>← Back to Collection</value></data>
+  <data name="YourBag" xml:space="preserve"><value>Your Bag</value></data>
+  <data name="ShoppingCart" xml:space="preserve"><value>Shopping Cart</value></data>
+  <data name="EmptyCartMsg" xml:space="preserve"><value>Your cart is still waiting for your luxury selections.</value></data>
+  <data name="StartShopping" xml:space="preserve"><value>Start Shopping</value></data>
+  <data name="Quantity" xml:space="preserve"><value>Quantity: </value></data>
+  <data name="RemoveItem" xml:space="preserve"><value>Remove Piece</value></data>
+  <data name="OrderSummary" xml:space="preserve"><value>Order Summary</value></data>
+  <data name="Subtotal" xml:space="preserve"><value>Subtotal</value></data>
+  <data name="ArchitecturalShipping" xml:space="preserve"><value>Architectural Delivery</value></data>
+  <data name="Free" xml:space="preserve"><value>Free</value></data>
+  <data name="Total" xml:space="preserve"><value>Total</value></data>
+  <data name="CompletePurchase" xml:space="preserve"><value>Complete Purchase</value></data>
+  <data name="LoginToBuy" xml:space="preserve"><value>Login to Complete Purchase</value></data>
+  <data name="AgreementMsg" xml:space="preserve"><value>By completing your purchase, you agree to the architectural service terms of Ruqi Store.</value></data>
+  <data name="ModalTitle" xml:space="preserve"><value>Architectural Registration Details</value></data>
+  <data name="ModalSubtitle" xml:space="preserve"><value>Please confirm your details to complete the luxury pieces reservation</value></data>
+  <data name="FullName" xml:space="preserve"><value>Full Name</value></data>
+  <data name="LocationCity" xml:space="preserve"><value>Location / City</value></data>
+  <data name="Phone" xml:space="preserve"><value>Phone Number</value></data>
+  <data name="Email" xml:space="preserve"><value>Email Address</value></data>
+  <data name="ConfirmButton" xml:space="preserve"><value>Confirm and Complete Purchase</value></data>
+  <data name="SuccessTitle" xml:space="preserve"><value>Operation Successful</value></data>
+  <data name="SuccessMsg" xml:space="preserve"><value>Thank you for choosing "Ruqi". Your order has been received, and we will contact you soon to confirm architectural delivery details.</value></data>
+  <data name="BackToStore" xml:space="preserve"><value>Back to Store</value></data>
+  <data name="FillFieldsMsg" xml:space="preserve"><value>Please fill in the required fields</value></data>
+</root>

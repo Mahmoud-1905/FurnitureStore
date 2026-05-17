@@ -9,7 +9,7 @@
     --primary-saturation: 30%;
     --primary-light: hsl(var(--primary-hue), var(--primary-saturation), 90%);
     --primary-dark: hsl(var(--primary-hue), var(--primary-saturation), 30%);
-    --glass-bg: rgba(255,255,255,0.25);
+    --glass-bg: rgba(66, 61, 50, 0.452);
     --glass-blur: 12px;
 }
 
@@ -17,8 +17,8 @@
 .navbar-glass {
     background: var(--glass-bg);
     backdrop-filter: blur(var(--glass-blur));
-    border-bottom: 1px solid rgba(255,255,255,0.3);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 /* Premium button tweaks */
@@ -27,19 +27,20 @@
     color: #fff;
     border-radius: 8px;
     transition: var(--transition-smooth);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
+
 .btn-teal:hover {
     background-color: var(--primary-hue);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* Footer glass effect */
 .modern-footer {
     background: var(--glass-bg);
     backdrop-filter: blur(var(--glass-blur));
-    border-top: 1px solid rgba(255,255,255,0.3);
+    border-top: 1px solid rgb(177, 176, 171);
 }
 
 /* Product card enhancements */
@@ -49,23 +50,25 @@
     transition: var(--transition-smooth);
     background: var(--glass-bg);
     backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
+
 .product-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
 }
 
 /* Search form premium style */
 .search-form {
     background: var(--glass-bg);
     backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid rgba(255,255,255,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 /* Ensure RTL consistency for footer */
 footer {
-    direction: ltr; /* keep LTR for icons */
+    direction: ltr;
+    /* keep LTR for icons */
 }
 
 /* Keep existing styles unchanged after this point */
@@ -81,6 +84,7 @@ body {
     height: 220px;
     object-fit: cover;
 }
+
 .badge {
     position: absolute;
     top: 12px;
@@ -92,6 +96,7 @@ body {
     font-size: 12px;
     font-weight: bold;
 }
+
 .product-content {
     padding: 18px;
     display: flex;
@@ -99,37 +104,45 @@ body {
     gap: 8px;
     flex: 1;
 }
+
 .product-name {
     font-size: 18px;
     font-weight: bold;
     color: #111827;
 }
+
 .product-desc {
     font-size: 14px;
     color: #6b7280;
     height: 40px;
     overflow: hidden;
 }
+
 .product-category {
     font-size: 13px;
     color: #2563eb;
     font-weight: 600;
 }
+
 .product-rating {
     color: #fbbf24;
     font-size: 14px;
 }
+
 .product-price {
     color: #16a34a;
     font-size: 20px;
     font-weight: bold;
 }
+
 .actions {
     display: flex;
     gap: 10px;
     margin-top: auto;
 }
-.btn-cart, .btn-details {
+
+.btn-cart,
+.btn-details {
     flex: 1;
     padding: 10px;
     border-radius: 10px;
@@ -139,20 +152,25 @@ body {
     text-align: center;
     text-decoration: none;
 }
+
 .btn-cart {
     background: #1f2937;
     color: #fff;
 }
+
 .btn-cart:hover {
     background: #111827;
 }
+
 .btn-details {
     background: #e5e7eb;
     color: #111;
 }
+
 .btn-details:hover {
     background: #d1d5db;
 }
+
 /* Search form refinements */
 .search-input {
     flex: 1;
@@ -164,11 +182,13 @@ body {
     background: #f8fafc;
     transition: 0.3s;
 }
+
 .search-input:focus {
     border-color: #3b82f6;
     background: #fff;
-    box-shadow: 0 0 0 4px rgba(59,130,246,0.1);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
 }
+
 .btn-search {
     background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
     color: #fff;
@@ -178,12 +198,14 @@ body {
     font-weight: 600;
     cursor: pointer;
     transition: 0.3s;
-    box-shadow: 0 4px 12px rgba(37,99,235,0.2);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
+
 .btn-search:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(37,99,235,0.3);
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
 }
+
 .clear-search {
     color: #ef4444;
     text-decoration: none;
@@ -194,6 +216,7 @@ body {
     border-radius: 8px;
     transition: 0.2s;
 }
+
 .clear-search:hover {
-    background: rgba(239,68,68,0.1);
+    background: rgba(239, 68, 68, 0.1);
 }

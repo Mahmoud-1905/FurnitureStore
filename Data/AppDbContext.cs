@@ -20,6 +20,12 @@ namespace FurnitureStore.Data
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<AuditLog> AuditLogs { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<ProductAttribute> ProductAttributes { get; set; }
+        public DbSet<Coupon> Coupons { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<ProductTag> ProductTags { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -262,6 +268,112 @@ namespace FurnitureStore.Data
                       .WithMany(u => u.AuditLogs)
                       .HasForeignKey(al => al.ActorUserId)
                       .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // ──────────────────────────────────────────────
+            // Addresses
+            // ──────────────────────────────────────────────
+            builder.Entity<Address>(entity =>
+            {
+                entity.HasKey(a => a.AddressId);
+                entity.Property(a => a.AddressName).IsRequired().HasMaxLength(100);
+                entity.Property(a => a.StreetAddress).IsRequired().HasMaxLength(150);
+                entity.Property(a => a.City).IsRequired().HasMaxLength(50);
+                entity.Property(a => a.State).IsRequired().HasMaxLength(50);
+                entity.Property(a => a.PostalCode).IsRequired().HasMaxLength(20);
+                entity.Property(a => a.Country).IsRequired().HasMaxLength(50).HasDefaultValue("Egypt");
+                entity.Property(a => a.IsDefault).HasDefaultValue(false);
+
+                entity.HasOne(a => a.User)
+                      .WithMany(u => u.Addresses)
+                      .HasForeignKey(a => a.UserId)
+                      .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // ──────────────────────────────────────────────
+            // ProductAttributes
+            // ──────────────────────────────────────────────
+            builder.Entity<ProductAttribute>(entity =>
+            {
+                entity.HasKey(pa => pa.AttributeId);
+                entity.Property(pa => pa.Key).IsRequired().HasMaxLength(100);
+                entity.Property(pa => pa.Value).IsRequired().HasMaxLength(500);
+
+                entity.HasOne(pa => pa.Product)
+                      .WithMany(p => p.Attributes)
+                      .HasForeignKey(pa => pa.ProductId)
+                      .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // ──────────────────────────────────────────────
+            // Coupons
+            // ──────────────────────────────────────────────
+            builder.Entity<Coupon>(entity =>
+            {
+                entity.HasKey(c => c.CouponId);
+                entity.Property(c => c.Code).IsRequired().HasMaxLength(20);
+                entity.HasIndex(c => c.Code).IsUnique();
+                entity.Property(c => c.DiscountValue).HasColumnType("decimal(10,2)");
+                entity.Property(c => c.MaxDiscountAmount).HasColumnType("decimal(10,2)");
+                entity.Property(c => c.MinimumOrderAmount).HasColumnType("decimal(10,2)");
+                entity.Property(c => c.IsActive).HasDefaultValue(true);
+            });
+
+            // ──────────────────────────────────────────────
+            // Payments
+            // ──────────────────────────────────────────────
+            builder.Entity<Payment>(entity =>
+            {
+                entity.HasKey(p => p.PaymentId);
+                entity.Property(p => p.PaymentMethod).IsRequired().HasMaxLength(50);
+                entity.Property(p => p.TransactionId).IsRequired().HasMaxLength(100);
+                entity.Property(p => p.Amount).HasColumnType("decimal(10,2)");
+                entity.Property(p => p.Status).IsRequired().HasMaxLength(20).HasDefaultValue("Pending");
+
+                entity.HasOne(p => p.Order)
+                      .WithOne(o => o.Payment)
+                      .HasForeignKey<Payment>(p => p.OrderId)
+                      .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // ──────────────────────────────────────────────
+            // Tags
+            // ──────────────────────────────────────────────
+            builder.Entity<Tag>(entity =>
+            {
+                entity.HasKey(t => t.TagId);
+                entity.Property(t => t.Name).IsRequired().HasMaxLength(50);
+                entity.HasIndex(t => t.Name).IsUnique();
+            });
+
+            // ──────────────────────────────────────────────
+            // ProductTags (Many-to-Many)
+            // ──────────────────────────────────────────────
+            builder.Entity<ProductTag>(entity =>
+            {
+                entity.HasKey(pt => new { pt.ProductId, pt.TagId });
+
+                entity.HasOne(pt => pt.Product)
+                      .WithMany(p => p.ProductTags)
+                      .HasForeignKey(pt => pt.ProductId);
+
+                entity.HasOne(pt => pt.Tag)
+                      .WithMany(t => t.ProductTags)
+                      .HasForeignKey(pt => pt.TagId);
+            });
+
+            // Update Orders for Coupon and Address references
+            builder.Entity<Order>(entity =>
+            {
+                entity.HasOne(o => o.Coupon)
+                      .WithMany(c => c.Orders)
+                      .HasForeignKey(o => o.CouponId)
+                      .OnDelete(DeleteBehavior.SetNull);
+
+                entity.HasOne(o => o.Address)
+                      .WithMany()
+                      .HasForeignKey(o => o.AddressId)
+                      .OnDelete(DeleteBehavior.SetNull);
             });
         }
 
