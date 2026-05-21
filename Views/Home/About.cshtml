@@ -30,73 +30,73 @@
                      alt="Craftsmanship" />
             </div>
             <div class="order-1 md:order-2 text-right">
-                <span class="text-xs font-sans text-primary uppercase tracking-[0.2em] block mb-4">@Localizer["OurBeginning"]</span>
-                <h2 class="text-4xl md:text-5xl font-serif text-on-surface mb-8 leading-tight">@Localizer["StoryTitle"]</h2>
-                    <p class="text-lg font-sans text-secondary leading-relaxed mb-8">
-                        @Localizer["StoryPara1"]
-                    </p>
-                    <p class="text-lg font-sans text-secondary leading-relaxed">
-                        @Localizer["StoryPara2"]
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Our Values -->
-        <section class="bg-surface-container py-24 px-8 md:px-16">
-            <div class="container-center grid grid-cols-1 md:grid-cols-3 gap-16 text-right">
-                <div>
-                    <span class="material-symbols-outlined text-primary text-4xl mb-6">architecture</span>
-                    <h3 class="text-2xl font-serif text-on-surface mb-4">@Localizer["ArchDesignTitle"]</h3>
-                    <p class="text-secondary font-sans leading-relaxed">
-                        @Localizer["ArchDesignDesc"]
-                    </p>
-                </div>
-                <div>
-                    <span class="material-symbols-outlined text-primary text-4xl mb-6">eco</span>
-                    <h3 class="text-2xl font-serif text-on-surface mb-4">@Localizer["SustainabilityTitle"]</h3>
-                    <p class="text-secondary font-sans leading-relaxed">
-                        @Localizer["SustainabilityDesc"]
-                    </p>
-                </div>
-                <div>
-                    <span class="material-symbols-outlined text-primary text-4xl mb-6">workspace_premium</span>
-                    <h3 class="text-2xl font-serif text-on-surface mb-4">@Localizer["QualityTitle"]</h3>
-                    <p class="text-secondary font-sans leading-relaxed">
-                        @Localizer["QualityDesc"]
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Team / Vision Quote -->
-        <section class="py-24 px-8 md:px-16 container-center text-center">
-            <div class="max-w-4xl mx-auto">
-                <span class="text-6xl font-serif text-primary/20 block mb-8">"</span>
-                <p class="text-3xl md:text-4xl font-serif text-on-surface leading-tight italic mb-8">
-                    @Localizer["Quote"]
+                <span
+                class="text-xs font-sans text-primary uppercase tracking-[0.2em] block mb-4">@Localizer["OurBeginning"]</span>
+                <h2 class="text-4xl md:text-5xl font-serif text-on-surface mb-8 leading-tight">@Localizer["StoryTitle"]
+                </h2>
+                <p class="text-lg font-sans text-secondary leading-relaxed mb-8">
+                    @Localizer["StoryPara1"]
                 </p>
-                <span class="text-xs font-sans text-primary uppercase tracking-[0.2em]">@Localizer["DesignTeam"]</span>
+                <p class="text-lg font-sans text-secondary leading-relaxed">
+                    @Localizer["StoryPara2"]
+                </p>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    @section Styles {
-        <style>
-            @@keyframes fadeInUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(30px);
-                }
+    <!-- Our Values -->
+    <section class="bg-surface-container py-24 px-8 md:px-16">
+        <div class="container-center grid grid-cols-1 md:grid-cols-3 gap-16 text-right">
+            <div>
+                <span class="material-symbols-outlined text-primary text-4xl mb-6">architecture</span>
+                <h3 class="text-2xl font-serif text-on-surface mb-4">@Localizer["ArchDesignTitle"]</h3>
+                <p class="text-secondary font-sans leading-relaxed">
+                    @Localizer["ArchDesignDesc"]
+                </p>
+            </div>
+            <div>
+                <span class="material-symbols-outlined text-primary text-4xl mb-6">eco</span>
+                <h3 class="text-2xl font-serif text-on-surface mb-4">@Localizer["SustainabilityTitle"]</h3>
+                <p class="text-secondary font-sans leading-relaxed">
+                    @Localizer["SustainabilityDesc"]
+                </p>
+            </div>
+            <div>
+                <span class="material-symbols-outlined text-primary text-4xl mb-6">workspace_premium</span>
+                <h3 class="text-2xl font-serif text-on-surface mb-4">@Localizer["QualityTitle"]</h3>
+                <p class="text-secondary font-sans leading-relaxed">
+                    @Localizer["QualityDesc"]
+                </p>
+            </div>
+        </div>
+    </section>
 
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
+    <!-- Team / Vision Quote -->
+    <section class="py-24 px-8 md:px-16 container-center text-center">
+        <div class="max-w-4xl mx-auto">
+            <p class="text-3xl md:text-4xl font-serif text-on-surface leading-tight italic mb-8">
+                @Localizer["Quote"]
+            </p>
+        </div>
+    </section>
+</main>
+
+@section Styles {
+    <style>
+        @@keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
 
-            .animate-fade-up {
-                animation: fadeInUp 1.2s ease-out forwards;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
-        </style>
-    }
+        }
+
+        .animate-fade-up {
+            animation: fadeInUp 1.2s ease-out forwards;
+        }
+    </style>
+}

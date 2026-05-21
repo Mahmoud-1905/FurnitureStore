@@ -8,7 +8,7 @@
     Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
 
-<div class="text-right">
+<div class="w-full">
     <h2 class="text-2xl font-serif text-on-surface mb-8">@Localizer["JoinRuqi"]</h2>
     
     <form asp-action="Register" method="post" class="space-y-8">
@@ -47,7 +47,7 @@
         <div class="pt-8 border-t border-outline-variant/30 text-center">
             <p class="text-xs font-sans text-secondary">
                 @Localizer["AlreadyHaveAccount"]
-                <a asp-controller="Account" asp-action="Login" class="text-primary uppercase tracking-widest border-b border-primary/20 hover:border-primary transition-all pb-1 mr-2">@Localizer["Login"]</a>
+                <a asp-controller="Account" asp-action="Login" class="text-primary uppercase tracking-widest border-b border-primary/20 hover:border-primary transition-all pb-1 ms-2">@Localizer["Login"]</a>
             </p>
         </div>
     </form>
