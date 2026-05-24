@@ -26,6 +26,7 @@ namespace FurnitureStore.Data
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<ProductTag> ProductTags { get; set; }
+        public DbSet<ShippingMethod> ShippingMethods { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -114,13 +115,13 @@ namespace FurnitureStore.Data
             {
                 entity.HasKey(o => o.OrderId);
                 entity.Property(o => o.UserId).IsRequired().HasMaxLength(450);
-                entity.Property(o => o.Status).IsRequired().HasMaxLength(30).HasDefaultValue("Pending");
+                entity.Property(o => o.Status).IsRequired().HasDefaultValue(OrderStatus.Pending);
                 entity.Property(o => o.TotalAmount).HasColumnType("decimal(10,2)");
                 entity.Property(o => o.ShippingCost).HasColumnType("decimal(8,2)");
                 entity.Property(o => o.TaxAmount).HasColumnType("decimal(8,2)");
                 entity.Property(o => o.DeliveryAddress).IsRequired().HasMaxLength(600);
                 entity.Property(o => o.Notes).HasMaxLength(1000);
-                entity.Property(o => o.PaymentStatus).IsRequired().HasMaxLength(20).HasDefaultValue("Unpaid");
+                entity.Property(o => o.PaymentStatus).IsRequired().HasDefaultValue(PaymentStatus.Pending);
                 entity.Property(o => o.PaymentMethod).HasMaxLength(50);
                 entity.Property(o => o.PlacedAt).HasDefaultValueSql("GETUTCDATE()");
 

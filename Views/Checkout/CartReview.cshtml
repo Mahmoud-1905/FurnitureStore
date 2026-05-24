@@ -1,0 +1,40 @@
+@model FurnitureStore.ViewModels.CartReviewViewModel
+
+<h2 class="text-2xl font-serif mb-4">Shopping Cart</h2>
+<table class="table w-full">
+    <thead class="bg-surface-container-low">
+        <tr>
+            <th class="p-2">Product</th>
+            <th class="p-2">Quantity</th>
+            <th class="p-2">Unit Price</th>
+            <th class="p-2">Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.CartItems)
+    {
+        <tr>
+            <td class="p-2">@item.Product.Name</td>
+            <td class="p-2">@item.Quantity</td>
+            <td class="p-2">@item.Product.Price:C</td>
+            <td class="p-2">@(item.Product.Price * item.Quantity):C</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<p class="mt-4"><strong>Sub‑total:</strong> @Model.SubTotal:C</p>
+
+<form asp-action="ApplyCoupon" method="post" class="flex items-center mt-2">
+    <label for="CouponCode" class="mr-2">Coupon code:</label>
+    <input type="text" name="CouponCode" class="form-control w-32" value="@Model.CouponCode" />
+    <button type="submit" class="btn btn-primary ml-2">Apply</button>
+</form>
+
+@if (Model.DiscountAmount > 0)
+{
+    <p class="mt-2 text-success"><strong>Discount:</strong> -@Model.DiscountAmount:C</p>
+}
+<p class="mt-2"><strong>Total:</strong> @Model.Total:C</p>
+
+<a asp-action="EnterAddress" class="btn btn-success mt-4">Proceed to Checkout</a>

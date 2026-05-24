@@ -5,7 +5,6 @@
     ViewData["Title"] = Localizer["HeroTitle"].Value.Replace("<br />", " ");
 }
 
-@section Styles {
 
     <!-- Swiper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
@@ -148,7 +147,13 @@
             padding-top: 100px !important;
             padding-bottom: 0 !important;
         }
-    </style>
+
+        .DiscoverAllSpan{
+            font-size: 1rem;
+                    line-height: 1rem;}
+       
+        
+        </style>
 }
 
 <main>
@@ -216,7 +221,8 @@
 
             <div class="md:col-span-5 order-2 ltr:md:order-1 rtl:md:order-1 ltr:text-left rtl:text-right">
 
-                <span class="text-xs text-primary uppercase tracking-[0.2em] block mb-stack-sm">
+                <span class="text text-primary uppercase tracking-[0.2em] block mb-stack-sm"                     style=".text {font-size: 1rem;
+                    line-height: 1rem;}">
                     @Localizer["PhilosophySubtitle"]
                 </span>
 
@@ -230,7 +236,9 @@
 
                 <a href="/About"
                    class="inline-flex items-center gap-3 text-primary hover:text-black transition-colors group mt-4">
-                    <span class="text-sm uppercase tracking-widest font-medium">@Localizer["DiscoverAll"]</span>
+                    <span class="DiscoverAllSpan uppercase tracking-widest font-medium">
+                        @Localizer["DiscoverAll"]
+</span>
                     <span class="w-8 h-[1px] bg-primary group-hover:w-12 transition-all duration-300"></span>
                     <svg class="w-4 h-4 transform rtl:rotate-180 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform"
                          fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -263,13 +271,9 @@
          SWIPER SECTION
     ========================== -->
 
-    <section class="py-32 px-8 md:px-16 bg-surface hidden-element">
+    <section class="pt-5 px-8 md:px-16 bg-surface hidden-element relative" style="padding-bottom: 5rem;">
 
         <div class="mb-16 text-right">
-
-            <span class="text-xs text-primary uppercase tracking-[0.2em] block mb-stack-sm">
-                Luxury Collection
-            </span>
 
             <h2 class="text-5xl font-serif">
                 Featured Spaces
@@ -277,33 +281,59 @@
 
         </div>
 
-        <div class="swiper luxurySwiper overflow-visible">
+        <div class="relative">
+            <div class="swiper luxurySwiper overflow-visible">
+    
+                <div class="swiper-wrapper">
+    
+                    <div class="swiper-slide flex justify-center items-center" style="width: auto;">
+    
+                        <img class="w-[85vw] md:w-[500px] h-[300px] object-cover rounded-[40px]"
+                             src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=2000&auto=format&fit=crop" />
+    
+                    </div>
+    
+                    <div class="swiper-slide flex justify-center items-center" style="width: auto;">
+    
+                        <img class="w-[85vw] md:w-[500px] h-[300px] object-cover rounded-[40px]"
+                             src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=2000&auto=format&fit=crop" />
+    
+                    </div>
+    
+                    <div class="swiper-slide flex justify-center items-center" style="width: auto;">
+    
+                        <img class="w-[85vw] md:w-[500px] h-[300px] object-cover rounded-[40px]"
+                             src="https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=2000&auto=format&fit=crop" />
+    
+                    </div>
 
-            <div class="swiper-wrapper">
-
-                <div class="swiper-slide">
-
-                    <img class="w-full h-[700px] object-cover rounded-[40px]"
-                         src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=2000&auto=format&fit=crop" />
-
+                    <div class="swiper-slide flex justify-center items-center" style="width: auto;">
+    
+                        <img class="w-[85vw] md:w-[500px] h-[300px] object-cover rounded-[40px]"
+                             src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=2000&auto=format&fit=crop" />
+    
+                    </div>
+    
+                    <div class="swiper-slide flex justify-center items-center" style="width: auto;">
+    
+                        <img class="w-[85vw] md:w-[500px] h-[300px] object-cover rounded-[40px]"
+                             src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=2000&auto=format&fit=crop" />
+    
+                    </div>
+    
+                    <div class="swiper-slide flex justify-center items-center" style="width: auto;">
+    
+                        <img class="w-[85vw] md:w-[500px] h-[300px] object-cover rounded-[40px]"
+                             src="https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=2000&auto=format&fit=crop" />
+    
+                    </div>
+    
                 </div>
-
-                <div class="swiper-slide">
-
-                    <img class="w-full h-[700px] object-cover rounded-[40px]"
-                         src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=2000&auto=format&fit=crop" />
-
-                </div>
-
-                <div class="swiper-slide">
-
-                    <img class="w-full h-[700px] object-cover rounded-[40px]"
-                         src="https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=2000&auto=format&fit=crop" />
-
-                </div>
-
+    
             </div>
-
+            
+            <div class="swiper-button-next" style="color: #c8a97e; right: -2rem;"></div>
+            <div class="swiper-button-prev" style="color: #c8a97e; left: -2rem;"></div>
         </div>
 
     </section>
@@ -324,17 +354,22 @@
 
         loop: true,
 
-        speed: 1500,
+        speed: 1000,
 
         autoplay: {
         delay: 3500,
         },
 
-        slidesPerView: 1.2,
+        slidesPerView: "auto",
 
         centeredSlides: true,
 
         spaceBetween: 30,
+
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
 
         });
 

@@ -1,8 +1,6 @@
 @using Microsoft.AspNetCore.Localization
 @using Microsoft.AspNetCore.Mvc.Localization
 @using Microsoft.AspNetCore.Http
-@using System.Text.Json
-@using FurnitureStore.ViewModels
 @inject IViewLocalizer Localizer
 @{
     var requestCultureFeature = Context.Features.Get<IRequestCultureFeature>();
@@ -12,13 +10,14 @@
     var htmlDir = isRtl ? "rtl" : "ltr";
 
     bool hasCartItems = false;
-    var cartSession = Context.Session.GetString("CartSession");
-    if (!string.IsNullOrEmpty(cartSession))
+    if (User.Identity.IsAuthenticated)
     {
-        var cart = JsonSerializer.Deserialize<List<CartSessionItem>>(cartSession);
-        if (cart != null && cart.Count > 0)
+        var dbContext = Context.RequestServices.GetService(typeof(FurnitureStore.Data.AppDbContext)) as FurnitureStore.Data.AppDbContext;
+        var userManager = Context.RequestServices.GetService(typeof(Microsoft.AspNetCore.Identity.UserManager<FurnitureStore.Models.ApplicationUser>)) as Microsoft.AspNetCore.Identity.UserManager<FurnitureStore.Models.ApplicationUser>;
+        if (dbContext != null && userManager != null)
         {
-            hasCartItems = true;
+            var userId = userManager.GetUserId(User);
+            hasCartItems = dbContext.CartItems.Any(ci => ci.Cart.UserId == userId);
         }
     }
 }

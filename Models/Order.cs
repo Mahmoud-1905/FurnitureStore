@@ -11,10 +11,12 @@ namespace FurnitureStore.Models
         public string UserId { get; set; } = string.Empty;
 
         [Required]
-        [MaxLength(30)]
-        public string Status { get; set; } = "Pending";
+        public OrderStatus Status { get; set; } = OrderStatus.Pending;
 
         public decimal TotalAmount { get; set; }
+
+        // Discount applied to the order
+        public decimal DiscountAmount { get; set; } = 0m;
 
         public decimal ShippingCost { get; set; }
 
@@ -28,8 +30,7 @@ namespace FurnitureStore.Models
         public string? Notes { get; set; }
 
         [Required]
-        [MaxLength(20)]
-        public string PaymentStatus { get; set; } = "Unpaid";
+        public PaymentStatus PaymentStatus { get; set; } = PaymentStatus.Pending;
 
         [MaxLength(50)]
         public string? PaymentMethod { get; set; }
@@ -40,7 +41,9 @@ namespace FurnitureStore.Models
 
         // Coupon integration
         public int? CouponId { get; set; }
-        public decimal DiscountAmount { get; set; } = 0;
+        // Shipping method integration
+        public int? ShippingMethodId { get; set; }
+        public ShippingMethod? ShippingMethod { get; set; }
 
         // Address integration (reference to saved address)
         public int? AddressId { get; set; }

@@ -37,9 +37,7 @@
 
             <!-- Purchase Form -->
             <form method="get" asp-controller="Cart" asp-action="AddToCart" class="space-y-8">
-                <input type="hidden" name="name"  value="@Model.Name" />
-                <input type="hidden" name="price" value="@Model.Price" />
-                <input type="hidden" name="image" value="@Model.ImageUrl" />
+                <input type="hidden" name="productId" value="@Model.ProductId" />
 
                 <div class="flex items-center justify-end gap-6">
                     <div class="relative">

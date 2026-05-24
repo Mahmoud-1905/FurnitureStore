@@ -15,10 +15,7 @@ builder.Services.AddControllersWithViews()
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    var connStr = builder.Environment.IsDevelopment()
-        ? builder.Configuration.GetConnectionString("DefaultConnection")
-        : Environment.GetEnvironmentVariable("DATABASE_URL");
-
+    var connStr = builder.Configuration.GetConnectionString("DefaultConnection");
     options.UseSqlite(connStr);
 });
 

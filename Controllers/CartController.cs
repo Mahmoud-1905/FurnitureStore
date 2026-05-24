@@ -1,80 +1,146 @@
+using FurnitureStore.Data;
+using FurnitureStore.Models;
 using FurnitureStore.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using Microsoft.AspNetCore.Http;
-using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace FurnitureStore.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
-        private const string CartSessionKey = "CartSession";
+        private readonly AppDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        private List<CartSessionItem> GetCart()
+        public CartController(AppDbContext context, UserManager<ApplicationUser> userManager)
         {
-            var sessionCart = HttpContext.Session.GetString(CartSessionKey);
-            return sessionCart == null ? new List<CartSessionItem>() : JsonSerializer.Deserialize<List<CartSessionItem>>(sessionCart)!;
+            _context = context;
+            _userManager = userManager;
         }
 
-        private void SaveCart(List<CartSessionItem> cart)
+        private async Task<string> GetCurrentUserIdAsync()
         {
-            HttpContext.Session.SetString(CartSessionKey, JsonSerializer.Serialize(cart));
+            var user = await _userManager.GetUserAsync(User);
+            return user?.Id ?? string.Empty;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(GetCart());
+            var userId = await GetCurrentUserIdAsync();
+            if (string.IsNullOrEmpty(userId)) return RedirectToAction("Login", "Account");
+
+            var cart = await _context.Carts
+                .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.Product)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            var cartItems = new List<CartSessionItem>();
+
+            if (cart != null && cart.CartItems.Any())
+            {
+                cartItems = cart.CartItems.Select(ci => new CartSessionItem
+                {
+                    Id = ci.CartItemId,
+                    ProductName = ci.Product.Name,
+                    Price = ci.Product.Price,
+                    ImageUrl = ci.Product.ImageUrl ?? string.Empty,
+                    Quantity = ci.Quantity
+                }).ToList();
+            }
+
+            return View(cartItems);
         }
 
-        [Microsoft.AspNetCore.Authorization.Authorize]
-        public IActionResult AddToCart(string name, decimal price, string image, int quantity = 1)
+        public async Task<IActionResult> AddToCart(int productId, int quantity = 1)
         {
             if (quantity < 1) quantity = 1;
 
-            var cart = GetCart();
-            var item = cart.FirstOrDefault(x => x.ProductName == name);
+            var userId = await GetCurrentUserIdAsync();
+            if (string.IsNullOrEmpty(userId)) return RedirectToAction("Login", "Account");
 
-            if (item != null)
+            // Find the product to ensure it exists and is active
+            var product = await _context.Products.FindAsync(productId);
+            if (product == null || !product.IsActive)
             {
-                item.Quantity += quantity;
+                return NotFound();
+            }
+
+            // Find or create cart
+            var cart = await _context.Carts
+                .Include(c => c.CartItems)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            if (cart == null)
+            {
+                cart = new Cart { UserId = userId };
+                _context.Carts.Add(cart);
+                await _context.SaveChangesAsync(); // Save to get CartId
+            }
+
+            // Check if item already exists in cart
+            var cartItem = cart.CartItems.FirstOrDefault(ci => ci.ProductId == productId);
+
+            if (cartItem != null)
+            {
+                cartItem.Quantity += quantity;
+                _context.CartItems.Update(cartItem);
             }
             else
             {
-                int newId = cart.Any() ? cart.Max(c => c.Id) + 1 : 1;
-                cart.Add(new CartSessionItem
+                cartItem = new CartItem
                 {
-                    Id = newId,
-                    ProductName = name,
-                    Price = price,
-                    ImageUrl = image,
+                    CartId = cart.CartId,
+                    ProductId = productId,
                     Quantity = quantity
-                });
+                };
+                _context.CartItems.Add(cartItem);
             }
 
-            SaveCart(cart);
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Remove(int id)
+        public async Task<IActionResult> Remove(int id)
         {
-            var cart = GetCart();
-            var item = cart.FirstOrDefault(x => x.Id == id);
-            if (item != null)
+            var userId = await GetCurrentUserIdAsync();
+            if (string.IsNullOrEmpty(userId)) return RedirectToAction("Login", "Account");
+
+            var cartItem = await _context.CartItems
+                .Include(ci => ci.Cart)
+                .FirstOrDefaultAsync(ci => ci.CartItemId == id && ci.Cart.UserId == userId);
+
+            if (cartItem != null)
             {
-                cart.Remove(item);
-                SaveCart(cart);
+                _context.CartItems.Remove(cartItem);
+                await _context.SaveChangesAsync();
             }
 
             return RedirectToAction("Index");
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Clear()
+        public async Task<IActionResult> Clear()
         {
-            HttpContext.Session.Remove(CartSessionKey);
+            var userId = await GetCurrentUserIdAsync();
+            if (string.IsNullOrEmpty(userId)) return RedirectToAction("Login", "Account");
+
+            var cart = await _context.Carts
+                .Include(c => c.CartItems)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            if (cart != null && cart.CartItems.Any())
+            {
+                _context.CartItems.RemoveRange(cart.CartItems);
+                await _context.SaveChangesAsync();
+            }
+
             return RedirectToAction("Index");
         }
     }

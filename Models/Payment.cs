@@ -28,5 +28,7 @@ namespace FurnitureStore.Models
 
         // Navigation property
         public Order Order { get; set; } = null!;
+        public string PaymentProvider { get; set; } = string.Empty;
+        public string ProviderReferenceId { get; set; } = string.Empty;
     }
 }

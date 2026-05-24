@@ -1,0 +1,35 @@
+@model FurnitureStore.ViewModels.AddressViewModel
+
+<h2 class="text-2xl font-serif mb-4">Shipping Address</h2>
+<form asp-action="EnterAddress" method="post" class="space-y-4">
+    <input type="hidden" asp-for="AddressId" />
+    <div class="form-group">
+        <label asp-for="AddressName" class="font-medium">Address Name</label>
+        <input asp-for="AddressName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="StreetAddress" class="font-medium">Street Address</label>
+        <input asp-for="StreetAddress" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="City" class="font-medium">City</label>
+        <input asp-for="City" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="State" class="font-medium">State</label>
+        <input asp-for="State" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="PostalCode" class="font-medium">Postal Code</label>
+        <input asp-for="PostalCode" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Country" class="font-medium">Country</label>
+        <input asp-for="Country" class="form-control" />
+    </div>
+    <div class="form-check">
+        <input asp-for="IsDefault" class="form-check-input" type="checkbox" />
+        <label asp-for="IsDefault" class="form-check-label">Make this my default address</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Save &amp; Continue</button>
+</form>
