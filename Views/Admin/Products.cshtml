@@ -1,28 +1,68 @@
 @model List<FurnitureStore.Models.Product>
-<main>
-<h2>إدارة المنتجات</h2>
+@{
+    ViewData["Title"] = "Product Management";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
 
-<a href="/Admin/Create">➕ إضافة منتج</a>
+<div class="bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
+    <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+        <div>
+            <h2 class="text-lg font-bold text-gray-900">Products Catalog</h2>
+            <p class="text-sm text-gray-500 mt-1">Manage all products (active and removed).</p>
+        </div>
+        <a asp-action="Create" class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-sm">
+            <span class="material-symbols-outlined text-sm">add</span> Add New Product
+        </a>
+    </div>
 
-<table border="1" cellpadding="10">
-    <tr>
-        <th>الاسم</th>
-        <th>السعر</th>
-        <th>حذف</th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.Name</td>
-            <td>@item.Price</td>
-            <td>
-                <form asp-action="Delete" asp-route-id="@item.ProductId" method="post" style="display:inline;">
-                    @Html.AntiForgeryToken()
-                    <button type="submit" style="background:none; border:none; color:red; cursor:pointer;">❌ حذف</button>
-                </form>
-            </td>
-        </tr>
-    }
-</table>
-</main>
+    <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+            <thead class="bg-gray-50 text-gray-600">
+                <tr>
+                    <th class="px-6 py-4 font-semibold">SKU</th>
+                    <th class="px-6 py-4 font-semibold">Name</th>
+                    <th class="px-6 py-4 font-semibold">Price</th>
+                    <th class="px-6 py-4 font-semibold">Status</th>
+                    <th class="px-6 py-4 font-semibold text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                @foreach (var item in Model)
+                {
+                    <tr class="@(item.IsActive ? "hover:bg-gray-50" : "bg-gray-50/50 opacity-75") transition-colors">
+                        <td class="px-6 py-4 font-mono text-xs text-gray-500">@item.SKU</td>
+                        <td class="px-6 py-4 font-medium text-gray-900">@item.Name</td>
+                        <td class="px-6 py-4 font-medium text-gray-900">$@item.Price.ToString("N2")</td>
+                        <td class="px-6 py-4">
+                            @if(item.IsActive)
+                            {
+                                <span class="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full text-xs font-medium bg-green-50 text-green-700">Active</span>
+                            }
+                            else
+                            {
+                                <span class="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full text-xs font-medium bg-gray-200 text-gray-700">Removed (Soft-deleted)</span>
+                            }
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <div class="flex items-center justify-end gap-3">
+                                <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">Edit</a>
+                                <span class="text-gray-300">|</span>
+                                <form asp-action="ToggleProductStatus" method="post">
+                                    <input type="hidden" name="id" value="@item.ProductId" />
+                                    @if(item.IsActive)
+                                    {
+                                        <button type="submit" class="text-orange-600 hover:text-orange-800 text-sm font-medium transition-colors">Remove</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="text-green-600 hover:text-green-800 text-sm font-medium transition-colors">Restore</button>
+                                    }
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

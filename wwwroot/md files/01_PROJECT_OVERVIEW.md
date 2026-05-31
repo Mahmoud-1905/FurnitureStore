@@ -1,73 +1,90 @@
-# 01 — Project Overview
-> **Destination:** Antigravity  
-> **Purpose:** Give the AI a complete mental model before any coding begins.  
-> **Rule:** Do NOT write code after reading this file. Understand first.
+# 01_PROJECT_OVERVIEW
+
+## Ruqi Store System
 
 ---
 
-## Project Name
-**Ruqi Store**
+## 1. Project Idea
+
+The Ruqi Store System is a **single‑vendor, full‑stack web application** designed for furniture retail. It combines an online catalog with a physical showroom appointment booking system.
+
+### Problem
+
+Single‑store furniture retailers often lack a digital catalog, leading to lost sales. High‑ticket items suffer from high cart‑abandonment because customers cannot verify material quality, scale, or comfort remotely.
+
+### Solution
+
+An omnichannel platform where:
+- **Customers** browse the catalog, filter by dimensions/materials, place orders, and book showroom appointments to inspect items before purchase.
+- **Store Manager & Administrator** (the same individual) manages product lifecycle, inventory, order fulfillment, appointments, and system configuration.
+- **Admin** responsibilities such as user management, role assignment, and audit‑log inspection are handled by the same person acting as Store Manager.
 
 ---
 
-## Project Description
-A single-vendor furniture e-commerce web application that allows customers to browse, purchase, and review furniture products online. The system is managed by one Store Manager and overseen by one Administrator.
+## 2. Project Objectives
 
-This is NOT a multi-vendor marketplace. There is ONE product catalog, ONE inventory, and ONE store.
-can be online payment.
+### 2.1 Functional Objectives
+- Searchable, filterable catalog of all furniture.
+- End‑to‑end order processing (cart → checkout).
+- Showroom appointment booking synchronized with manager schedule.
+- Verified‑purchase review system.
+- Dashboard for the Store Manager/Administrator to monitor sales, inventory, and appointments.
 
----
-
-## Technology Stack
-| Layer | Technology |
-|---|---|
-| Frontend | HTML5, CSS3, Vanilla JavaScript + Razor Views (.cshtml) |
-| Backend | ASP.NET Core MVC (C#) |
-| Database (Production) | SQL Server + Entity Framework Core (Code-First) |
-| Database (Development) | SQLite (local dev only — same EF Core models) |
-| Authentication | ASP.NET Core Identity + Cookie-Based Auth |
-
+### 2.2 Non‑Functional Objectives
+- **Performance**: API p95 response < 500 ms; page render < 2 s.
+- **Security**: JWT authentication, bcrypt password hashing, parameterized SQL.
+- **Reliability**: 99.5 % uptime, automated daily backups.
+- **Usability**: Responsive design, WCAG 2.1 AA compliance, full RTL support.
+- **Scalability**: Stateless API with Redis for session management and caching.
 
 ---
 
-## Main Users (Roles)
-## Main Users (Roles)
-| Role | Description |
-|---|---|
-| **Customer** | Registers, browses furniture, adds to cart, places orders, and submits product reviews |
-| **Store Manager** | Manages the product catalog, inventory, and order fulfillment pipeline |
-| **Payment Officer** | Reviews payment submissions, marks orders as Paid or Rejected, and logs all payment decisions |
-| **Administrator** | Full system oversight — user management, role assignment, review moderation, audit logs, and reports |
+## 3. Stakeholders
+
+| Stakeholder            | Role                              | Primary Concern                                            |
+|-----------------------|-----------------------------------|------------------------------------------------------------|
+| **Customers**         | External Users                    | Ease of use, accurate product representation, order tracking, appointment booking |
+| **Store Manager / Administrator** | Internal Operator (single person) | Operational efficiency, inventory tracking, order fulfillment, system configuration |
+| **System Administrator** | Internal Overseer               | System stability, security compliance, data integrity |
+| **Development Team**  | Creators                          | Technical feasibility, code quality, timely delivery |
+| **University Supervisor** | Academic Evaluator            | Completeness, academic rigor, correct application of software engineering principles |
 
 ---
 
-## Main Goal
-Enable a physical furniture store to operate a professional online presence — with full e-commerce functionality — while maintaining the trust of high-ticket buyers through showroom appointment integration.
+## 4. Development Methodology — Iterative (Agile)
 
----
+Given the decoupled 3‑tier architecture, a rigid Waterfall model is unsuitable. An iterative Agile approach enables independent development, continuous testing, and seamless integration of API and MVC layers.
 
-## Core Features 
-1. **Furniture Product Catalog** — searchable, filterable by category, price, material, stock status
-2. **Shopping Cart** — persistent DB-backed cart 
-3. **Checkout & Order Placement** — atomic transaction; price snapshot; stock deduction
-4. **Order Tracking** — Pending → Processing → Shipped → Delivered → Cancelled
-5. **Product Review System** — verified-purchase only; one review per customer per product
-6. **Store Manager Dashboard** — product CRUD, inventory management, order processing, appointment calendar
-7. **Admin Panel** — user management, role assignment, review moderation, audit logs, CSV reports
-
----
-
-## What This System is NOT
-- ❌ Not a multi-vendor marketplace
-- ❌ Not a general merchandise store (furniture only)
-- ❌ No native mobile app
-- ❌ No Node.js, no React, no Vue, no Angular, no jQuery, no Bootstrap JS
-
----
-
-## Antigravity Prompt
+**Phases**:
+```text
+Phase 1: Requirements & Architecture → SAD, ERD, API contracts
+Phase 2: Backend API Development → Node.js services, DB schema, JWT auth
+Phase 3: Frontend Integration → ASP.NET Core MVC, Razor views, state management
+Phase 4: Testing & Refinement → Load testing, security audits
+Phase 5: Final Delivery → Deployment, academic defense
 ```
-Read 01_PROJECT_OVERVIEW.md. Do not write code.
-Summarize the project, the four roles, and all 7 features.
-Confirm you understand: single-vendor, furniture-only, ASP.NET Core MVC, SQL Server (dev: SQLite).
-```
+
+---
+
+## 5. System Scope
+
+### In Scope (Must be built)
+- Single‑vendor product catalog management (CRUD, stock, images, dimensions).
+- Customer shopping cart, persistent sessions, order history.
+- Showroom appointment booking and management workflow.
+- Secure authentication (JWT + cookie session, role‑based access).
+- Verified product review system (tied to delivered orders).
+- Store Manager/Administrator operational dashboard and admin oversight panel.
+- Arabic (RTL) and English language support.
+
+### Out of Scope (Not in this version)
+- Multi‑vendor marketplace functionality.
+- Real‑time payment gateway integration.
+- Non‑furniture product categories.
+- Augmented Reality room visualization.
+- Native mobile applications.
+- Delivery tracking via external logistics APIs.
+
+---
+
+*Prepared for inclusion in the project repository.*

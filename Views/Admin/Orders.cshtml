@@ -1,0 +1,101 @@
+@model FurnitureStore.ViewModels.AdminOrdersViewModel
+@{
+    ViewData["Title"] = "Orders Management";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
+    <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+        <h2 class="text-lg font-bold text-gray-900">All Orders</h2>
+        
+        <form method="get" class="flex gap-2">
+            <select name="status" class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-primary focus:border-primary" onchange="this.form.submit()">
+                <option value="">All Statuses</option>
+                @foreach (var status in Enum.GetValues(typeof(FurnitureStore.Models.OrderStatus)))
+                {
+                    if (Model.FilterStatus.HasValue && Model.FilterStatus.Value == (FurnitureStore.Models.OrderStatus)status)
+                    {
+                        <option value="@status" selected>@status</option>
+                    }
+                    else
+                    {
+                        <option value="@status">@status</option>
+                    }
+                }
+            </select>
+        </form>
+    </div>
+
+    <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+            <thead class="bg-gray-50 text-gray-600">
+                <tr>
+                    <th class="px-6 py-4 font-semibold">Order ID</th>
+                    <th class="px-6 py-4 font-semibold">Customer</th>
+                    <th class="px-6 py-4 font-semibold">Date</th>
+                    <th class="px-6 py-4 font-semibold">Amount</th>
+                    <th class="px-6 py-4 font-semibold">Payment</th>
+                    <th class="px-6 py-4 font-semibold">Status</th>
+                    <th class="px-6 py-4 font-semibold text-right">Action</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                @foreach (var order in Model.Orders)
+                {
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-6 py-4 font-medium">#@order.OrderId</td>
+                        <td class="px-6 py-4">@(order.User?.FullName ?? "Unknown")</td>
+                        <td class="px-6 py-4 text-gray-500">@order.PlacedAt.ToString("MMM dd, yyyy")</td>
+                        <td class="px-6 py-4 font-medium">$@order.TotalAmount.ToString("N2")</td>
+                        <td class="px-6 py-4">
+                            @if (order.PaymentStatus == FurnitureStore.Models.PaymentStatus.Succeeded)
+                            {
+                                <span class="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full text-xs font-medium bg-green-50 text-green-700">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                    Paid
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full text-xs font-medium bg-yellow-50 text-yellow-700">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>
+                                    Pending
+                                </span>
+                            }
+                        </td>
+                        <td class="px-6 py-4">
+                            <form asp-action="UpdateOrderStatus" method="post" class="flex gap-2">
+                                <input type="hidden" name="orderId" value="@order.OrderId" />
+                                <select name="newStatus" class="border border-gray-300 rounded px-2 py-1 text-xs focus:ring-primary focus:border-primary" onchange="this.form.submit()">
+                                    @foreach (var status in Enum.GetValues(typeof(FurnitureStore.Models.OrderStatus)))
+                                    {
+                                        if (order.Status == (FurnitureStore.Models.OrderStatus)status)
+                                        {
+                                            <option value="@status" selected>@status</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@status">@status</option>
+                                        }
+                                    }
+                                </select>
+                            </form>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <a href="#" class="text-primary hover:text-primary-600 font-medium text-sm">View Details</a>
+                        </td>
+                    </tr>
+                }
+                
+                @if(!Model.Orders.Any())
+                {
+                    <tr>
+                        <td colspan="7" class="px-6 py-8 text-center text-gray-500">
+                            No orders found matching the selected criteria.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

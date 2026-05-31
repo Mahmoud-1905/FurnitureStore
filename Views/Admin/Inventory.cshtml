@@ -1,0 +1,67 @@
+@model FurnitureStore.ViewModels.AdminInventoryViewModel
+@{
+    ViewData["Title"] = "Inventory Alerts";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
+    <div class="p-6 border-b border-gray-100 bg-yellow-50/50">
+        <h2 class="text-lg font-bold text-yellow-900 flex items-center gap-2">
+            <span class="material-symbols-outlined text-yellow-600">inventory_2</span>
+            Inventory Management
+        </h2>
+        <p class="text-sm text-yellow-800 mt-1">Monitor stock levels. Items with low stock are highlighted.</p>
+    </div>
+
+    <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+            <thead class="bg-gray-50 text-gray-600">
+                <tr>
+                    <th class="px-6 py-4 font-semibold">SKU</th>
+                    <th class="px-6 py-4 font-semibold">Product Name</th>
+                    <th class="px-6 py-4 font-semibold">Category</th>
+                    <th class="px-6 py-4 font-semibold">Status</th>
+                    <th class="px-6 py-4 font-semibold text-right">Stock Quantity</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                @foreach (var product in Model.Products)
+                {
+                    bool isLowStock = product.StockQuantity < 10 && product.IsActive;
+                    
+                    <tr class="@(isLowStock ? "bg-red-50/30" : "hover:bg-gray-50") transition-colors">
+                        <td class="px-6 py-4 font-mono text-xs text-gray-500">@product.SKU</td>
+                        <td class="px-6 py-4 font-medium text-gray-900">@product.Name</td>
+                        <td class="px-6 py-4 text-gray-500">@product.Category?.Name</td>
+                        <td class="px-6 py-4">
+                            @if(product.IsActive)
+                            {
+                                <span class="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full text-xs font-medium bg-green-50 text-green-700">Active</span>
+                            }
+                            else
+                            {
+                                <span class="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Inactive</span>
+                            }
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <form asp-action="UpdateStock" method="post" class="flex items-center justify-end gap-2">
+                                <input type="hidden" name="productId" value="@product.ProductId" />
+                                
+                                @if (isLowStock)
+                                {
+                                    <span class="material-symbols-outlined text-red-500 text-sm" title="Low Stock">warning</span>
+                                }
+                                
+                                <input type="number" name="quantity" value="@product.StockQuantity" min="0" class="w-20 text-center border @(isLowStock ? "border-red-300 bg-red-50 text-red-900" : "border-gray-300") rounded-lg px-2 py-1 text-sm focus:ring-primary focus:border-primary" />
+                                
+                                <button type="submit" class="p-1 text-gray-400 hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-xl">save</span>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

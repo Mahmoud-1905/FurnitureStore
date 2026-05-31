@@ -143,6 +143,15 @@
             transform: scale(1);
         }
 
+        .luxurySwiper .swiper-button-next { right: -2rem !important; left: auto !important; }
+        .luxurySwiper .swiper-button-prev { left: -2rem !important; right: auto !important; }
+        
+        html[dir="rtl"] .luxurySwiper .swiper-button-next,
+        .swiper-rtl .luxurySwiper .swiper-button-next { right: auto !important; left: -2rem !important; }
+        
+        html[dir="rtl"] .luxurySwiper .swiper-button-prev,
+        .swiper-rtl .luxurySwiper .swiper-button-prev { left: auto !important; right: -2rem !important; }
+
         .py-section-gap {
             padding-top: 100px !important;
             padding-bottom: 0 !important;
@@ -154,7 +163,6 @@
        
         
         </style>
-}
 
 <main>
 
@@ -332,8 +340,8 @@
     
             </div>
             
-            <div class="swiper-button-next" style="color: #c8a97e; right: -2rem;"></div>
-            <div class="swiper-button-prev" style="color: #c8a97e; left: -2rem;"></div>
+            <div class="swiper-button-next" style="color: #c8a97e;"></div>
+            <div class="swiper-button-prev" style="color: #c8a97e;"></div>
         </div>
 
     </section>

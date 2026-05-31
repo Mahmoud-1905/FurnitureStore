@@ -1,0 +1,144 @@
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    var requestCultureFeature = Context.Features.Get<IRequestCultureFeature>();
+    var currentCulture = requestCultureFeature?.RequestCulture.Culture.Name ?? "ar";
+    var isRtl = currentCulture.StartsWith("ar");
+    var htmlLang = isRtl ? "ar" : "en";
+    var htmlDir = isRtl ? "rtl" : "ltr";
+}
+<!DOCTYPE html>
+<html class="light h-full bg-surface" lang="@htmlLang" dir="@htmlDir">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin Dashboard</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Arabic:wght@400;700&family=Cairo:wght@300;400;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        surface: "#fcf9f5",
+                        "on-surface": "#1c1c1a",
+                        primary: "#755a22",
+                        "on-primary": "#ffffff",
+                    },
+                    fontFamily: {
+                        serif: ["'Noto Serif Arabic'", "serif"],
+                        sans: ["'Cairo'", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        body { font-family: 'Cairo', sans-serif; }
+    </style>
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body class="h-full flex overflow-hidden antialiased text-on-surface">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col hidden md:flex shrink-0 shadow-lg z-10">
+        <div class="h-16 flex items-center px-6 border-b border-gray-200">
+            <a href="/" class="flex items-center gap-2 text-primary font-serif font-bold text-xl">
+                <span class="material-symbols-outlined">chair</span>
+                FurnitureStore Admin
+            </a>
+        </div>
+        <div class="flex-1 overflow-y-auto py-4">
+            <nav class="space-y-1 px-3">
+                <a href="/Admin/Dashboard" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 @(ViewContext.RouteData.Values["action"]?.ToString() == "Dashboard" ? "bg-primary/10 text-primary" : "text-gray-700")">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    Overview
+                </a>
+                <a href="/Admin/Orders" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 @(ViewContext.RouteData.Values["action"]?.ToString() == "Orders" ? "bg-primary/10 text-primary" : "text-gray-700")">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                    Orders
+                </a>
+                <a href="/Admin/Payments" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 @(ViewContext.RouteData.Values["action"]?.ToString() == "Payments" ? "bg-primary/10 text-primary" : "text-gray-700")">
+                    <span class="material-symbols-outlined">payments</span>
+                    Payment Queue
+                </a>
+                <a href="/Admin/Products" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 @(ViewContext.RouteData.Values["action"]?.ToString() == "Products" ? "bg-primary/10 text-primary" : "text-gray-700")">
+                    <span class="material-symbols-outlined">inventory_2</span>
+                    Products
+                </a>
+                <a href="/Admin/Inventory" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 @(ViewContext.RouteData.Values["action"]?.ToString() == "Inventory" ? "bg-primary/10 text-primary" : "text-gray-700")">
+                    <span class="material-symbols-outlined">warning</span>
+                    Inventory Alerts
+                </a>
+                <a href="/Admin/Customers" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 @(ViewContext.RouteData.Values["action"]?.ToString() == "Customers" ? "bg-primary/10 text-primary" : "text-gray-700")">
+                    <span class="material-symbols-outlined">group</span>
+                    Customers
+                </a>
+                <a href="/Admin/Reviews" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 @(ViewContext.RouteData.Values["action"]?.ToString() == "Reviews" ? "bg-primary/10 text-primary" : "text-gray-700")">
+                    <span class="material-symbols-outlined">rate_review</span>
+                    Reviews
+                </a>
+                <a href="/Admin/AuditLogs" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 @(ViewContext.RouteData.Values["action"]?.ToString() == "AuditLogs" ? "bg-primary/10 text-primary" : "text-gray-700")">
+                    <span class="material-symbols-outlined">history</span>
+                    Audit Log
+                </a>
+            </nav>
+        </div>
+        <div class="p-4 border-t border-gray-200">
+            <form asp-controller="Account" asp-action="Logout" method="post">
+                <button type="submit" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50">
+                    <span class="material-symbols-outlined">logout</span>
+                    Logout
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col overflow-hidden bg-surface">
+        <header class="h-16 flex items-center justify-between px-8 bg-white border-b border-gray-200 shadow-sm z-0">
+            <h1 class="text-xl font-semibold">@ViewData["Title"]</h1>
+            <div class="flex items-center gap-4">
+                <span class="text-sm text-gray-500">Admin</span>
+                <div class="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center">
+                    <span class="material-symbols-outlined text-sm">person</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-1 overflow-y-auto p-8 relative">
+            @RenderBody()
+        </main>
+    </div>
+
+    <div id="lang-modal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center z-50">
+        <div class="bg-white p-6 rounded-lg shadow-xl">
+            <h2 class="text-lg font-bold mb-4">Do you want to change the page language?</h2>
+            <div class="flex gap-4">
+                <button onclick="setLang('ar')" class="px-4 py-2 bg-primary text-white rounded">Arabic</button>
+                <button onclick="setLang('en')" class="px-4 py-2 bg-gray-200 text-gray-800 rounded">English</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setLang(lang) {
+            sessionStorage.setItem('adminLangChosen', lang);
+            document.cookie = `adminLang=${lang}; path=/; max-age=31536000`;
+            document.getElementById('lang-modal').classList.add('hidden');
+            location.reload();
+        }
+
+        if (!sessionStorage.getItem('adminLangChosen')) {
+            document.getElementById('lang-modal').classList.remove('hidden');
+        }
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

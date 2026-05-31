@@ -77,15 +77,16 @@ namespace FurnitureStore.Controllers
 
             if (result.Succeeded)
             {
-                var roleExist = await roleManager.RoleExistsAsync("Customer");
+                string roleName = (user.Email.ToLower() == "admin@furniturestore.com") ? "Admin" : "Customer";
+                var roleExist = await roleManager.RoleExistsAsync(roleName);
 
                 if (!roleExist)
                 {
-                    var role = new IdentityRole("Customer");
+                    var role = new IdentityRole(roleName);
                     await roleManager.CreateAsync(role);
                 }
 
-                await userManager.AddToRoleAsync(user, "Customer");
+                await userManager.AddToRoleAsync(user, roleName);
 
                 await signInManager.SignInAsync(user, isPersistent: false);
                 return RedirectToAction("Index", "Home");

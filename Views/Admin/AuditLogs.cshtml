@@ -1,0 +1,43 @@
+@model List<FurnitureStore.Models.AuditLog>
+@{
+    ViewData["Title"] = "System Audit Log";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
+    <div class="p-6 border-b border-gray-100 bg-gray-50/50">
+        <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+            <span class="material-symbols-outlined text-gray-500">history</span>
+            Audit Log
+        </h2>
+        <p class="text-sm text-gray-500 mt-1">Tracks every admin action with timestamps for accountability. (Last 100 entries)</p>
+    </div>
+
+    <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+            <thead class="bg-gray-50 text-gray-600">
+                <tr>
+                    <th class="px-6 py-4 font-semibold w-1/5">Timestamp (UTC)</th>
+                    <th class="px-6 py-4 font-semibold w-1/5">Action</th>
+                    <th class="px-6 py-4 font-semibold w-2/5">Details</th>
+                    <th class="px-6 py-4 font-semibold w-1/5">User ID</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100 font-mono text-xs">
+                @foreach (var log in Model)
+                {
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-6 py-3 text-gray-500">@log.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td class="px-6 py-3 font-semibold text-gray-700">@log.ActionType</td>
+                        <td class="px-6 py-3 text-gray-600 break-words">@log.Description</td>
+                        <td class="px-6 py-3 text-gray-400">@(log.ActorUser?.FullName ?? "System")</td>
+                    </tr>
+                }
+                @if(!Model.Any())
+                {
+                    <tr><td colspan="4" class="px-6 py-8 text-center text-gray-500 font-sans text-sm">No audit logs found.</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+@model FurnitureStore.ViewModels.AdminPaymentsViewModel
+@{
+    ViewData["Title"] = "Payment Queue";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
+    <div class="p-6 border-b border-gray-100 bg-red-50/50">
+        <h2 class="text-lg font-bold text-red-900 flex items-center gap-2">
+            <span class="material-symbols-outlined text-red-500">warning</span>
+            Action Required: Unpaid Orders
+        </h2>
+        <p class="text-sm text-red-700 mt-1">The following orders have been placed but payment has not been confirmed.</p>
+    </div>
+
+    <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+            <thead class="bg-gray-50 text-gray-600">
+                <tr>
+                    <th class="px-6 py-4 font-semibold">Order ID</th>
+                    <th class="px-6 py-4 font-semibold">Customer</th>
+                    <th class="px-6 py-4 font-semibold">Date Placed</th>
+                    <th class="px-6 py-4 font-semibold">Amount Due</th>
+                    <th class="px-6 py-4 font-semibold text-right">Action</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                @foreach (var order in Model.UnpaidOrders)
+                {
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-6 py-4 font-medium">#@order.OrderId</td>
+                        <td class="px-6 py-4">
+                            <div>@order.User?.FullName</div>
+                            <div class="text-xs text-gray-500">@order.User?.Email</div>
+                        </td>
+                        <td class="px-6 py-4 text-gray-500">@order.PlacedAt.ToString("MMM dd, yyyy HH:mm")</td>
+                        <td class="px-6 py-4 font-bold text-red-600">$@order.TotalAmount.ToString("N2")</td>
+                        <td class="px-6 py-4 text-right">
+                            <form asp-action="MarkAsPaid" method="post" onsubmit="return confirm('Confirm payment received for Order #@order.OrderId?');">
+                                <input type="hidden" name="orderId" value="@order.OrderId" />
+                                <button type="submit" class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-sm">
+                                    Mark as Paid
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+                
+                @if(!Model.UnpaidOrders.Any())
+                {
+                    <tr>
+                        <td colspan="5" class="px-6 py-12 text-center text-gray-500">
+                            <div class="flex flex-col items-center justify-center">
+                                <span class="material-symbols-outlined text-4xl text-green-300 mb-2">check_circle</span>
+                                <p class="text-lg text-gray-600 font-medium">All caught up!</p>
+                                <p class="text-sm">There are no unpaid orders in the queue.</p>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

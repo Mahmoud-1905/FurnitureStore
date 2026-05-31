@@ -1,7 +1,104 @@
-﻿<main>
-    <h1>لوحة التحكم</h1>
+@model FurnitureStore.ViewModels.DashboardOverviewViewModel
+@{
+    ViewData["Title"] = "Dashboard Overview";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
 
-    <div style="margin-top:20px;">
-        <a href="/Admin/Products">📦 إدارة المنتجات</a>
+<!-- Key Metrics Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="bg-white rounded-2xl p-6 shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-gray-100 flex items-center justify-between">
+        <div>
+            <p class="text-sm text-gray-500 font-medium mb-1">Total Visitors</p>
+            <h3 class="text-2xl font-bold text-gray-900">@Model.TotalVisitors.ToString("N0")</h3>
+        </div>
+        <div class="h-12 w-12 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center">
+            <span class="material-symbols-outlined">group</span>
+        </div>
     </div>
-</main>
+    
+    <div class="bg-white rounded-2xl p-6 shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-gray-100 flex items-center justify-between">
+        <div>
+            <p class="text-sm text-gray-500 font-medium mb-1">Page Views</p>
+            <h3 class="text-2xl font-bold text-gray-900">@Model.TotalPageViews.ToString("N0")</h3>
+        </div>
+        <div class="h-12 w-12 rounded-full bg-purple-50 text-purple-500 flex items-center justify-center">
+            <span class="material-symbols-outlined">visibility</span>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-2xl p-6 shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-gray-100 flex items-center justify-between">
+        <div>
+            <p class="text-sm text-gray-500 font-medium mb-1">Total Revenue</p>
+            <h3 class="text-2xl font-bold text-gray-900">$@Model.TotalRevenue.ToString("N2")</h3>
+        </div>
+        <div class="h-12 w-12 rounded-full bg-green-50 text-green-500 flex items-center justify-center">
+            <span class="material-symbols-outlined">payments</span>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-2xl p-6 shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-gray-100 flex items-center justify-between">
+        <div>
+            <p class="text-sm text-gray-500 font-medium mb-1">Store Health</p>
+            @if(Model.LowStockProductsCount > 0)
+            {
+                <h3 class="text-2xl font-bold text-yellow-600">@Model.LowStockProductsCount Low Stock</h3>
+            }
+            else
+            {
+                <h3 class="text-2xl font-bold text-green-500">Optimal</h3>
+            }
+        </div>
+        <div class="h-12 w-12 rounded-full @(Model.LowStockProductsCount > 0 ? "bg-yellow-50 text-yellow-500" : "bg-green-50 text-green-500") flex items-center justify-center">
+            <span class="material-symbols-outlined">vital_signs</span>
+        </div>
+    </div>
+</div>
+
+<!-- Chart Row -->
+<div class="bg-white rounded-2xl p-6 shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-gray-100 mb-8">
+    <h2 class="text-lg font-bold mb-4">Revenue Overview (Last 7 Days)</h2>
+    <div class="relative h-[300px] w-full">
+        <canvas id="revenueChart"></canvas>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        const labels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.ChartLabels));
+        const data = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.ChartData));
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Revenue ($)',
+                    data: data,
+                    borderColor: '#755a22',
+                    backgroundColor: 'rgba(117, 90, 34, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { borderDash: [2, 4], color: '#f3f4f6' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    </script>
+}
