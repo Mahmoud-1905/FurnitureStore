@@ -51,14 +51,15 @@
                         </span>
                     </div>
 
-                    <!-- Quick Add Hover -->
-                    <div
-                        class="absolute inset-0 bg-on-surface/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@item.ProductId"
-                           class="bg-surface text-on-surface px-8 py-3 font-sans text-xs uppercase tracking-widest hover:bg-primary hover:text-surface transition-colors">
-                            @(User.Identity.IsAuthenticated ? Localizer["AddToCart"].Value : Localizer["LoginToAdd"].Value)
-                        </a>
-                    </div>
+                </div>
+
+                <!-- Quick Add Button -->
+                <div class="mb-4 px-2">
+                    <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@item.ProductId"
+                       class="flex items-center justify-center w-full bg-surface-variant text-on-surface-variant px-6 py-3 font-sans text-xs font-medium uppercase tracking-widest hover:bg-primary hover:text-surface transition-colors rounded-sm shadow-sm">
+                        <span class="material-symbols-outlined text-[16px] mr-2 ml-2">shopping_cart</span>
+                        @(User.Identity.IsAuthenticated ? Localizer["AddToCart"].Value : Localizer["LoginToAdd"].Value)
+                    </a>
                 </div>
 
                 <!-- Content -->

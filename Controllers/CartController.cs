@@ -76,7 +76,7 @@ namespace FurnitureStore.Controllers
 
             if (cart == null)
             {
-                cart = new Cart { UserId = userId };
+                cart = new Cart { UserId = userId, CartItems = new List<CartItem>() };
                 _context.Carts.Add(cart);
                 await _context.SaveChangesAsync(); // Save to get CartId
             }

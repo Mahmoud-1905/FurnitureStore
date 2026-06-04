@@ -22,17 +22,19 @@ namespace FurnitureStore.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             if (!ModelState.IsValid)
             {
+                ViewData["ReturnUrl"] = returnUrl;
                 return View(model);
             }
 
@@ -42,10 +44,15 @@ namespace FurnitureStore.Controllers
 
             if (result.Succeeded)
             {
+                if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
                 return RedirectToAction("Index", "Home");
             }
 
             ModelState.AddModelError(string.Empty, localizer["InvalidLogin"]);
+            ViewData["ReturnUrl"] = returnUrl;
             return View(model);
         }
 

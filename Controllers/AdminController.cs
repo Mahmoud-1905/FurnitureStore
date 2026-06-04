@@ -165,6 +165,50 @@ namespace FurnitureStore.Controllers
             return View(product);
         }
 
+        public async Task<IActionResult> Edit(int id)
+        {
+            var product = await _context.Products.FindAsync(id);
+            if (product == null) return NotFound();
+
+            ViewBag.Categories = _context.Categories.Where(c => c.IsActive).OrderBy(c => c.SortOrder).ToList();
+            return View(product);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Product product)
+        {
+            if (id != product.ProductId) return NotFound();
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(product);
+                    await _context.SaveChangesAsync();
+                    
+                    _context.AuditLogs.Add(new AuditLog 
+                    { 
+                        ActorUserId = GetUserId(),
+                        ActionType = "Edit Product", 
+                        TargetEntityType = "Product",
+                        TargetEntityId = product.ProductId.ToString(),
+                        Description = $"Product {product.Name} updated.", 
+                        CreatedAt = DateTime.UtcNow 
+                    });
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!_context.Products.Any(e => e.ProductId == id)) return NotFound();
+                    else throw;
+                }
+                return RedirectToAction(nameof(Products));
+            }
+            ViewBag.Categories = _context.Categories.Where(c => c.IsActive).OrderBy(c => c.SortOrder).ToList();
+            return View(product);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ToggleProductStatus(int id)

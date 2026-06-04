@@ -45,7 +45,7 @@
                         </td>
                         <td class="px-6 py-4 text-right">
                             <div class="flex items-center justify-end gap-3">
-                                <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">Edit</a>
+                                <a asp-action="Edit" asp-route-id="@item.ProductId" class="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">Edit</a>
                                 <span class="text-gray-300">|</span>
                                 <form asp-action="ToggleProductStatus" method="post">
                                     <input type="hidden" name="id" value="@item.ProductId" />

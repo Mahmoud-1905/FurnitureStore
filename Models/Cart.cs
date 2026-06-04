@@ -11,8 +11,6 @@ namespace FurnitureStore.Models
         [MaxLength(450)]
         public string UserId { get; set; } = string.Empty;
 
-        [Required]
-        [MaxLength(450)]
         // Optional coupon applied to the cart
         public int? CouponId { get; set; }
         public Coupon? Coupon { get; set; }

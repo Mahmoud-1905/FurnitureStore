@@ -457,6 +457,11 @@
         'X-Requested-With': 'XMLHttpRequest'
         }
         }).then(response => {
+        if (!response.ok) {
+        console.error('Server error adding to cart', response.status);
+        alert('Could not add to cart due to a server error. Please try again later.');
+        return;
+        }
         if (response.url && response.url.toLowerCase().includes('login')) {
         window.location.href = response.url;
         return;
