@@ -2,12 +2,44 @@
 <root>
   <data name="TitleSuffix" xml:space="preserve"><value>دقة معمارية</value></data>
   <data name="ReferenceNumber" xml:space="preserve"><value>الرقم المرجعي: #</value></data>
+  <data name="Description" xml:space="preserve"><value>الوصف</value></data>
   <data name="Quantity" xml:space="preserve"><value>الكمية</value></data>
-  <data name="AddToCartButton" xml:space="preserve"><value>اقتناء هذه القطعة</value></data>
+  <data name="Material" xml:space="preserve"><value>المادة</value></data>
+  <data name="Color" xml:space="preserve"><value>اللون</value></data>
+  <data name="AddToCartButton" xml:space="preserve"><value>أضف إلى السلة</value></data>
+  <data name="BuyNow" xml:space="preserve"><value>اشترِ الآن</value></data>
   <data name="LoginToBuy" xml:space="preserve"><value>تسجيل الدخول للاقتناء</value></data>
   <data name="BackToCollection" xml:space="preserve"><value>← العودة للمجموعة الكاملة</value></data>
   <data name="SustainableMaterials" xml:space="preserve"><value>مواد مستدامة</value></data>
   <data name="SustainableMaterialsDesc" xml:space="preserve"><value>صُنع بعناية من أجود أنواع الأخشاب الطبيعية.</value></data>
   <data name="ArchitecturalShipping" xml:space="preserve"><value>شحن معماري</value></data>
   <data name="ArchitecturalShippingDesc" xml:space="preserve"><value>تغليف خاص يضمن وصول القطعة بدقتها الأصلية.</value></data>
+  <data name="DeliveryFrom" xml:space="preserve"><value>التوصيل خلال 5-8 أسابيع</value></data>
+  <data name="RegularPrice" xml:space="preserve"><value>السعر العادي</value></data>
+  <data name="MemberPrice" xml:space="preserve"><value>سعر العضو</value></data>
+  <data name="Dimensions" xml:space="preserve"><value>الأبعاد</value></data>
+  <data name="DimensionsWidth" xml:space="preserve"><value>العرض</value></data>
+  <data name="DimensionsDepth" xml:space="preserve"><value>العمق</value></data>
+  <data name="DimensionsHeight" xml:space="preserve"><value>الارتفاع</value></data>
+  <data name="ProductWeight" xml:space="preserve"><value>وزن المنتج</value></data>
+  <data name="PackagedWeight" xml:space="preserve"><value>الوزن المغلف / وزن الشحن</value></data>
+  <data name="FabricDetails" xml:space="preserve"><value>تفاصيل القماش</value></data>
+  <data name="FabricDetailsDesc" xml:space="preserve"><value>قماش تنجيد فاخر، تم اختياره بعناية لمتانته وراحته. كل قطعة مصنوعة يدويًا مع الاهتمام بالتفاصيل.</value></data>
+  <data name="DeliveryReturns" xml:space="preserve"><value>توصيل وإرجاع القطع الكبيرة</value></data>
+  <data name="DeliveryReturnsDesc" xml:space="preserve"><value>توصيل مجاني للطلبات التي تزيد عن ₪500. توصيل قياسي خلال 5-8 أيام عمل. يُقبل الإرجاع خلال 14 يومًا من التسليم بالحالة الأصلية.</value></data>
+  <data name="ProductDimensions" xml:space="preserve"><value>أبعاد المنتج</value></data>
+  <data name="ValueProduct" xml:space="preserve"><value>قيمة المنتج</value></data>
+  <data name="ValueProductTitle" xml:space="preserve"><value>راحة خالدة، أناقة عصرية، مصنوعة بخبرة لتعزيز أي غرفة بالأناقة والرقي</value></data>
+  <data name="ValueProductDesc1" xml:space="preserve"><value>يمزج بين الراحة الخالدة والأناقة العصرية، يرتقي بأي غرفة بتصميمه المتنوع والأنيق.</value></data>
+  <data name="ValueProductDesc2" xml:space="preserve"><value>مصنوع بخبرة من مواد فاخرة، توفر هذه القطعة المتانة والاسترخاء الذي لا مثيل له. ارتقِ بمساحة معيشتك بسهولة مع قطعة توازن بين الأناقة والوظائف العملية.</value></data>
+  <data name="OurVibe" xml:space="preserve"><value>رؤيتنا</value></data>
+  <data name="Mission" xml:space="preserve"><value>المهمة</value></data>
+  <data name="CollectionTitle" xml:space="preserve"><value>مجموعة منتجاتنا</value></data>
+  <data name="CollectionDesc" xml:space="preserve"><value>اكتشف مجموعتنا المنتقاة من الأثاث الفاخر، التي تمزج بين التصميم الخالد والجودة الاستثنائية والراحة العصرية.</value></data>
+  <data name="ShowMore" xml:space="preserve"><value>عرض المزيد</value></data>
+  <data name="ShopTheLook" xml:space="preserve"><value>تسوّق الإطلالة</value></data>
+  <data name="ShopTheLookDesc" xml:space="preserve"><value>تسوّق الإطلالة مع هذه القطعة، حيث تلتقي الراحة الخالدة بالأناقة العصرية، لتصنع قطعة مميزة لأي غرفة.</value></data>
+  <data name="Explore" xml:space="preserve"><value>استكشف</value></data>
+  <data name="CM" xml:space="preserve"><value>سم</value></data>
+  <data name="KG" xml:space="preserve"><value>كغ</value></data>
 </root>

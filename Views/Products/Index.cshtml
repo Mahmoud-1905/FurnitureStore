@@ -35,15 +35,20 @@
     </div>
 
     <!-- Products Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-gutter gap-y-24">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-gutter gap-y-24  "
+        >
         @foreach (var item in Model)
         {
-            <div class="group flex flex-col h-full bg-surface-container-low/30">
+            <div class="group flex flex-col h-full bg-surface-container-low/30"  style="border-radius: 3%">
                 <!-- Image Container -->
-                <div class="relative aspect-[4/5] overflow-hidden bg-surface-container mb-6">
+                <div class="relative aspect-[4/5] overflow-hidden bg-surface-container mb-6"
+                     style="border-radius: 3%" >
                     <img src="@Url.Content(item.ImageUrl)"
                          class="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105"
-                         alt="@item.Name" />
+                         alt="@item.Name"
+
+                         
+                         />
 
                     <div class="absolute top-0 right-0 p-4">
                         <span class="bg-on-surface text-surface text-[10px] uppercase tracking-[0.2em] px-3 py-1">

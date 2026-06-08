@@ -52,6 +52,28 @@ namespace FurnitureStore.Controllers
             {
                 return NotFound();
             }
+
+            // Fetch related products from the same category (excluding the current product)
+            var relatedProducts = await _context.Products
+                .Include(p => p.Category)
+                .Where(p => p.IsActive && p.CategoryId == product.CategoryId && p.ProductId != id)
+                .Take(4)
+                .ToListAsync();
+
+            // If not enough related products in the same category, fill with other active products
+            if (relatedProducts.Count < 4)
+            {
+                var existingIds = relatedProducts.Select(p => p.ProductId).ToList();
+                existingIds.Add(id);
+                var moreProducts = await _context.Products
+                    .Include(p => p.Category)
+                    .Where(p => p.IsActive && !existingIds.Contains(p.ProductId))
+                    .Take(4 - relatedProducts.Count)
+                    .ToListAsync();
+                relatedProducts.AddRange(moreProducts);
+            }
+
+            ViewBag.RelatedProducts = relatedProducts;
             return View(product);
         }
 

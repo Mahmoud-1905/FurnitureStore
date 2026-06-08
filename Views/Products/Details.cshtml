@@ -4,80 +4,360 @@
 
 @{
     ViewData["Title"] = $"{Model.Name} - {Localizer["TitleSuffix"]}";
+
+    // Build the list of images for the gallery
+    var allImages = new List<string>();
+    if (Model.ProductImages != null && Model.ProductImages.Any())
+    {
+        allImages.AddRange(Model.ProductImages.OrderBy(pi => pi.SortOrder).Select(pi => pi.ImageUrl));
+    }
+    if (!allImages.Any() && !string.IsNullOrEmpty(Model.ImageUrl))
+    {
+        allImages.Add(Model.ImageUrl);
+    }
+    // Ensure at least 4 thumbnails for visual consistency
+    while (allImages.Count < 4)
+    {
+        allImages.Add(allImages.FirstOrDefault() ?? Model.ImageUrl ?? "");
+    }
+
+    var primaryImage = allImages.First();
+    var relatedProducts = ViewBag.RelatedProducts as List<FurnitureStore.Models.Product> ?? new List<FurnitureStore.Models.Product>();
+
+    // Calculate a mock member price (10% off)
+    var memberPrice = Math.Round(Model.Price * 0.9m, 0);
 }
 
-<div class="py-24 px-8 md:px-16 container-center">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-        <!-- Product Image -->
+@section Styles {
+    <link rel="stylesheet" href="~/css/site.css" />
+}
+
+<!-- ============================================================
+     SECTION 1: PRODUCT HERO (Image Gallery + Product Info)
+     ============================================================ -->
+<div class="px-6 md:px-16 pt-8 pb-16 container-center" dir="ltr" style="background-color: white;">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+
+        <!-- LEFT: Image Gallery -->
         <div class="lg:col-span-7">
-            <div class="relative overflow-hidden bg-surface-container aspect-square md:aspect-[4/5]">
-                <img src="@Url.Content(Model.ImageUrl)" 
-                     class="w-full h-full object-cover transition-all duration-1000" 
+            <!-- Main Image -->
+            <div class="relative overflow-hidden bg-surface-container aspect-square md:aspect-[7/5]">
+                <img id="mainProductImage"
+                     src="@Url.Content(primaryImage)"
+                     class="details-main-image w-full h-full object-cover"
                      alt="@Model.Name" />
-                <div class="absolute top-0 right-0 p-8">
-                    <span class="text-[10px] font-sans text-on-surface bg-surface px-4 py-2 uppercase tracking-[0.2em]">
-                        @Localizer["ReferenceNumber"]@Model.ProductId
-                    </span>
-                </div>
+            </div>
+
+            <!-- Thumbnail Row -->
+            <div class="flex mt-4 gap-3 details-thumbs-row overflow-x-auto">
+                @for (int i = 0; i < allImages.Count && i < 5; i++)
+                {
+                    <img src="@Url.Content(allImages[i])"
+                         class="details-thumbnail w-20 h-20 md:w-24 md:h-24 object-cover flex-shrink-0 @(i == 0 ? "active" : "")"
+                         alt="@Model.Name thumbnail @(i + 1)"
+                         data-full="@Url.Content(allImages[i])"
+                         onclick="switchImage(this)" />
+                }
             </div>
         </div>
 
-        <!-- Product Details -->
-        <div class="lg:col-span-5 text-right">
-            <div class="mb-12">
-                <span class="text-xs font-sans text-primary uppercase tracking-[0.2em] block mb-stack-sm">@Model.Category?.Name</span>
-                <h1 class="text-5xl font-serif text-on-surface mb-6 leading-tight">@Model.Name</h1>
-                <div class="text-3xl font-sans text-on-surface font-light mb-8">₪@Model.Price</div>
-                <div class="w-16 h-[1px] bg-outline-variant"></div>
+        <!-- RIGHT: Product Info -->
+        <div class="lg:col-span-5">
+            <!-- Category label -->
+            <span class="text-[11px] font-sans text-primary uppercase tracking-[0.2em] block mb-3">@Model.Category?.Name</span>
+
+            <!-- Product Name -->
+            <h1 class="text-3xl md:text-4xl font-serif text-on-surface mb-4 leading-tight">@Model.Name</h1>
+
+
+            <!-- Description heading + text -->
+            <div class="mb-8">
+                <h3 class="text-[11px] font-sans text-on-surface uppercase tracking-[0.18em] font-semibold mb-3">@Localizer["Description"]</h3>
+                <p class="text-sm font-sans text-secondary leading-relaxed">@Model.Description</p>
             </div>
 
-            <p class="text-lg font-sans text-secondary mb-12 leading-relaxed">
-                @Model.Description
-            </p>
+            <!-- Price Section -->
+            <div class="flex items-baseline gap-10 mb-8 pb-6 border-b border-outline-variant/30">
+                <div>
+                    <span class="text-[11px] font-sans text-secondary block mb-1">@Localizer["RegularPrice"]</span>
+                    <span class="text-2xl font-sans text-on-surface font-semibold">₪@Model.Price</span>
+                </div>
+            
+            </div>
 
-            <!-- Purchase Form -->
-            <form method="get" asp-controller="Cart" asp-action="AddToCart" class="space-y-8">
+            <!-- Quantity Selector -->
+            <div class="mb-8">
+                <div class="flex items-center gap-4">
+                    <button type="button" class="details-qty-btn" data-action="decrement">−</button>
+                    <input type="number" name="quantity" value="1" min="1"
+                           class="bg-transparent border-b border-outline-variant focus:ring-0 focus:border-primary w-14 text-center font-sans text-lg py-1" />
+                    <button type="button" class="details-qty-btn" data-action="increment">+</button>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <form method="get" asp-controller="Cart" asp-action="AddToCart">
                 <input type="hidden" name="productId" value="@Model.ProductId" />
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="flex gap-4 mb-8">
+                        <button type="submit" name="action" value="add" class="details-btn-outline">
+                            @Localizer["AddToCartButton"]
+                        </button>
+                        <button type="submit" name="action" value="buy" class="details-btn-filled">
+                            @Localizer["BuyNow"]
+                        </button>
+                    </div>
+                }
+                else
+                {
+                    <div class="mb-8">
+                        <a asp-controller="Account" asp-action="Login" class="details-btn-filled block text-center w-full py-4">
+                            @Localizer["LoginToBuy"]
+                        </a>
+                    </div>
+                }
+            </form>
 
-                <div class="flex items-center justify-end gap-6">
-                    <div class="relative">
-                        <label class="text-[10px] font-sans text-secondary uppercase tracking-[0.2em] block mb-2">@Localizer["Quantity"]</label>
-                        <input type="number" name="quantity" value="1" min="1" 
-                               class="bg-transparent border-b border-on-surface focus:ring-0 focus:border-primary w-24 text-center font-sans text-lg py-2" />
+            <!-- Accordion Sections -->
+            <div class="border-t border-outline-variant/30">
+
+                <!-- Dimensions -->
+                <div class="border-b border-outline-variant/30">
+                    <button type="button" class="details-accordion-toggle w-full flex justify-between items-center py-5 text-left" onclick="toggleAccordion(this)">
+                        <span class="text-sm font-sans text-on-surface uppercase tracking-[0.12em] font-medium">@Localizer["Dimensions"]</span>
+                        <span class="details-accordion-icon text-on-surface text-xl leading-none">+</span>
+                    </button>
+                    <div class="details-accordion-content">
+                        <div class="pb-5 grid grid-cols-2 gap-x-8 gap-y-3 text-sm font-sans">
+                            <div class="flex justify-between">
+                                <span class="text-secondary">@Localizer["ProductDimensions"]</span>
+                            </div>
+                            <div></div>
+                            @if (Model.DimensionW.HasValue || Model.DimensionD.HasValue || Model.DimensionH.HasValue)
+                            {
+                                <div class="flex justify-between col-span-2">
+                                    <span class="text-secondary">@Localizer["DimensionsWidth"] x @Localizer["DimensionsDepth"] x @Localizer["DimensionsHeight"]</span>
+                                    <span class="text-on-surface">@(Model.DimensionW ?? 0) x @(Model.DimensionD ?? 0) x @(Model.DimensionH ?? 0) @Localizer["CM"]</span>
+                                </div>
+                            }
+                            @if (Model.WeightKg.HasValue)
+                            {
+                                <div class="flex justify-between col-span-2">
+                                    <span class="text-secondary">@Localizer["ProductWeight"]</span>
+                                    <span class="text-on-surface">@Model.WeightKg @Localizer["KG"]</span>
+                                </div>
+                            }
+                        </div>
                     </div>
                 </div>
 
-                <div class="flex flex-col gap-4 pt-8">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <button type="submit" class="w-full bg-on-surface text-surface py-5 font-sans text-sm uppercase tracking-[0.2em] hover:bg-primary transition-colors duration-500">
-                            @Localizer["AddToCartButton"]
-                        </button>
-                    }
-                    else
-                    {
-                        <a asp-controller="Account" asp-action="Login" class="block text-center w-full bg-primary text-surface py-5 font-sans text-sm uppercase tracking-[0.2em] hover:bg-on-surface transition-colors duration-500">
-                            @Localizer["LoginToBuy"]
-                        </a>
-                    }
-                    <a asp-controller="Products" asp-action="Index" 
-                       class="text-center text-xs font-sans text-primary uppercase tracking-widest border-b border-primary/0 hover:border-primary py-2 transition-all">
-                        @Localizer["BackToCollection"]
-                    </a>
+                <!-- Fabric Details -->
+                <div class="border-b border-outline-variant/30">
+                    <button type="button" class="details-accordion-toggle w-full flex justify-between items-center py-5 text-left" onclick="toggleAccordion(this)">
+                        <span class="text-sm font-sans text-on-surface uppercase tracking-[0.12em] font-medium">@Localizer["FabricDetails"]</span>
+                        <span class="details-accordion-icon text-on-surface text-xl leading-none">+</span>
+                    </button>
+                    <div class="details-accordion-content">
+                        <div class="pb-5">
+                            <p class="text-sm font-sans text-secondary leading-relaxed">
+                                @if (!string.IsNullOrEmpty(Model.Material))
+                                {
+                                    <strong class="text-on-surface">@Localizer["Material"]:</strong> @Model.Material<br />
+                                }
+                                @Localizer["FabricDetailsDesc"]
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </form>
 
-            <!-- Quality Assurance -->
-            <div class="mt-16 grid grid-cols-2 gap-8 border-t border-outline-variant/30 pt-8">
-                <div>
-                    <h4 class="text-[10px] font-sans text-on-surface uppercase tracking-[0.1em] mb-2">@Localizer["SustainableMaterials"]</h4>
-                    <p class="text-xs font-sans text-secondary">@Localizer["SustainableMaterialsDesc"]</p>
+                <!-- Delivery & Returns -->
+                <div class="border-b border-outline-variant/30">
+                    <button type="button" class="details-accordion-toggle w-full flex justify-between items-center py-5 text-left" onclick="toggleAccordion(this)">
+                        <span class="text-sm font-sans text-on-surface uppercase tracking-[0.12em] font-medium">@Localizer["DeliveryReturns"]</span>
+                        <span class="details-accordion-icon text-on-surface text-xl leading-none">+</span>
+                    </button>
+                    <div class="details-accordion-content">
+                        <div class="pb-5">
+                            <p class="text-sm font-sans text-secondary leading-relaxed">
+                                @Localizer["DeliveryReturnsDesc"]
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h4 class="text-[10px] font-sans text-on-surface uppercase tracking-[0.1em] mb-2">@Localizer["ArchitecturalShipping"]</h4>
-                    <p class="text-xs font-sans text-secondary">@Localizer["ArchitecturalShippingDesc"]</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 2: VALUE PRODUCT HIGHLIGHT
+     ============================================================ -->
+<div class="py-20 px-6 md:px-16 bg-surface" dir="ltr">
+    <div class="container-center">
+        <!-- Tagline -->
+        <p class="text-center text-xl md:text-2xl font-serif text-on-surface leading-relaxed max-w-3xl mx-auto mb-20">
+            @Localizer["ValueProductTitle"]
+        </p>
+
+        <!-- Two-column layout -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
+            <!-- Text Side -->
+            <div class="md:col-span-5">
+                <span class="text-[11px] font-sans text-secondary uppercase tracking-[0.2em] block mb-6">@Localizer["ValueProduct"]</span>
+
+                <p class="text-base font-sans text-on-surface leading-relaxed mb-6">
+                    @Model.Name — @Localizer["ValueProductDesc1"]
+                </p>
+
+                <p class="text-sm font-sans text-secondary leading-relaxed mb-10">
+                    @Localizer["ValueProductDesc2"]
+                </p>
+
+                <!-- Navigation dots -->
+                <div class="flex items-center gap-8 mb-6">
+                    <span class="text-xs font-sans text-on-surface uppercase tracking-[0.15em]">@Localizer["OurVibe"]</span>
+                    <span class="text-xs font-sans text-secondary uppercase tracking-[0.15em]">@Localizer["Mission"]</span>
+                </div>
+                <div class="flex gap-2">
+                    <span class="details-dot active"></span>
+                    <span class="details-dot"></span>
+                </div>
+            </div>
+
+            <!-- Image Side -->
+            <div class="md:col-span-7">
+                <div class="overflow-hidden aspect-[4/3] md:aspect-[16/10]">
+                    <img src="@Url.Content(primaryImage)"
+                         class="w-full h-full object-cover"
+                         alt="@Model.Name featured view" />
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<!-- ============================================================
+     SECTION 3: OUR PRODUCT COLLECTION (Related Products)
+     ============================================================ -->
+@if (relatedProducts.Any())
+{
+    <div class="py-20 px-6 md:px-16 bg-surface" dir="ltr" style="background-color: white;">
+        <div class="container-center">
+            <!-- Section Header -->
+            <div class="flex justify-between items-end mb-4">
+                <div>
+                    <span class="text-[11px] font-sans text-secondary uppercase tracking-[0.2em] block mb-2">@Model.Category?.Name</span>
+                    <h2 class="text-3xl md:text-4xl font-serif text-on-surface">@Localizer["CollectionTitle"]</h2>
+                </div>
+                <a asp-controller="Products" asp-action="Index"
+                   class="hidden md:flex items-center gap-2 bg-on-surface text-surface px-6 py-3 font-sans text-xs uppercase tracking-[0.15em] hover:bg-primary transition-colors">
+                    @Localizer["ShowMore"]
+                </a>
+            </div>
+            <p class="text-sm font-sans text-secondary max-w-xl mb-12 leading-relaxed">@Localizer["CollectionDesc"]</p>
+
+            <!-- Products Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
+                @foreach (var item in relatedProducts.Take(3))
+                {
+                    <a asp-controller="Products" asp-action="Details" asp-route-id="@item.ProductId"
+                       class="details-product-card group block">
+                        <div class="overflow-hidden bg-surface-container aspect-[4/5] mb-4">
+                            <img src="@Url.Content(item.ImageUrl)"
+                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                 alt="@item.Name" />
+                        </div>
+                        <h3 class="text-base font-sans text-on-surface font-medium uppercase tracking-wide mb-1">@item.Name</h3>
+                        <div class="flex gap-4 items-baseline">
+                            <span class="text-sm font-sans text-secondary line-through">₪@item.Price</span>
+                            <span class="text-sm font-sans text-primary font-medium">₪@(Math.Round(item.Price * 0.9m, 0)) Member</span>
+                        </div>
+                    </a>
+                }
+            </div>
+
+            <!-- Mobile Show More -->
+            <div class="mt-8 md:hidden text-center">
+                <a asp-controller="Products" asp-action="Index"
+                   class="inline-block bg-on-surface text-surface px-8 py-3 font-sans text-xs uppercase tracking-[0.15em]">
+                    @Localizer["ShowMore"]
+                </a>
+            </div>
+        </div>
+    </div>
+}
+
+
+<!-- ============================================================
+     SECTION 4: SHOP THE LOOK CTA
+     ============================================================ -->
+<div class="details-shop-look py-20 px-6 md:px-16" dir="ltr">
+    <div class="container-center text-center">
+        <h2 class="text-4xl md:text-5xl font-serif text-white mb-6">@Localizer["ShopTheLook"]</h2>
+        <p class="text-base font-sans text-white/70 max-w-lg mx-auto mb-10 leading-relaxed">
+            @Localizer["ShopTheLookDesc"]
+        </p>
+        <a asp-controller="Products" asp-action="Index"
+           class="inline-block border border-white/40 text-white px-10 py-4 font-sans text-sm uppercase tracking-[0.15em] hover:bg-white hover:text-on-surface transition-all duration-500">
+            @Localizer["Explore"]
+        </a>
+    </div>
+</div>
+
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+    // ---- Thumbnail Gallery Switch ----
+    function switchImage(thumbEl) {
+        var mainImg = document.getElementById('mainProductImage');
+        if (mainImg && thumbEl.dataset.full) {
+            mainImg.style.opacity = '0';
+            setTimeout(function () {
+                mainImg.src = thumbEl.dataset.full;
+                mainImg.style.opacity = '1';
+            }, 200);
+        }
+        // Update active state
+        document.querySelectorAll('.details-thumbnail').forEach(function (t) {
+            t.classList.remove('active');
+        });
+        thumbEl.classList.add('active');
+    }
+
+    // ---- Accordion Toggle ----
+    function toggleAccordion(btn) {
+        var content = btn.nextElementSibling;
+        var icon = btn.querySelector('.details-accordion-icon');
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            icon.classList.remove('rotated');
+        } else {
+            content.classList.add('open');
+            icon.classList.add('rotated');
+        }
+    }
+
+    // ---- Quantity Increment / Decrement ----
+    document.addEventListener('click', function (e) {
+        if (e.target.dataset.action === 'increment' || e.target.closest('[data-action="increment"]')) {
+            var btn = e.target.closest('[data-action="increment"]') || e.target;
+            var container = btn.closest('.flex') || btn.parentElement;
+            var qty = container.querySelector('input[name="quantity"]');
+            if (qty) qty.value = parseInt(qty.value) + 1;
+        } else if (e.target.dataset.action === 'decrement' || e.target.closest('[data-action="decrement"]')) {
+            var btn = e.target.closest('[data-action="decrement"]') || e.target;
+            var container = btn.closest('.flex') || btn.parentElement;
+            var qty = container.querySelector('input[name="quantity"]');
+            if (qty) {
+                var val = parseInt(qty.value);
+                if (val > 1) qty.value = val - 1;
+            }
+        }
+    });
+</script>
