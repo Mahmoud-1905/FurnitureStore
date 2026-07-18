@@ -1,6 +1,6 @@
 # 02. Stakeholder & User Role Analysis
 
-## 2.1 Stakeholder Register
+## 2.1 Stakeholder 
 
 | # | Stakeholder | Role | Interest | Influence | Key Concern |
 | :---: | :--- | :--- | :--- | :---: | :---: |
