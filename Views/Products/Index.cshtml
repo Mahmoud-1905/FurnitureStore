@@ -60,11 +60,22 @@
 
                 <!-- Quick Add Button -->
                 <div class="mb-4 px-2">
-                    <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@item.ProductId"
-                       class="flex items-center justify-center w-full bg-surface-variant text-on-surface-variant px-6 py-3 font-sans text-xs font-medium uppercase tracking-widest hover:bg-primary hover:text-surface transition-colors rounded-sm shadow-sm">
-                        <span class="material-symbols-outlined text-[16px] mr-2 ml-2">shopping_cart</span>
-                        @(User.Identity.IsAuthenticated ? Localizer["AddToCart"].Value : Localizer["LoginToAdd"].Value)
-                    </a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@item.ProductId"
+                           class="flex items-center justify-center w-full bg-surface-variant text-on-surface-variant px-6 py-3 font-sans text-xs font-medium uppercase tracking-widest hover:bg-primary hover:text-surface transition-colors rounded-sm shadow-sm">
+                            <span class="material-symbols-outlined text-[16px] mr-2 ml-2">shopping_cart</span>
+                            @Localizer["AddToCart"].Value
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Account" asp-action="Login" asp-route-returnUrl="@(Context.Request.Path + Context.Request.QueryString)"
+                           class="flex items-center justify-center w-full bg-surface-variant text-on-surface-variant px-6 py-3 font-sans text-xs font-medium uppercase tracking-widest hover:bg-primary hover:text-surface transition-colors rounded-sm shadow-sm">
+                            <span class="material-symbols-outlined text-[16px] mr-2 ml-2">shopping_cart</span>
+                            @Localizer["LoginToAdd"].Value
+                        </a>
+                    }
                 </div>
 
                 <!-- Content -->

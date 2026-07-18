@@ -91,26 +91,6 @@ html, body {
     transform: translateY(-4px);
 }
 
-/* Quantity button styling */
-.details-qty-btn {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #d1c5b5;
-    background: transparent;
-    cursor: pointer;
-    font-size: 18px;
-    color: #1c1c1a;
-    transition: background 0.2s ease, border-color 0.2s ease;
-    user-select: none;
-}
-
-.details-qty-btn:hover {
-    border-color: #755a22;
-    background: #f6f3ef;
-}
 
 /* Primary action buttons for details */
 .details-btn-outline {
@@ -227,8 +207,7 @@ footer {
 /* Keep existing styles unchanged after this point */
 /* Body font */
 body {
-    font-family: 'Inter', sans-serif;
-    direction: rtl;
+    font-family: 'Cairo', sans-serif;
 }
 
 /* Product page styles */
@@ -435,8 +414,7 @@ footer {
 /* Keep existing styles unchanged after this point */
 /* Body font */
 body {
-    font-family: 'Inter', sans-serif;
-    direction: rtl;
+    font-family: 'Cairo', sans-serif;
 }
 
 /* Product page styles */

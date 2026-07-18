@@ -10,6 +10,7 @@
     var htmlDir = isRtl ? "rtl" : "ltr";
 
     bool hasCartItems = false;
+    int cartItemCount = 0;
     if (User.Identity.IsAuthenticated)
     {
         var dbContext = Context.RequestServices.GetService(typeof(FurnitureStore.Data.AppDbContext)) as FurnitureStore.Data.AppDbContext;
@@ -18,8 +19,10 @@
         {
             var userId = userManager.GetUserId(User);
             hasCartItems = dbContext.CartItems.Any(ci => ci.Cart.UserId == userId);
+            cartItemCount = dbContext.CartItems.Where(ci => ci.Cart.UserId == userId).Sum(ci => (int?)ci.Quantity) ?? 0;
         }
     }
+    ViewData["CartItemCount"] = cartItemCount;
 }
 <!DOCTYPE html>
 <html class="light" lang="@htmlLang" dir="@htmlDir">
@@ -236,8 +239,8 @@
                 <a href="/Cart" id="cartIcon"
                    class="material-symbols-outlined text-on-surface hover:text-primary transition-colors relative">
                     shopping_bag
-                    <span id="cartCheckmark"
-                          class="@(hasCartItems ? "" : "hidden") absolute -top-1 -right-1 bg-primary text-surface rounded-full text-[10px] w-4 h-4 flex items-center justify-center font-bold">✓</span>
+                    <span id="cartCount"
+                          class="@(cartItemCount > 0 ? "" : "hidden") absolute -top-1 -right-1 bg-primary text-surface rounded-full text-[10px] w-5 h-5 flex items-center justify-center font-bold">@cartItemCount</span>
                 </a>
             </div>
         </div>
@@ -248,7 +251,7 @@
     </main>
 
     <!-- Global Footer -->
-<footer class="bg-[#111111] text-white py-20 px-8 md:px-16 border-t border-white/10">
+<footer class="bg-[#111111] text-white py-8 px-8 md:px-16 border-t border-white/10">
 
     <div class="container-center grid grid-cols-1 md:grid-cols-4 gap-14">
 
@@ -425,7 +428,7 @@
         });
 
         document.querySelectorAll(".hidden-element").forEach((el) => {
-[2026-05-23 10:04 AM] حلا وسام نبهان: observer.observe(el);
+            observer.observe(el);
 
         });
 
@@ -466,13 +469,15 @@
         window.location.href = response.url;
         return;
         }
-        const cartCheckmark = document.getElementById('cartCheckmark');
-        if (cartCheckmark) {
-        cartCheckmark.classList.remove('hidden');
-        cartCheckmark.classList.add('animate-bounce');
-        setTimeout(() => {
-        cartCheckmark.classList.remove('animate-bounce');
-        }, 1000);
+        const cartCount = document.getElementById('cartCount');
+        if (cartCount) {
+            var current = parseInt(cartCount.textContent) || 0;
+            cartCount.textContent = current + 1;
+            cartCount.classList.remove('hidden');
+            cartCount.classList.add('animate-bounce');
+            setTimeout(() => {
+                cartCount.classList.remove('animate-bounce');
+            }, 1000);
         }
         }).catch(err => console.error(err));
         }
@@ -486,16 +491,22 @@
         });
 
         document.addEventListener('submit', function (e) {
-        const target = e.target.closest('form[action*="AddToCart"]');
-        if (target) {
-        e.preventDefault();
-        const url = new URL(target.action, window.location.origin);
-        const formData = new FormData(target);
-        for (const pair of formData.entries()) {
-        url.searchParams.append(pair[0], pair[1]);
-        }
-        fetchAddToCart(url.toString());
-        }
+            const target = e.target.closest('form[action*="AddToCart"]');
+            if (target) {
+                const formData = new FormData(target);
+                const actionValue = formData.get('action');
+                // If buying now, allow normal form submission to navigate to checkout
+                if (actionValue && actionValue.toLowerCase() === 'buy') {
+                    // Do not prevent default, allow browser to follow redirect
+                    return;
+                }
+                e.preventDefault();
+                const url = new URL(target.action, window.location.origin);
+                for (const pair of formData.entries()) {
+                    url.searchParams.append(pair[0], pair[1]);
+                }
+                fetchAddToCart(url.toString());
+            }
         });
         });
     </script>

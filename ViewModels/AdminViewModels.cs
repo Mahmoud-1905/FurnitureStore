@@ -16,11 +16,7 @@ namespace FurnitureStore.ViewModels
         public List<decimal> ChartData { get; set; } = new List<decimal>();
     }
 
-    public class AdminOrdersViewModel
-    {
-        public List<Order> Orders { get; set; } = new List<Order>();
-        public OrderStatus? FilterStatus { get; set; }
-    }
+
 
     public class AdminPaymentsViewModel
     {

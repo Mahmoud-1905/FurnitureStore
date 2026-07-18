@@ -115,16 +115,16 @@
     <div class="absolute inset-0 bg-on-surface/80 backdrop-blur-sm" onclick="closeCheckoutModal()"></div>
     
     <!-- Modal Content -->
-    <div class="relative bg-surface w-full max-w-xl p-12 shadow-2xl transform translate-y-8 transition-transform duration-500" id="modalContent">
+    <div class="relative bg-surface w-full max-w-lg p-10 shadow-2xl transform translate-y-8 transition-transform duration-500" id="modalContent">
         <button onclick="closeCheckoutModal()" class="absolute top-8 left-8 text-secondary hover:text-on-surface transition-colors">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
 
         <div class="text-right">
             <h2 class="text-3xl font-serif text-on-surface mb-2">@Localizer["ModalTitle"]</h2>
-            <p class="text-sm font-sans text-secondary mb-12 uppercase tracking-widest">@Localizer["ModalSubtitle"]</p>
+            <p class="text-sm font-sans text-secondary mb-10 uppercase tracking-widest">@Localizer["ModalSubtitle"]</p>
 
-            <div class="space-y-8">
+            <div class="space-y-7">
                 <div>
                     <label class="block text-[10px] font-sans text-secondary uppercase tracking-widest mb-2">@Localizer["FullName"]</label>
                     <input type="text" id="custName" class="w-full bg-transparent border-b border-outline-variant py-3 font-sans text-on-surface focus:border-primary outline-none transition-colors" placeholder="محمود ...">
@@ -133,7 +133,7 @@
                     <label class="block text-[10px] font-sans text-secondary uppercase tracking-widest mb-2">@Localizer["LocationCity"]</label>
                     <input type="text" id="custLocation" class="w-full bg-transparent border-b border-outline-variant py-3 font-sans text-on-surface focus:border-primary outline-none transition-colors" placeholder="رام الله، فلسطين">
                 </div>
-                <div class="grid grid-cols-2 gap-8">
+                <div class="grid grid-cols-2 gap-7">
                     <div>
                         <label class="block text-[10px] font-sans text-secondary uppercase tracking-widest mb-2">@Localizer["Phone"]</label>
                         <input type="tel" id="custPhone" class="w-full bg-transparent border-b border-outline-variant py-3 font-sans text-on-surface focus:border-primary outline-none transition-colors" placeholder="+970 ...">
@@ -144,8 +144,8 @@
                     </div>
                 </div>
 
-                <div class="pt-8">
-                    <button onclick="processPurchase()" class="w-full bg-on-surface text-surface py-5 font-sans text-sm uppercase tracking-[0.2em] hover:bg-primary transition-colors duration-500">
+                <div class="pt-7">
+                    <button onclick="processPurchase()" class="w-full bg-on-surface text-surface py-4.5 font-sans text-sm uppercase tracking-[0.2em] hover:bg-primary transition-colors duration-500">
                         @Localizer["ConfirmButton"]
                     </button>
                 </div>

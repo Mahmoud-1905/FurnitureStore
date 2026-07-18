@@ -1,12 +1,6 @@
-@using Microsoft.AspNetCore.Localization
-@using Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
 @{
-    var requestCultureFeature = Context.Features.Get<IRequestCultureFeature>();
-    var currentCulture = requestCultureFeature?.RequestCulture.Culture.Name ?? "ar";
-    var isRtl = currentCulture.StartsWith("ar");
-    var htmlLang = isRtl ? "ar" : "en";
-    var htmlDir = isRtl ? "rtl" : "ltr";
+    var htmlLang = "en";
+    var htmlDir = "ltr";
 }
 <!DOCTYPE html>
 <html class="light h-full bg-surface" lang="@htmlLang" dir="@htmlDir">
@@ -116,28 +110,7 @@
         </main>
     </div>
 
-    <div id="lang-modal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center z-50">
-        <div class="bg-white p-6 rounded-lg shadow-xl">
-            <h2 class="text-lg font-bold mb-4">Do you want to change the page language?</h2>
-            <div class="flex gap-4">
-                <button onclick="setLang('ar')" class="px-4 py-2 bg-primary text-white rounded">Arabic</button>
-                <button onclick="setLang('en')" class="px-4 py-2 bg-gray-200 text-gray-800 rounded">English</button>
-            </div>
-        </div>
-    </div>
 
-    <script>
-        function setLang(lang) {
-            sessionStorage.setItem('adminLangChosen', lang);
-            document.cookie = `adminLang=${lang}; path=/; max-age=31536000`;
-            document.getElementById('lang-modal').classList.add('hidden');
-            location.reload();
-        }
-
-        if (!sessionStorage.getItem('adminLangChosen')) {
-            document.getElementById('lang-modal').classList.remove('hidden');
-        }
-    </script>
     @await RenderSectionAsync("Scripts", required: false)
 
 </body>

@@ -48,16 +48,23 @@ namespace FurnitureStore.Controllers
         // --- ORDERS PANEL ---
         public async Task<IActionResult> Orders(OrderStatus? status)
         {
-            var query = _context.Orders.Include(o => o.User).AsQueryable();
+            var query = _context.Orders.Include(o => o.User).Include(o => o.Address).AsQueryable();
             
             if (status.HasValue)
             {
                 query = query.Where(o => o.Status == status.Value);
             }
 
+            var orders = await query.OrderByDescending(o => o.PlacedAt).ToListAsync();
+            if (!orders.Any() && status.HasValue)
+            {
+                // fallback to all orders if filter returns none
+                orders = await _context.Orders.Include(o => o.User).Include(o => o.Address)
+                    .OrderByDescending(o => o.PlacedAt).ToListAsync();
+            }
             var vm = new AdminOrdersViewModel
             {
-                Orders = await query.OrderByDescending(o => o.PlacedAt).ToListAsync(),
+                Orders = orders,
                 FilterStatus = status
             };
             return View(vm);

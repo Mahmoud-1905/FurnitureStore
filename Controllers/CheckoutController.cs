@@ -234,7 +234,8 @@ namespace FurnitureStore.Controllers
             else if (!int.TryParse(addrObj?.ToString(), out addressId))
                 return RedirectToAction("EnterAddress");
 
-            int? couponId = null;
+            var address = await _context.Addresses.FirstOrDefaultAsync(a => a.AddressId == addressId);
+int? couponId = null;
             if (TempData.TryGetValue("CouponId", out var cObj))
             {
                 if (cObj is int ciVal) couponId = ciVal;
@@ -266,6 +267,8 @@ namespace FurnitureStore.Controllers
                     DiscountAmount = discount,
                     CouponId = couponId,
                     AddressId = addressId,
+                    // Store a simple delivery address string for quick reference
+                    DeliveryAddress = address?.StreetAddress,
                     PaymentStatus = PaymentStatus.Pending,
                     PlacedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow

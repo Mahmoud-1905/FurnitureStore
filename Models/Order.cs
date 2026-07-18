@@ -6,8 +6,10 @@ namespace FurnitureStore.Models
     {
         public int OrderId { get; set; }
 
+        [MaxLength(600)]
+        public string? DeliveryAddress { get; set; }
+
         [Required]
-        [MaxLength(450)]
         public string UserId { get; set; } = string.Empty;
 
         [Required]
@@ -22,9 +24,7 @@ namespace FurnitureStore.Models
 
         public decimal TaxAmount { get; set; }
 
-        [Required]
-        [MaxLength(600)]
-        public string DeliveryAddress { get; set; } = string.Empty;
+
 
         [MaxLength(1000)]
         public string? Notes { get; set; }

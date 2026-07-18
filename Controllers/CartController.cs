@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,11 +17,13 @@ namespace FurnitureStore.Controllers
     {
         private readonly AppDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ILogger<CartController> _logger;
 
-        public CartController(AppDbContext context, UserManager<ApplicationUser> userManager)
+        public CartController(AppDbContext context, UserManager<ApplicationUser> userManager, ILogger<CartController> logger)
         {
             _context = context;
             _userManager = userManager;
+            _logger = logger;
         }
 
         private async Task<string> GetCurrentUserIdAsync()
@@ -55,21 +59,21 @@ namespace FurnitureStore.Controllers
             return View(cartItems);
         }
 
-        public async Task<IActionResult> AddToCart(int productId, int quantity = 1)
+        public async Task<IActionResult> AddToCart(int productId, int quantity = 1, string action = "add")
         {
             if (quantity < 1) quantity = 1;
 
             var userId = await GetCurrentUserIdAsync();
             if (string.IsNullOrEmpty(userId)) return RedirectToAction("Login", "Account");
 
-            // Find the product to ensure it exists and is active
+            // Verify product exists and is active
             var product = await _context.Products.FindAsync(productId);
             if (product == null || !product.IsActive)
             {
                 return NotFound();
             }
 
-            // Find or create cart
+            // Get or create cart
             var cart = await _context.Carts
                 .Include(c => c.CartItems)
                 .FirstOrDefaultAsync(c => c.UserId == userId);
@@ -81,9 +85,8 @@ namespace FurnitureStore.Controllers
                 await _context.SaveChangesAsync(); // Save to get CartId
             }
 
-            // Check if item already exists in cart
+            // Add or update cart item
             var cartItem = cart.CartItems.FirstOrDefault(ci => ci.ProductId == productId);
-
             if (cartItem != null)
             {
                 cartItem.Quantity += quantity;
@@ -100,7 +103,36 @@ namespace FurnitureStore.Controllers
                 _context.CartItems.Add(cartItem);
             }
 
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to add product {ProductId} to cart for user {UserId}", productId, userId);
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new { success = false, message = "Could not add to cart due to a server error. Please try again later." });
+                }
+                TempData["CartError"] = "Could not add to cart due to a server error. Please try again later.";
+                return RedirectToAction("Index");
+            }
+
+            // If buying now, complete purchase process
+            if (action.Equals("buy", StringComparison.OrdinalIgnoreCase))
+            {
+                return RedirectToAction("CartReview", "Checkout");
+            }
+
+            // AJAX response
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                // Calculate new cart count
+                var newCount = cart.CartItems.Sum(ci => ci.Quantity);
+                return Json(new { success = true, cartCount = newCount });
+            }
+
+            // Default: return to cart index for normal requests
             return RedirectToAction("Index");
         }
 
@@ -141,7 +173,7 @@ namespace FurnitureStore.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Products");
         }
     }
 }

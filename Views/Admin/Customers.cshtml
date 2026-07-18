@@ -68,16 +68,4 @@
     </div>
 </div>
 
-        @* Language selection prompt *@
-        <script>
-            // Show language choice only once per session
-            if (!sessionStorage.getItem('adminLangChosen')) {
-                const useArabic = confirm('Do you want to view the admin pages in Arabic? OK = Arabic, Cancel = English');
-                const lang = useArabic ? 'ar' : 'en';
-                // Store choice and reload to apply
-                sessionStorage.setItem('adminLangChosen', lang);
-                // Simple way: set a cookie that server can read on next request (if you have localization middleware)
-                document.cookie = `adminLang=${lang}; path=/`; // server can use this cookie to set culture
-                location.reload();
-            }
-        </script>
+

@@ -32,6 +32,9 @@
                 <tr>
                     <th class="px-6 py-4 font-semibold">Order ID</th>
                     <th class="px-6 py-4 font-semibold">Customer</th>
+                    <th class="px-6 py-4 font-semibold">Email</th>
+                    <th class="px-6 py-4 font-semibold">Address</th>
+
                     <th class="px-6 py-4 font-semibold">Date</th>
                     <th class="px-6 py-4 font-semibold">Amount</th>
                     <th class="px-6 py-4 font-semibold">Payment</th>
@@ -45,6 +48,8 @@
                     <tr class="hover:bg-gray-50 transition-colors">
                         <td class="px-6 py-4 font-medium">#@order.OrderId</td>
                         <td class="px-6 py-4">@(order.User?.FullName ?? "Unknown")</td>
+                        <td class="px-6 py-4">@(order.User?.Email ?? "Unknown")</td>
+                        <td class="px-6 py-4">@(order.Address?.StreetAddress ?? "N/A")</td>
                         <td class="px-6 py-4 text-gray-500">@order.PlacedAt.ToString("MMM dd, yyyy")</td>
                         <td class="px-6 py-4 font-medium">$@order.TotalAmount.ToString("N2")</td>
                         <td class="px-6 py-4">
@@ -87,14 +92,13 @@
                     </tr>
                 }
                 
-                @if(!Model.Orders.Any())
-                {
-                    <tr>
-                        <td colspan="7" class="px-6 py-8 text-center text-gray-500">
-                            No orders found matching the selected criteria.
-                        </td>
-                    </tr>
-                }
+@if (!Model.Orders.Any())
+{
+    <div class="p-6 text-center text-gray-500">
+        There are currently no orders. Once customers purchase, they will appear here.
+    </div>
+}
+
             </tbody>
         </table>
     </div>

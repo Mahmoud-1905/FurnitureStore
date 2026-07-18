@@ -15,11 +15,7 @@
     {
         allImages.Add(Model.ImageUrl);
     }
-    // Ensure at least 4 thumbnails for visual consistency
-    while (allImages.Count < 4)
-    {
-        allImages.Add(allImages.FirstOrDefault() ?? Model.ImageUrl ?? "");
-    }
+
 
     var primaryImage = allImages.First();
     var relatedProducts = ViewBag.RelatedProducts as List<FurnitureStore.Models.Product> ?? new List<FurnitureStore.Models.Product>();
@@ -48,17 +44,7 @@
                      alt="@Model.Name" />
             </div>
 
-            <!-- Thumbnail Row -->
-            <div class="flex mt-4 gap-3 details-thumbs-row overflow-x-auto">
-                @for (int i = 0; i < allImages.Count && i < 5; i++)
-                {
-                    <img src="@Url.Content(allImages[i])"
-                         class="details-thumbnail w-20 h-20 md:w-24 md:h-24 object-cover flex-shrink-0 @(i == 0 ? "active" : "")"
-                         alt="@Model.Name thumbnail @(i + 1)"
-                         data-full="@Url.Content(allImages[i])"
-                         onclick="switchImage(this)" />
-                }
-            </div>
+
         </div>
 
         <!-- RIGHT: Product Info -->
@@ -85,39 +71,88 @@
             
             </div>
 
-            <!-- Quantity Selector -->
-            <div class="mb-8">
-                <div class="flex items-center gap-4">
-                    <button type="button" class="details-qty-btn" data-action="decrement">−</button>
-                    <input type="number" name="quantity" value="1" min="1"
-                           class="bg-transparent border-b border-outline-variant focus:ring-0 focus:border-primary w-14 text-center font-sans text-lg py-1" />
-                    <button type="button" class="details-qty-btn" data-action="increment">+</button>
+@* Add to Cart Form (no quantity selector) *@
+<form id="addToCartForm" method="post" asp-controller="Cart" asp-action="AddToCart">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="productId" value="@Model.ProductId" />
+    <input type="hidden" name="quantity" value="1" />
+    @if (User.Identity.IsAuthenticated)
+    {
+        <button type="submit" class="details-btn-outline" id="addToCartBtn">
+            @Localizer["AddToCartButton"]
+        </button>
+        <button type="button" class="details-btn-filled" onclick="openCheckoutModal()">
+            @Localizer["BuyNow"]
+        </button>
+    }
+    else
+    {
+        <a asp-controller="Account" asp-action="Login" class="details-btn-filled block text-center w-full py-4">
+            @Localizer["LoginToBuy"]
+        </a>
+    }
+    <input type="hidden" name="returnUrl" value="@Url.Action("Details", "Products", new { id = Model.ProductId })" />
+</form>
+
+            <!-- Checkout Modal (reused) -->
+<div id="checkoutModal" class="fixed inset-0 z-50 invisible opacity-0 transition-all duration-500 flex items-center justify-center p-4">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-on-surface/80 backdrop-blur-sm" onclick="closeCheckoutModal()"></div>
+    
+    <!-- Modal Content -->
+    <div class="relative bg-surface w-full max-w-lg p-10 shadow-2xl transform translate-y-8 transition-transform duration-500" id="modalContent">
+        <button onclick="closeCheckoutModal()" class="absolute top-8 left-8 text-secondary hover:text-on-surface transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        
+        <div class="text-right">
+            <h2 class="text-3xl font-serif text-on-surface mb-2">@Localizer["ModalTitle"]</h2>
+            <p class="text-sm font-sans text-secondary mb-10 uppercase tracking-widest">@Localizer["ModalSubtitle"]</p>
+
+            <div class="space-y-7">
+                <div>
+                    <label class="block text-[10px] font-sans text-secondary uppercase tracking-widest mb-2">@Localizer["FullName"]</label>
+                    <input type="text" id="custName" class="w-full bg-transparent border-b border-outline-variant py-3 font-sans text-on-surface focus:border-primary outline-none transition-colors" placeholder="محمود ...">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-sans text-secondary uppercase tracking-widest mb-2">@Localizer["LocationCity"]</label>
+                    <input type="text" id="custLocation" class="w-full bg-transparent border-b border-outline-variant py-3 font-sans text-on-surface focus:border-primary outline-none transition-colors" placeholder="رام الله، فلسطين">
+                </div>
+                <div class="grid grid-cols-2 gap-7">
+                    <div>
+                        <label class="block text-[10px] font-sans text-secondary uppercase tracking-widest mb-2">@Localizer["Phone"]</label>
+                        <input type="tel" id="custPhone" class="w-full bg-transparent border-b border-outline-variant py-3 font-sans text-on-surface focus:border-primary outline-none transition-colors" placeholder="+970 ...">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-sans text-secondary uppercase tracking-widest mb-2">@Localizer["Email"]</label>
+                        <input type="email" id="custEmail" class="w-full bg-transparent border-b border-outline-variant py-3 font-sans text-on-surface focus:border-primary outline-none transition-colors" placeholder="name@domain.com">
+                    </div>
+                </div>
+                <div class="pt-7">
+                    <button onclick="processPurchase()" class="w-full bg-on-surface text-surface py-4.5 font-sans text-sm uppercase tracking-[0.2em] hover:bg-primary transition-colors duration-500">
+                        @Localizer["ConfirmButton"]
+                    </button>
                 </div>
             </div>
-
-            <!-- Action Buttons -->
-            <form method="get" asp-controller="Cart" asp-action="AddToCart">
-                <input type="hidden" name="productId" value="@Model.ProductId" />
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <div class="flex gap-4 mb-8">
-                        <button type="submit" name="action" value="add" class="details-btn-outline">
-                            @Localizer["AddToCartButton"]
-                        </button>
-                        <button type="submit" name="action" value="buy" class="details-btn-filled">
-                            @Localizer["BuyNow"]
-                        </button>
-                    </div>
-                }
-                else
-                {
-                    <div class="mb-8">
-                        <a asp-controller="Account" asp-action="Login" class="details-btn-filled block text-center w-full py-4">
-                            @Localizer["LoginToBuy"]
-                        </a>
-                    </div>
-                }
-            </form>
+        </div>
+    </div>
+    
+    <!-- Success Content -->
+    <div class="relative bg-surface w-full max-w-md p-16 shadow-2xl text-center hidden transform scale-95 transition-all duration-500" id="successContent">
+        <div class="mb-8 flex justify-center">
+            <div class="w-20 h-20 border border-primary rounded-full flex items-center justify-center">
+                <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+        </div>
+        <h2 class="text-3xl font-serif text-on-surface mb-4">@Localizer["SuccessTitle"]</h2>
+        <p class="text-sm font-sans text-secondary mb-12 leading-relaxed">@Localizer["SuccessMsg"]</p>
+        <a asp-controller="Products" asp-action="Index" class="w-full block text-center bg-on-surface text-surface py-4 font-sans text-xs uppercase tracking-widest hover:bg-primary transition-colors">
+            @Localizer["BackToStore"]
+        </a>
+    </div>
+</div>
+                </div>
+            </div>
 
             <!-- Accordion Sections -->
             <div class="border-t border-outline-variant/30">
@@ -330,6 +365,38 @@
         thumbEl.classList.add('active');
     }
 
+    // ---- Checkout Modal ---
+    function openCheckoutModal() {
+        const modal = document.getElementById('checkoutModal');
+        const content = document.getElementById('modalContent');
+        modal.classList.remove('invisible', 'opacity-0');
+        content.classList.remove('translate-y-8');
+    }
+
+    function closeCheckoutModal() {
+        const modal = document.getElementById('checkoutModal');
+        const content = document.getElementById('modalContent');
+        modal.classList.add('invisible', 'opacity-0');
+        content.classList.add('translate-y-8');
+    }
+
+    function processPurchase() {
+        const name = document.getElementById('custName').value;
+        const email = document.getElementById('custEmail').value;
+
+        if (!name || !email) {
+            alert('@Localizer["FillFieldsMsg"]');
+            return;
+        }
+
+        document.getElementById('modalContent').classList.add('hidden');
+        const success = document.getElementById('successContent');
+        success.classList.remove('hidden');
+        setTimeout(() => {
+            success.classList.remove('scale-95');
+        }, 50);
+    }
+
     // ---- Accordion Toggle ----
     function toggleAccordion(btn) {
         var content = btn.nextElementSibling;
@@ -343,21 +410,8 @@
         }
     }
 
-    // ---- Quantity Increment / Decrement ----
-    document.addEventListener('click', function (e) {
-        if (e.target.dataset.action === 'increment' || e.target.closest('[data-action="increment"]')) {
-            var btn = e.target.closest('[data-action="increment"]') || e.target;
-            var container = btn.closest('.flex') || btn.parentElement;
-            var qty = container.querySelector('input[name="quantity"]');
-            if (qty) qty.value = parseInt(qty.value) + 1;
-        } else if (e.target.dataset.action === 'decrement' || e.target.closest('[data-action="decrement"]')) {
-            var btn = e.target.closest('[data-action="decrement"]') || e.target;
-            var container = btn.closest('.flex') || btn.parentElement;
-            var qty = container.querySelector('input[name="quantity"]');
-            if (qty) {
-                var val = parseInt(qty.value);
-                if (val > 1) qty.value = val - 1;
-            }
-        }
-    });
+
+
+
+    
 </script>

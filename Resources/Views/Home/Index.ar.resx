@@ -25,4 +25,5 @@
   <data name="ConsultationTitle" xml:space="preserve"><value>خدمة معمارية خاصة</value></data>
   <data name="ConsultationDesc" xml:space="preserve"><value>تعاون مع كبار المصممين لدينا لتأثيث مساحتك بدقة متناهية. نقدم رعاية شاملة للمشاريع السكنية الراقية.</value></data>
   <data name="BookConsultation" xml:space="preserve"><value>احجز استشارة</value></data>
+  <data name="FeaturedSpaces" xml:space="preserve"><value>مساحات مميزة</value></data>
 </root>

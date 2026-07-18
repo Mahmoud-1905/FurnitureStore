@@ -25,4 +25,5 @@
   <data name="ConsultationTitle" xml:space="preserve"><value>Private Architectural Service</value></data>
   <data name="ConsultationDesc" xml:space="preserve"><value>Collaborate with our top designers to furnish your space with utmost precision. We offer comprehensive care for high-end residential projects.</value></data>
   <data name="BookConsultation" xml:space="preserve"><value>Book Consultation</value></data>
+  <data name="FeaturedSpaces" xml:space="preserve"><value>Featured Spaces</value></data>
 </root>
