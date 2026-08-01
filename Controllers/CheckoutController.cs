@@ -226,15 +226,15 @@ namespace FurnitureStore.Controllers
             if (user == null || string.IsNullOrEmpty(user.Id))
                 return RedirectToAction("Login", "Account");
 
-            if (!TempData.TryGetValue("AddressId", out var addrObj))
-                return RedirectToAction("EnterAddress");
+            //if (!TempData.TryGetValue("AddressId", out var addrObj))
+            //    return RedirectToAction("EnterAddress");
 
-            int addressId;
-            if (addrObj is int ai) addressId = ai;
-            else if (!int.TryParse(addrObj?.ToString(), out addressId))
-                return RedirectToAction("EnterAddress");
+            //int addressId;
+            //if (addrObj is int ai) addressId = ai;
+            //else if (!int.TryParse(addrObj?.ToString(), out addressId))
+            //    return RedirectToAction("EnterAddress");
 
-            var address = await _context.Addresses.FirstOrDefaultAsync(a => a.AddressId == addressId);
+            //var address = await _context.Addresses.FirstOrDefaultAsync(a => a.AddressId == addressId);
 int? couponId = null;
             if (TempData.TryGetValue("CouponId", out var cObj))
             {
@@ -266,9 +266,8 @@ int? couponId = null;
                     TotalAmount = total,
                     DiscountAmount = discount,
                     CouponId = couponId,
-                    AddressId = addressId,
                     // Store a simple delivery address string for quick reference
-                    DeliveryAddress = address?.StreetAddress,
+                    DeliveryAddress = "Gaza",
                     PaymentStatus = PaymentStatus.Pending,
                     PlacedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow
@@ -288,9 +287,9 @@ int? couponId = null;
                 };
                 _context.OrderItems.Add(oi);
             }
-            // Clear cart
-            _context.CartItems.RemoveRange(cartItems);
-            await _context.SaveChangesAsync();
+            //// Clear cart
+            //_context.CartItems.RemoveRange(cartItems);
+            //await _context.SaveChangesAsync();
 
             // Stub payment record
             var payment = new Payment
@@ -308,18 +307,16 @@ int? couponId = null;
             order.Payment = payment;
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Result", new { orderId = order.OrderId });
+            return Ok(new { redirectUrl = Url.Action("Result", "Checkout", new { orderId = order.OrderId }) });
+            //return RedirectToAction(nameof(Result), new { orderId = order.OrderId });
         }
 
         // 7. Show result page
-        public async Task<IActionResult> Result(int orderId)
+        public IActionResult Result(int orderId)
         {
-            var order = await _context.Orders
+            var order =  _context.Orders
                 .Include(o => o.OrderItems)
-                .Include(o => o.Address)
-                .Include(o => o.Coupon)
-                .Include(o => o.Payment)
-                .FirstOrDefaultAsync(o => o.OrderId == orderId);
+                .FirstOrDefault(o => o.OrderId == orderId);
             if (order == null) return NotFound();
             return View(order);
         }

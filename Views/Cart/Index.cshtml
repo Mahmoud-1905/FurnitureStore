@@ -145,7 +145,7 @@
                 </div>
 
                 <div class="pt-7">
-                    <button onclick="processPurchase()" class="w-full bg-on-surface text-surface py-4.5 font-sans text-sm uppercase tracking-[0.2em] hover:bg-primary transition-colors duration-500">
+                        <button onclick="processPurchase()" id="processPurchase" class="w-full bg-on-surface text-surface py-4.5 font-sans text-sm uppercase tracking-[0.2em] hover:bg-primary transition-colors duration-500">
                         @Localizer["ConfirmButton"]
                     </button>
                 </div>
@@ -202,5 +202,18 @@
         setTimeout(() => {
             success.classList.remove('scale-95');
         }, 50);
+
+
     }
+
+        document.getElementById("processPurchase").addEventListener("click", function () {
+        fetch('/Checkout/ProcessPayment', {
+            method: 'POST'
+        })
+        .then(response => response.json())
+            .then(data => {
+        window.location.href = data.redirectUrl;
+
+    });
+    });
 </script>

@@ -101,6 +101,7 @@ namespace FurnitureStore.Controllers
                     Quantity = quantity
                 };
                 _context.CartItems.Add(cartItem);
+
             }
 
             try
