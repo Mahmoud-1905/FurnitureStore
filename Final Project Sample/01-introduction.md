@@ -2,10 +2,13 @@
 
 ## 1.1 Project Overview
 
-Many local and specialized furniture boutiques with medium-scale operations commonly rely on manual physical showrooms, paper-based stock records, disconnected spreadsheets, and manual order tracking. This operational model leads to inventory discrepancies, slow order fulfillment, poor shopping experiences, and a complete lack of real-time visibility into sales and stock levels.
+Smart Furniture Store is a web-based furniture retail management system that combines digital shopping with personalized sales consultation to improve the customer purchasing experience. Unlike traditional e-commerce platforms that rely solely on online checkout, this system adopts a consultative selling approach suitable for furniture products, where customers often require additional guidance before making a purchase.
 
-The **Ruqi Store** is a premium, web-based e-commerce platform designed specifically to digitize and streamline core furniture retail operations. It integrates user identity management, an interactive catalog, digital shopping carts, persistent wishlists, secure order checkout, and automated inventory sync into a single, cohesive software system.
+Customers can browse the furniture catalog, search for products, and add their preferred items to a shopping cart. Instead of completing an online payment, they submit a purchase request containing their selected products and contact information. The request is then delivered to the administrator through a centralized dashboard.
 
+The administrator, acting as a sales representative, reviews incoming requests and contacts customers to answer questions, provide product recommendations, clarify specifications, discuss delivery options, and build customer confidence before finalizing the purchase. Once both parties reach an agreement, the order can either be delivered to the customer's location or completed at the physical showroom, depending on the customer's preference.
+
+This hybrid sales model combines the convenience of online product discovery with the trust and personalized communication of traditional furniture sales, resulting in a more effective and customer-centered purchasing process.
 ---
 
 ## 1.2 Problem Statement
