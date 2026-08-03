@@ -7,6 +7,7 @@ Smart Furniture Store is a web-based furniture retail management system that com
 Customers can browse the furniture catalog, search for products, and add their preferred items to a shopping cart. Instead of completing an online payment, they submit a purchase request containing their selected products and contact information. The request is then delivered to the administrator through a centralized dashboard.
 
 The administrator, acting as a sales representative, reviews incoming requests and contacts customers to answer questions, provide product recommendations, clarify specifications, discuss delivery options, and build customer confidence before finalizing the purchase. Once both parties reach an agreement, the order can either be delivered to the customer's location or completed at the physical showroom, depending on the customer's preference.
+
 This hybrid sales model combines the convenience of online product discovery with the trust and personalized communication of traditional furniture sales, resulting in a more effective and customer-
 
 ---
