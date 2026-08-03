@@ -30,18 +30,19 @@ Beyond financial leaks, the offline model degrades the customer experience: buye
 
 ## 1.3 Project Scope
 
-### 🟢 In Scope (Version 1.0):
-* **User & Identity Management:** Secure registration, login, and profile tracking with distinct roles (Customer, Store Manager, Accountant, Administrator).
-* **Catalog Management:** Dynamic categorization (Living Room, Bedroom, Office) and robust product tracking with critical commercial attributes (SKU, StockQuantity, Pricing).
+### 🟢 In Scope (Version 10.0):
+* **User & Identity Management:** Secure registration, authentication, and profile management for Customers and Administrators with role-based access control.
+* **Catalog Management:** Dynamic furniture categorization (Living Room, Bedroom, Office, Dining Room) with product management including SKU, stock quantity, pricing, images, and specifications.
 * **Interactive Shopping Tools:** Persistent database-backed shopping sessions (`Cart` & `CartItem` junction entities) and custom user `Wishlist` collections.
-* **Order & Transaction Management:** Structured checkout flows, stateful order lifecycles, and **immutable price freezing** at the exact moment of checkout.
-* **Automated Stock Synchronization:** Real-time stock level reduction and automated threshold alerts to prevent overselling.
+* **Purchase Request Management:** Customers can submit purchase requests based on the items in their shopping cart. Requests are stored in the system and forwarded to the administrator for review and customer follow-up.
+* **Sales Consultation Workflow:** Administrators review submitted purchase requests and communicate with customers to answer inquiries, confirm product availability, discuss delivery options, and finalize the purchase.
+* **Inventory Management:** Real-time stock level reduction and automated threshold alerts to prevent overselling.
 
 ### 🔴 Out of Scope:
 * **Custom AR/VR Visualizer:** Virtual room-planning tools (planned for v2.0).
-* **Third-Party Logistics Integration:** External fleet routing or delivery courier APIs (handled manually by administrators in v1.0).
-* **Installment Financing / Credit Engines:** Native long-term payment installments (only standard payment methods are supported in v1.0).
-* **Native Mobile Apps:** Standalone iOS/Android applications (fully responsive web interface only for v1.0).
+* **Third-Party Logistics Integration:** External fleet routing or delivery courier APIs (handled manually by administrators in v10.0).
+* **Online payment processing and financing services:** are outside the scope of Version 10.0. Payment arrangements are completed after direct communication between the administrator and the customer.
+* **Native Mobile Apps:** Standalone iOS/Android applications (fully responsive web interface only for v10.0).
 
 ---
 
