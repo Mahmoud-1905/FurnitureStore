@@ -46,6 +46,8 @@ Beyond financial leaks, the offline model degrades the customer experience: buye
 
 ---
 
+## Project Objective
+
 |   #   | Objective                                 | Success Metric                                                                                                                         |
 | :---: | :---------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
 | **1** | **Simplify Customer Purchase Requests**   | 100% of purchase requests are successfully submitted from the shopping cart to the administrator without errors.                       |
