@@ -3,7 +3,7 @@
 **Project:** Ruqi Store (Full-Stack E-Commerce Furniture Application)  
 **Prepared by:** Business & Information Technology Portfolio Project  
 **Date:** July 2026  
-**Version:** 1.0  
+**Version:** 10.0  
 
 ---
 
