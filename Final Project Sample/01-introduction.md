@@ -60,11 +60,14 @@ Beyond financial leaks, the offline model degrades the customer experience: buye
 
 ## 1.5 Methodology
 
-This project follows the **Agile (Scrum)** framework with 2-week sprints. The rationale behind this decision includes:
+This project follows the Agile (Scrum) methodology with 2-week sprints to support iterative development, continuous stakeholder feedback, and gradual system enhancement. This approach was selected because the project requirements may evolve during development as users interact with early prototypes and provide feedback.
 
-* **Dynamic Catalog Needs:** Requirements around product attributes and custom furniture finishes evolve as store managers interact with early prototypes.
-* **Incremental Validation:** Essential e-commerce pathways (like Cart updates and Checkout validations) need to be validated piece-by-piece by stakeholders.
-* **Risk Mitigation:** Iterative sprint reviews significantly reduce the risk of deploying broken transaction sequences or incorrect inventory logic.
+The rationale behind this decision includes:
+
+* **Iterative Requirement Refinement:** Furniture product information, customer request workflows, and administrative features can be continuously refined based on stakeholder feedback throughout the development process.
+* **Incremental Feature Validation:** Core system modules—including product browsing, shopping cart management, purchase request submission, and the administrative dashboard—are developed and validated incrementally to ensure each feature functions correctly before proceeding to the next.
+* **Continuous Stakeholder Feedback:** Regular sprint reviews enable store representatives and project supervisors to evaluate system functionality, suggest improvements, and ensure the solution aligns with real business needs.
+* **Risk Reduction:** Developing the system in small iterations minimizes implementation risks, allows early detection of defects, and ensures that customer request management and product administration operate reliably before deployment.
 
 ---
 
