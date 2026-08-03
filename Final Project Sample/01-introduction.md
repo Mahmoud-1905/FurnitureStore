@@ -46,15 +46,13 @@ Beyond financial leaks, the offline model degrades the customer experience: buye
 
 ---
 
-## 1.4 Project Objectives
-
-| # | Objective | Success Metric |
-| :---: | :--- | :--- |
-| **1** | **Reduce Order Processing Overhead** | 50% reduction in average time required to log and verify custom orders. |
-| **2** | **Prevent Overselling & Discrepancies** | 100% accuracy in stock deduction immediately post-checkout via isolated transactions. |
-| **3** | **Enhance Customer Retainability** | At least 35% of registered users utilizing the "Curated Collection" Wishlist feature. |
-| **4** | **Guarantee Price Auditing Security** | 0% variance between historical order invoices and subsequent catalog pricing modifications. |
-| **5** | **Responsive Deployment** | Seamless layout rendering across mobile, tablet, and desktop viewports on schedule within 12 weeks. |
+|   #   | Objective                                 | Success Metric                                                                                                                         |
+| :---: | :---------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
+| **1** | **Simplify Customer Purchase Requests**   | 100% of purchase requests are successfully submitted from the shopping cart to the administrator without errors.                       |
+| **2** | **Improve Customer Engagement**           | At least 90% of customer requests receive an initial response from the administrator within 24 hours.                                  |
+| **3** | **Centralize Request Management**         | All customer requests are stored and managed through a single administrative dashboard with 100% request traceability.                 |
+| **4** | **Enhance Product Management Efficiency** | Administrators can create, update, or remove furniture products with all changes reflected immediately in the product catalog.         |
+| **5** | **Provide a Responsive User Experience**  | The system functions correctly on desktop, tablet, and mobile devices with page loading times below 3 seconds under normal conditions. |
 
 ---
 
