@@ -1,0 +1,26 @@
+﻿@model FurnitureStore.Models.Order
+
+<h1 class="text-2xl font-serif mb-4">View Details</h1>
+
+<h2>This page for ADMAIN <strong>IN FUTURE</strong> we will design this page.</h2>
+
+
+
+
+<h2>Order Details</h2>
+
+<hr />
+
+<p><strong>Order ID:</strong> @Model.OrderId</p>
+
+<p><strong>Customer:</strong> @Model.User?.FullName</p>
+
+<p><strong>Email:</strong> @Model.User?.Email</p>
+
+<p><strong>Phone:</strong> @Model.User?.PhoneNumber</p>
+
+<p><strong>Total:</strong> $@Model.TotalAmount</p>
+
+<p><strong>Status:</strong> @Model.Status</p>
+
+<p><strong>Payment:</strong> @Model.PaymentStatus</p>

@@ -1,13 +1,16 @@
 // Controllers/CheckoutController.cs
+using FurnitureStore.Data; // Assuming AppDbContext is in Data namespace
+using FurnitureStore.Models;
+using FurnitureStore.ViewModels;
+using Humanizer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Runtime.Intrinsics.Arm;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
-using FurnitureStore.Models;
-using FurnitureStore.Data; // Assuming AppDbContext is in Data namespace
-using FurnitureStore.ViewModels;
-using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FurnitureStore.Controllers
 {
@@ -259,11 +262,12 @@ int? couponId = null;
             var total = subTotal - discount;
 
             // Create Order
-            var order = new Order
-                {
-                    UserId = user.Id,
-                    Status = OrderStatus.Pending,
-                    TotalAmount = total,
+            var order = new Order // A new object كائن is created from the Order class, It is stored inside a variable named: order
+            {
+                    UserId = user.Id, // Look, I'm saying he stored it for me uer.Id inside the UserId property of the order object الي في models/Order.cs
+                                      // This is because the database links tables using `UserId`, whereas in the code, you might need to access the user data itself via the `User` property.
+                Status = OrderStatus.Pending, //in Enum.cs we have OrderStatus and PaymentStatus whe connct it with OrderStatus
+                TotalAmount = total,
                     DiscountAmount = discount,
                     CouponId = couponId,
                     // Store a simple delivery address string for quick reference
@@ -272,7 +276,15 @@ int? couponId = null;
                     PlacedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow
                 };
-            _context.Orders.Add(order);
+            // in shotr:
+                //This code does not save anything to the database.
+                //It simply creates a new object of the "Request" type and populates its data.
+                //It is like having a blank request form and starting to fill in the details.
+
+             
+
+
+            _context.Orders.Add(order);// this add an order to admin page to see this step by step go to depug mode
             await _context.SaveChangesAsync(); // to generate OrderId
 
             // Transfer CartItems to OrderItems
@@ -320,5 +332,6 @@ int? couponId = null;
             if (order == null) return NotFound();
             return View(order);
         }
+
     }
 }
