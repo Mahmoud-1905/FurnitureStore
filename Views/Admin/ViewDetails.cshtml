@@ -11,11 +11,15 @@
 
 <hr />
 
-<p><strong>Order ID:</strong> @Model.OrderId</p>
+<p><strong>Order ID:</strong> @Model.OrderId</p> 
+@* take from order.cs Models *@
 
 <p><strong>Customer:</strong> @Model.User?.FullName</p>
+@* take from ApplicationUser inside Orders.cs Models we have  public ApplicationUser User { get; set; } = null!;
+ *@
 
 <p><strong>Email:</strong> @Model.User?.Email</p>
+@* Take from Identity By defult  *@
 
 <p><strong>Phone:</strong> @Model.User?.PhoneNumber</p>
 
