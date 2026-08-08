@@ -7,6 +7,7 @@ namespace FurnitureStore.Models
     /// Extends IdentityUser. Stored in AspNetUsers table.
     /// </summary>
     public class ApplicationUser : IdentityUser
+    // To understund this go to Program.cs in 22 to 31 to see the details of the IdentityUser class and how it is used in the application.
     {
         [Required]
         [MaxLength(150)]

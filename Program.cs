@@ -28,7 +28,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     options.SignIn.RequireConfirmedAccount = false;
     options.SignIn.RequireConfirmedEmail = false;
     options.SignIn.RequireConfirmedPhoneNumber = false;
-})
+}) // Users are stored in the `AspNetUsers` table—a standard table provided by ASP.NET Core Identity—whereas `ApplicationUser` is the project's custom user model that inherits from `IdentityUser`.
+
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
