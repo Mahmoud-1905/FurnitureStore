@@ -380,5 +380,25 @@ namespace FurnitureStore.Controllers
 
             return View(logs);
         }
+
+
+        public async Task<IActionResult> ViewDetails(int id)
+        {
+            var order = await _context.Orders
+                .Include(o => o.User)
+                .Include(o => o.Address)
+                .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Product)
+                .Include(o => o.Payment)
+                .FirstOrDefaultAsync(o => o.OrderId == id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
+        }
+
     }
 }

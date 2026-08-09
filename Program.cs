@@ -28,7 +28,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     options.SignIn.RequireConfirmedAccount = false;
     options.SignIn.RequireConfirmedEmail = false;
     options.SignIn.RequireConfirmedPhoneNumber = false;
-})
+}) // Users are stored in the `AspNetUsers` table—a standard table provided by ASP.NET Core Identity—whereas `ApplicationUser` is the project's custom user model that inherits from `IdentityUser`.
+
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
@@ -82,6 +83,12 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+//This code defines how routes are interpreted in ASP.NET Core MVC. `
+//{controller=Home}` indicates that the default controller is `Home`,
+//and `{action=Index}` means the default action is `Index`, while `{id?}`
+//signifies that the `id` parameter is optional. Consequently, navigating to
+//`/` directs you to `HomeController` and the `Index()` action; navigating to `
+///Product/Details/5`, for example, directs you to `ProductController` and the `
+///Details()` action, passing the value `5` as the `id`.
 
 app.Run();

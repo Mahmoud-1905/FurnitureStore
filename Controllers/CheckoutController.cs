@@ -1,13 +1,16 @@
 // Controllers/CheckoutController.cs
+using FurnitureStore.Data; // Assuming AppDbContext is in Data namespace
+using FurnitureStore.Models;
+using FurnitureStore.ViewModels;
+using Humanizer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Runtime.Intrinsics.Arm;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
-using FurnitureStore.Models;
-using FurnitureStore.Data; // Assuming AppDbContext is in Data namespace
-using FurnitureStore.ViewModels;
-using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FurnitureStore.Controllers
 {
@@ -226,15 +229,15 @@ namespace FurnitureStore.Controllers
             if (user == null || string.IsNullOrEmpty(user.Id))
                 return RedirectToAction("Login", "Account");
 
-            if (!TempData.TryGetValue("AddressId", out var addrObj))
-                return RedirectToAction("EnterAddress");
+            //if (!TempData.TryGetValue("AddressId", out var addrObj))
+            //    return RedirectToAction("EnterAddress");
 
-            int addressId;
-            if (addrObj is int ai) addressId = ai;
-            else if (!int.TryParse(addrObj?.ToString(), out addressId))
-                return RedirectToAction("EnterAddress");
+            //int addressId;
+            //if (addrObj is int ai) addressId = ai;
+            //else if (!int.TryParse(addrObj?.ToString(), out addressId))
+            //    return RedirectToAction("EnterAddress");
 
-            var address = await _context.Addresses.FirstOrDefaultAsync(a => a.AddressId == addressId);
+            //var address = await _context.Addresses.FirstOrDefaultAsync(a => a.AddressId == addressId);
 int? couponId = null;
             if (TempData.TryGetValue("CouponId", out var cObj))
             {
@@ -259,21 +262,29 @@ int? couponId = null;
             var total = subTotal - discount;
 
             // Create Order
-            var order = new Order
-                {
-                    UserId = user.Id,
-                    Status = OrderStatus.Pending,
-                    TotalAmount = total,
+            var order = new Order // A new object كائن is created from the Order class, It is stored inside a variable named: order
+            {
+                    UserId = user.Id, // Look, I'm saying he stored it for me uer.Id inside the UserId property of the order object الي في models/Order.cs
+                                      // This is because the database links tables using `UserId`, whereas in the code, you might need to access the user data itself via the `User` property.
+                Status = OrderStatus.Pending, //in Enum.cs we have OrderStatus and PaymentStatus whe connct it with OrderStatus
+                TotalAmount = total,
                     DiscountAmount = discount,
                     CouponId = couponId,
-                    AddressId = addressId,
                     // Store a simple delivery address string for quick reference
-                    DeliveryAddress = address?.StreetAddress,
+                    DeliveryAddress = "Gaza",
                     PaymentStatus = PaymentStatus.Pending,
                     PlacedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow
                 };
-            _context.Orders.Add(order);
+            // in shotr:
+                //This code does not save anything to the database.
+                //It simply creates a new object of the "Request" type and populates its data.
+                //It is like having a blank request form and starting to fill in the details.
+
+             
+
+
+            _context.Orders.Add(order);// this add an order to admin page to see this step by step go to depug mode
             await _context.SaveChangesAsync(); // to generate OrderId
 
             // Transfer CartItems to OrderItems
@@ -288,9 +299,9 @@ int? couponId = null;
                 };
                 _context.OrderItems.Add(oi);
             }
-            // Clear cart
-            _context.CartItems.RemoveRange(cartItems);
-            await _context.SaveChangesAsync();
+            //// Clear cart
+            //_context.CartItems.RemoveRange(cartItems);
+            //await _context.SaveChangesAsync();
 
             // Stub payment record
             var payment = new Payment
@@ -308,20 +319,19 @@ int? couponId = null;
             order.Payment = payment;
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Result", new { orderId = order.OrderId });
+            return Ok(new { redirectUrl = Url.Action("Result", "Checkout", new { orderId = order.OrderId }) });
+            //return RedirectToAction(nameof(Result), new { orderId = order.OrderId });
         }
 
         // 7. Show result page
-        public async Task<IActionResult> Result(int orderId)
+        public IActionResult Result(int orderId)
         {
-            var order = await _context.Orders
+            var order =  _context.Orders
                 .Include(o => o.OrderItems)
-                .Include(o => o.Address)
-                .Include(o => o.Coupon)
-                .Include(o => o.Payment)
-                .FirstOrDefaultAsync(o => o.OrderId == orderId);
+                .FirstOrDefault(o => o.OrderId == orderId);
             if (order == null) return NotFound();
             return View(order);
         }
+
     }
 }

@@ -10,7 +10,7 @@ namespace FurnitureStore.Models
         public string? DeliveryAddress { get; set; }
 
         [Required]
-        public string UserId { get; set; } = string.Empty;
+        public string UserId { get; set; } = string.Empty; // Foreign Key.
 
         [Required]
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
@@ -49,10 +49,20 @@ namespace FurnitureStore.Models
         public int? AddressId { get; set; }
 
         // Navigation properties
-        public ApplicationUser User { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!; // Navigation Property. User provides you with this user's data.
         public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
         public Coupon? Coupon { get; set; }
         public Payment? Payment { get; set; }
         public Address? Address { get; set; }
+
+        //// Customer information at the time of placing the order
+        //public string CustomerName { get; set; } = string.Empty;
+
+        //public string CustomerEmail { get; set; } = string.Empty;
+
+        //public string CustomerPhone { get; set; } = string.Empty;
+
+        //public string CustomerCity { get; set; } = string.Empty;
+
     }
 }

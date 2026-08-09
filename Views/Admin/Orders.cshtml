@@ -86,8 +86,13 @@
                                 </select>
                             </form>
                         </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#" class="text-primary hover:text-primary-600 font-medium text-sm">View Details</a>
+                        <td>
+                            <a asp-controller="Admin"
+                               asp-action="ViewDetails"
+                               asp-route-id="@order.OrderId"
+                               class="text-primary hover:text-primary-600 font-medium text-sm">
+                                View Details
+                            </a>
                         </td>
                     </tr>
                 }
