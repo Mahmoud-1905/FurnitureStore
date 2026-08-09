@@ -1,8 +1,7 @@
-
 using FurnitureStore.Models;
+using FurnitureStore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using FurnitureStore.ViewModels;
 
 namespace FurnitureStore.Controllers
 {
@@ -13,7 +12,11 @@ namespace FurnitureStore.Controllers
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly Microsoft.Extensions.Localization.IStringLocalizer<AccountController> localizer;
 
-        public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, Microsoft.Extensions.Localization.IStringLocalizer<AccountController> localizer)
+        public AccountController(
+            SignInManager<ApplicationUser> signInManager,
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager,
+            Microsoft.Extensions.Localization.IStringLocalizer<AccountController> localizer)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
@@ -107,30 +110,32 @@ namespace FurnitureStore.Controllers
             return View(model);
         }
 
+       
         [HttpGet]
-        public IActionResult VerifyEmail()
+        public IActionResult ForgotPassword()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> VerifyEmail(VerifyEmailViewModel model)
+        public async Task<IActionResult> ForgotPassword(VerifyEmailViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            var user = await userManager.FindByNameAsync(model.Email);
+            var user = await userManager.FindByEmailAsync(model.Email);
 
             if (user != null)
             {
                 var token = await userManager.GeneratePasswordResetTokenAsync(user);
+
                 return RedirectToAction("ChangePassword", "Account", new { email = user.Email, token = token });
             }
 
-            ModelState.AddModelError("", localizer["ResetLinkSent"]);
+            ModelState.AddModelError(string.Empty, localizer["EmailNotFound"] ?? "البريد الإلكتروني غير مسجل لدينا.");
             return View(model);
         }
 
@@ -139,7 +144,7 @@ namespace FurnitureStore.Controllers
         {
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(token))
             {
-                return RedirectToAction("VerifyEmail", "Account");
+                return RedirectToAction("ForgotPassword", "Account");
             }
 
             return View(new ChangePasswordViewModel { Email = email, Token = token });
@@ -151,11 +156,10 @@ namespace FurnitureStore.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("", localizer["SomethingWentWrong"]);
                 return View(model);
             }
 
-            var user = await userManager.FindByNameAsync(model.Email);
+            var user = await userManager.FindByEmailAsync(model.Email);
 
             if (user == null)
             {
@@ -163,6 +167,7 @@ namespace FurnitureStore.Controllers
             }
 
             var result = await userManager.ResetPasswordAsync(user, model.Token, model.NewPassword);
+
             if (result.Succeeded)
             {
                 return RedirectToAction("Login", "Account");
@@ -170,7 +175,7 @@ namespace FurnitureStore.Controllers
 
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError("", error.Description);
+                ModelState.AddModelError(string.Empty, error.Description);
             }
 
             return View(model);
