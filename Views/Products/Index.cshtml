@@ -1,0 +1,188 @@
+﻿@model List<FurnitureStore.Models.Product>
+
+<style>
+    body {
+        background: #f5f6fa;
+        font-family: 'Segoe UI', sans-serif;
+        direction: rtl;
+    }
+
+    .title {
+        text-align: center;
+        font-size: 36px;
+        margin: 30px 0;
+        font-weight: bold;
+        color: #1f2937;
+    }
+
+    .products-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+        gap: 30px;
+        padding: 40px;
+    }
+
+    .product-card {
+        background: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: 0.3s;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        position: relative;
+    }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+    .product-img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+    }
+
+    .badge {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: #22c55e;
+        color: #fff;
+        padding: 6px 12px;
+        border-radius: 10px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .product-content {
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        flex: 1;
+    }
+
+    .product-name {
+        font-size: 18px;
+        font-weight: bold;
+        color: #111827;
+    }
+
+    .product-desc {
+        font-size: 14px;
+        color: #6b7280;
+        height: 40px;
+        overflow: hidden;
+    }
+
+    .product-category {
+        font-size: 13px;
+        color: #2563eb;
+        font-weight: 600;
+    }
+
+    .product-rating {
+        color: #fbbf24;
+        font-size: 14px;
+    }
+
+    .product-price {
+        color: #16a34a;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .actions {
+        display: flex;
+        gap: 10px;
+        margin-top: auto;
+    }
+
+    .btn-cart, .btn-details {
+        flex: 1;
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .btn-cart {
+        background: #1f2937;
+        color: #fff;
+    }
+
+        .btn-cart:hover {
+            background: #111827;
+        }
+
+    .btn-details {
+        background: #e5e7eb;
+        color: #111;
+    }
+
+        .btn-details:hover {
+            background: #d1d5db;
+        }
+</style>
+
+<h1 class="title">🛋️ متجر الأثاث الفاخر</h1>
+
+<div class="products-container">
+    @foreach (var item in Model)
+    {
+        <div class="product-card">
+
+            <div class="badge">جديد</div>
+
+            <img src="@Url.Content(item.ImageUrl)" class="product-img" />
+
+            <div class="product-content">
+
+                <div class="product-name">@item.Name</div>
+
+                <div class="product-desc">
+                    @item.Description
+                </div>
+
+                <div class="product-category">
+                    @item.Category
+                </div>
+
+                <div class="product-rating">
+                    ⭐⭐⭐⭐☆
+                </div>
+
+                <div class="product-price">
+                    ₪ @item.Price
+                </div>
+
+                <div class="actions">
+
+                    <a asp-controller="Cart"
+                           asp-action="AddToCart"
+                           asp-route-name="@item.Name"
+                           asp-route-price="@item.Price"
+                           asp-route-image="@item.ImageUrl"
+                           class="btn-cart">
+                        🛒 إضافة
+                    </a>
+
+                    <a asp-controller="Products"
+                           asp-action="Details"
+                           asp-route-id="@item.Id"
+                           class="btn-details">
+                        👁️ تفاصيل
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+</div>
