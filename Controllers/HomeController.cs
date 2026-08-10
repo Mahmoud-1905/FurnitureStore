@@ -2,6 +2,7 @@ using FurnitureStore.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
+
 namespace FurnitureStore.Controllers
 {
     public class HomeController : Controller
