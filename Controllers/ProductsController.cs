@@ -57,7 +57,7 @@ namespace FurnitureStore.Controllers
             var relatedProducts = await _context.Products
                 .Include(p => p.Category)
                 .Where(p => p.IsActive && p.CategoryId == product.CategoryId && p.ProductId != id)
-                .Take(4)
+                .Take(4)  
                 .ToListAsync();
 
             // If not enough related products in the same category, fill with other active products
